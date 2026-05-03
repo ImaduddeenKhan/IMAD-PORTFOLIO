@@ -1,0 +1,41 @@
+# Dependencies
+node_modules/
+
+# Next.js / builds
+.next/
+out/
+build/
+dist/
+coverage/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Local tooling
+.railway/
+.vercel/
+.turbo/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Python legacy / local virtual envs
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Misc
+*.pem
