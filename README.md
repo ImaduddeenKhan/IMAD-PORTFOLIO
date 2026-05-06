@@ -1,6 +1,6 @@
 # Imad Portfolio
 
-Personal portfolio for Imaduddeen Khan with a full `/admin` editor, Supabase-backed content and uploads, project detail pages, theme studio, and Railway-ready deployment.
+Personal portfolio for Imaduddeen Khan with a full `/admin` editor, Supabase-backed content and uploads, project detail pages, theme studio, and deployment support for Render and Railway.
 
 ## Stack
 
@@ -75,9 +75,99 @@ NEXT_PUBLIC_SITE_NAME=Imad Portfolio
 npm run seed
 ```
 
+## Render deployment
+
+This repo is set up for Render with:
+
+- `render.yaml` Blueprint for a Render web service
+- `next.config.mjs` using `output: "standalone"`
+- `app/api/health/route.js` for Render health checks
+- `.env.example` so you can bulk import env vars into Render
+
+### Render dashboard steps
+
+1. Push this repo to GitHub.
+2. In Render, click `New +` -> `Web Service`.
+3. Choose `Git Provider` and select this repository.
+4. Use these values in the service form:
+
+```text
+Language: Node
+Build Command: npm install && npm run build
+Start Command: npm run start:standalone
+Health Check Path: /api/health
+```
+
+5. Add env vars from `.env.example`.
+6. Set these production values:
+
+```env
+NODE_ENV=production
+NEXTAUTH_URL=https://your-service-name.onrender.com
+NEXT_PUBLIC_SITE_URL=https://your-service-name.onrender.com
+NEXTAUTH_SECRET=generate-a-long-random-secret
+ADMIN_EMAIL=your-admin-email
+ADMIN_PASSWORD=your-admin-password
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-role-key
+SUPABASE_BUCKET=portfolios
+NEXT_PUBLIC_SITE_NAME=Imad Portfolio
+```
+
+7. Deploy.
+8. After the first deploy, open `/api/health` and `/admin` to verify the app.
+9. If you use a custom domain, update both `NEXTAUTH_URL` and `NEXT_PUBLIC_SITE_URL` to that final HTTPS URL and redeploy.
+
+### Render Blueprint deploy
+
+You can also deploy from the included `render.yaml`:
+
+1. Push this repo to GitHub.
+2. In Render, click `New +` -> `Blueprint`.
+3. Select this repository.
+4. During creation, fill in every env var marked as `sync: false` in `render.yaml`.
+5. After deploy, confirm `/api/health` returns a `200` response.
+
+### Render CLI commands
+
+Install the CLI:
+
+```bash
+brew install render
+```
+
+Log in:
+
+```bash
+render login
+```
+
+Optional: validate the Blueprint locally before pushing:
+
+```bash
+render blueprints validate
+```
+
+Useful local production checks before deploying:
+
+```bash
+npm install
+npm run build
+npm run start:standalone
+```
+
+On Windows, use the dashboard or install the CLI from Render's official docs if you want local Blueprint validation.
+
+### Why these settings
+
+- Render recommends a Node web service for dynamic Next.js apps.
+- Render web services should expose an HTTP server and can use an HTTP health check path.
+- This repo already has a standalone Next.js build and a health endpoint, so `npm run start:standalone` is the right production start command.
+- Render recommends pinning Node instead of relying on the platform default. This repo now constrains Node to major version 20 in `package.json`.
+
 ## Railway deployment
 
-This repo is set up for Railway with:
+This repo is still set up for Railway with:
 
 - `next.config.mjs` using `output: "standalone"`
 - `railway.toml` for build/start/healthcheck
