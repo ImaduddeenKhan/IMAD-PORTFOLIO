@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
-import Sidebar from "@/components/portfolio/Sidebar";
-import MobileNav from "@/components/portfolio/MobileNav";
+import TopNav from "@/components/portfolio/TopNav";
 import Hero from "@/components/portfolio/Hero";
 import Building from "@/components/portfolio/Building";
 import Projects from "@/components/portfolio/Projects";
@@ -68,11 +67,10 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      <Sidebar portfolio={portfolio} sections={sections} initialMode={initialMode} />
-      <MobileNav portfolio={portfolio} sections={sections} initialMode={initialMode} />
-      <main className="lg:pl-[21.5rem]">
+      <TopNav portfolio={portfolio} sections={sections} initialMode={initialMode} />
+      <main>
+        <Hero hero={portfolio.hero} personalInfo={portfolio.personalInfo} socials={portfolio.socials} />
         <div className="container-page py-6 sm:py-8 lg:py-10">
-          <Hero hero={portfolio.hero} personalInfo={portfolio.personalInfo} />
           <About personalInfo={portfolio.personalInfo} />
           <Building items={portfolio.building} />
           <Projects projects={portfolio.projects} />

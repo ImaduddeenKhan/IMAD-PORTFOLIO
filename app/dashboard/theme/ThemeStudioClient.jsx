@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useMemo } from "react";
+import { useState, useTransition, useMemo, useCallback } from "react";
 import { toast } from "sonner";
 import { THEME_PRESETS, FONTS, LAYOUTS } from "@/lib/themes";
 
@@ -15,10 +15,11 @@ export default function ThemeStudioClient({ initialTheme }) {
     ...initialTheme,
   });
   const [pending, startTransition] = useTransition();
+  const [previewKey, setPreviewKey] = useState(0);
 
   function update(patch) { setTheme((t) => ({ ...t, ...patch })); }
 
-  async function save() {
+  const save = useCallback(async () => {
     startTransition(async () => {
       const res = await fetch("/api/me/portfolio", {
         method: "PATCH",
@@ -30,13 +31,14 @@ export default function ThemeStudioClient({ initialTheme }) {
         toast.error(json?.error?.message || "Save failed");
         return;
       }
-      toast.success("Theme saved!");
+      toast.success("Theme saved! Refreshing preview…");
+      /* Refresh the preview iframe after a short delay */
+      setTimeout(() => setPreviewKey((k) => k + 1), 600);
     });
-  }
+  }, [theme]);
 
   const presetEntries = useMemo(() => Object.entries(THEME_PRESETS), []);
   const fontEntries = useMemo(() => Object.entries(FONTS), []);
-  const previewBust = useMemo(() => Date.now(), [theme]);
 
   return (
     <div>
@@ -52,6 +54,7 @@ export default function ThemeStudioClient({ initialTheme }) {
 
       <div className="grid lg:grid-cols-2 gap-6">
         <div className="space-y-6">
+          {/* ─── Preset picker ─── */}
           <div className="card p-5 space-y-4">
             <h2 className="font-display font-semibold">Preset</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -65,15 +68,17 @@ export default function ThemeStudioClient({ initialTheme }) {
                   style={{ background: `rgb(${p.bg})`, color: `rgb(${p.fg})` }}
                 >
                   <div className="font-medium text-sm">{p.name}</div>
+                  <div className="text-[10px] opacity-60 mt-0.5">{p.mode}</div>
                   <div className="mt-3 flex gap-1.5">
-                    <span className="h-3 w-3 rounded-full" style={{ background: `rgb(${p.primary})` }} />
-                    <span className="h-3 w-3 rounded-full" style={{ background: `rgb(${p.accent})` }} />
+                    <span className="h-3 w-3 rounded-full border border-white/20" style={{ background: `rgb(${p.primary})` }} />
+                    <span className="h-3 w-3 rounded-full border border-white/20" style={{ background: `rgb(${p.accent})` }} />
                   </div>
                 </button>
               ))}
             </div>
           </div>
 
+          {/* ─── Custom colors ─── */}
           <div className="card p-5 space-y-4">
             <h2 className="font-display font-semibold">Custom colors</h2>
             <p className="text-xs text-muted">Override the preset colors. Leave blank to use the preset defaults.</p>
@@ -81,16 +86,42 @@ export default function ThemeStudioClient({ initialTheme }) {
               <ColorPicker label="Primary" value={theme.primaryColor} onChange={(v) => update({ primaryColor: v })} fallback={`#${rgbToHex(THEME_PRESETS[theme.preset]?.primary)}`} />
               <ColorPicker label="Accent" value={theme.accentColor} onChange={(v) => update({ accentColor: v })} fallback={`#${rgbToHex(THEME_PRESETS[theme.preset]?.accent)}`} />
             </div>
+            {/* Color preview swatches */}
+            <div className="flex items-center gap-3 mt-2">
+              <div className="text-xs text-muted">Preview:</div>
+              <div
+                className="h-8 w-8 rounded-lg border border-border shadow-sm"
+                style={{ background: theme.primaryColor || `rgb(${THEME_PRESETS[theme.preset]?.primary})` }}
+                title="Primary color"
+              />
+              <div
+                className="h-8 w-8 rounded-lg border border-border shadow-sm"
+                style={{ background: theme.accentColor || `rgb(${THEME_PRESETS[theme.preset]?.accent})` }}
+                title="Accent color"
+              />
+            </div>
           </div>
 
+          {/* ─── Typography ─── */}
           <div className="card p-5 space-y-4">
             <h2 className="font-display font-semibold">Typography</h2>
             <div className="grid sm:grid-cols-2 gap-4">
               <FontPicker label="Body font" value={theme.fontSans} onChange={(v) => update({ fontSans: v })} entries={fontEntries} />
               <FontPicker label="Display font" value={theme.fontDisplay} onChange={(v) => update({ fontDisplay: v })} entries={fontEntries} />
             </div>
+            {/* Font preview */}
+            <div className="rounded-xl border border-border p-4 mt-2 space-y-2">
+              <p className="text-xs text-muted mb-2">Font preview:</p>
+              <p style={{ fontFamily: FONTS[theme.fontDisplay]?.stack || "inherit" }} className="text-lg font-semibold">
+                {FONTS[theme.fontDisplay]?.name || "Display"} — Heading Text
+              </p>
+              <p style={{ fontFamily: FONTS[theme.fontSans]?.stack || "inherit" }} className="text-sm text-fg/70">
+                {FONTS[theme.fontSans]?.name || "Body"} — The quick brown fox jumps over the lazy dog.
+              </p>
+            </div>
           </div>
 
+          {/* ─── Layout ─── */}
           <div className="card p-5 space-y-4">
             <h2 className="font-display font-semibold">Layout</h2>
             <div className="grid grid-cols-3 gap-3">
@@ -106,22 +137,31 @@ export default function ThemeStudioClient({ initialTheme }) {
                 </button>
               ))}
             </div>
-            <p className="text-xs text-muted">More layout variants coming soon — currently all use the sidebar layout.</p>
+            <p className="text-xs text-muted">All layouts currently use the click-to-open menu navigation.</p>
           </div>
         </div>
 
+        {/* ─── Live preview ─── */}
         <div className="card p-2 lg:sticky lg:top-6 h-fit">
           <div className="px-3 py-2 text-xs text-muted flex items-center justify-between">
             <span>Live preview · /</span>
-            <a href="/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Open ↗</a>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setPreviewKey((k) => k + 1)}
+                className="text-primary hover:underline"
+              >
+                Refresh ↻
+              </button>
+              <a href="/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Open ↗</a>
+            </div>
           </div>
           <iframe
-            key={previewBust}
+            key={previewKey}
             src="/"
             title="Portfolio preview"
             className="w-full h-[640px] rounded-xl border border-border bg-bg"
           />
-          <p className="px-3 py-2 text-xs text-muted">Save your theme above, then refresh the preview to see changes.</p>
+          <p className="px-3 py-2 text-xs text-muted">Save your theme, then click &quot;Refresh&quot; or reload the preview to see changes.</p>
         </div>
       </div>
     </div>
@@ -143,7 +183,12 @@ function ColorPicker({ label, value, onChange, fallback }) {
           type="text"
           value={value || ""}
           placeholder={fallback}
-          onChange={(e) => onChange(e.target.value || null)}
+          onChange={(e) => {
+            const v = e.target.value;
+            // Only set if it looks like a valid hex color or empty
+            if (!v) { onChange(null); return; }
+            onChange(v.startsWith("#") ? v : `#${v}`);
+          }}
           className="input flex-1 font-mono text-xs"
         />
         {value && (
