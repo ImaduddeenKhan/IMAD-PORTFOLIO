@@ -3,7 +3,7 @@ builder = "RAILPACK"
 buildCommand = "npm run build"
 
 [deploy]
-startCommand = "npm run start:standalone"
+startCommand = "npm start"
 healthcheckPath = "/api/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"

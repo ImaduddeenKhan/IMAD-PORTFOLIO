@@ -1,6 +1,6 @@
 # Imad Portfolio
 
-Personal portfolio for Imaduddeen Khan with a full `/admin` editor, Supabase-backed content and uploads, project detail pages, theme studio, and deployment support for Render and Railway.
+Personal portfolio for Imaduddeen Khan with a full `/admin` editor, Supabase-backed content and uploads, project detail pages, theme studio, and deployment support for Vercel.
 
 ## Stack
 
@@ -75,37 +75,33 @@ NEXT_PUBLIC_SITE_NAME=Imad Portfolio
 npm run seed
 ```
 
-## Render deployment
+## Vercel deployment
 
-This repo is set up for Render with:
+This repo is now configured to deploy to Vercel using the default Next.js runtime.
 
-- `render.yaml` Blueprint for a Render web service
-- `next.config.mjs` using `output: "standalone"`
-- `app/api/health/route.js` for Render health checks
-- `.env.example` so you can bulk import env vars into Render
-
-### Render dashboard steps
+### Vercel dashboard steps
 
 1. Push this repo to GitHub.
-2. In Render, click `New +` -> `Web Service`.
-3. Choose `Git Provider` and select this repository.
-4. Use these values in the service form:
+2. In Vercel, click `Add New...` -> `Project`.
+3. Import this repository.
+4. Keep the detected framework as `Next.js`.
+5. Use the default install and build settings:
 
 ```text
-Language: Node
-Build Command: npm install && npm run build
-Start Command: npm run start:standalone
-Health Check Path: /api/health
+Install Command: npm install
+Build Command: npm run build
+Output Directory: .next
 ```
 
-5. Add env vars from `.env.example`.
-6. Set these production values:
+6. Add the environment variables from `.env.example`.
+7. Set these production values:
 
 ```env
 NODE_ENV=production
-NEXTAUTH_URL=https://your-service-name.onrender.com
-NEXT_PUBLIC_SITE_URL=https://your-service-name.onrender.com
 NEXTAUTH_SECRET=generate-a-long-random-secret
+NEXTAUTH_URL=https://your-project.vercel.app
+NEXT_PUBLIC_SITE_URL=https://your-project.vercel.app
+ADMIN_NAME=Imaduddeen Khan
 ADMIN_EMAIL=your-admin-email
 ADMIN_PASSWORD=your-admin-password
 SUPABASE_URL=https://your-project.supabase.co
@@ -114,131 +110,48 @@ SUPABASE_BUCKET=portfolios
 NEXT_PUBLIC_SITE_NAME=Imad Portfolio
 ```
 
-7. Deploy.
-8. After the first deploy, open `/api/health` and `/admin` to verify the app.
-9. If you use a custom domain, update both `NEXTAUTH_URL` and `NEXT_PUBLIC_SITE_URL` to that final HTTPS URL and redeploy.
+8. Deploy.
+9. After the first deploy, open `/api/health` and `/admin` to verify the app.
+10. If you attach a custom domain, update both `NEXTAUTH_URL` and `NEXT_PUBLIC_SITE_URL` to that final HTTPS URL and redeploy.
 
-### Render Blueprint deploy
-
-You can also deploy from the included `render.yaml`:
-
-1. Push this repo to GitHub.
-2. In Render, click `New +` -> `Blueprint`.
-3. Select this repository.
-4. During creation, fill in every env var marked as `sync: false` in `render.yaml`.
-5. After deploy, confirm `/api/health` returns a `200` response.
-
-### Render CLI commands
+### Vercel CLI commands
 
 Install the CLI:
 
 ```bash
-brew install render
+npm install -g vercel
 ```
 
 Log in:
 
 ```bash
-render login
+vercel login
 ```
 
-Optional: validate the Blueprint locally before pushing:
+Create the project and deploy a preview:
 
 ```bash
-render blueprints validate
+vercel
 ```
 
-Useful local production checks before deploying:
+Promote to production:
 
 ```bash
-npm install
-npm run build
-npm run start:standalone
+vercel --prod
 ```
 
-On Windows, use the dashboard or install the CLI from Render's official docs if you want local Blueprint validation.
+Pull remote env vars locally if needed:
+
+```bash
+vercel env pull .env.local
+```
 
 ### Why these settings
 
-- Render recommends a Node web service for dynamic Next.js apps.
-- Render web services should expose an HTTP server and can use an HTTP health check path.
-- This repo already has a standalone Next.js build and a health endpoint, so `npm run start:standalone` is the right production start command.
-- Render recommends pinning Node instead of relying on the platform default. This repo now constrains Node to major version 20 in `package.json`.
-
-## Railway deployment
-
-This repo is still set up for Railway with:
-
-- `next.config.mjs` using `output: "standalone"`
-- `railway.toml` for build/start/healthcheck
-- `app/api/health/route.js` for Railway health checks
-
-### Railway dashboard steps
-
-1. Push this repo to GitHub.
-2. In Railway, click `New Project`.
-3. Choose `Deploy from GitHub repo`.
-4. Select this repository.
-5. Add all env vars from `.env.example`.
-6. Set these production values:
-
-```env
-NEXTAUTH_URL=https://your-app-name.up.railway.app
-NEXT_PUBLIC_SITE_URL=https://your-app-name.up.railway.app
-NODE_ENV=production
-```
-
-7. Deploy.
-8. After first deploy, open `/api/health` and `/admin` to verify the app.
-
-### Railway CLI commands
-
-Install CLI:
-
-```bash
-npm install -g @railway/cli
-```
-
-Login and link project:
-
-```bash
-railway login
-railway init
-```
-
-Set env vars:
-
-```bash
-railway variables set NEXTAUTH_SECRET=your-secret
-railway variables set NEXTAUTH_URL=https://your-app-name.up.railway.app
-railway variables set ADMIN_NAME="Imaduddeen Khan"
-railway variables set ADMIN_EMAIL=imad@example.com
-railway variables set ADMIN_PASSWORD=your-password
-railway variables set SUPABASE_URL=https://your-project.supabase.co
-railway variables set SUPABASE_SERVICE_KEY=your-service-role-key
-railway variables set SUPABASE_BUCKET=portfolios
-railway variables set NEXT_PUBLIC_SITE_URL=https://your-app-name.up.railway.app
-railway variables set NEXT_PUBLIC_SITE_NAME="Imad Portfolio"
-railway variables set NODE_ENV=production
-```
-
-Deploy:
-
-```bash
-railway up
-```
-
-Open logs:
-
-```bash
-railway logs
-```
-
-Open shell:
-
-```bash
-railway shell
-```
+- Vercel natively detects and builds Next.js App Router projects.
+- The app no longer depends on a self-hosted standalone server entrypoint.
+- `app/api/health/route.js` remains available for smoke checks after deploy.
+- Node is pinned to major version 20 in `package.json`, which aligns with Vercel project settings.
 
 ## Production commands
 
@@ -248,15 +161,11 @@ Build locally:
 npm run build
 ```
 
-Run the same standalone server Railway uses:
+Run the production server locally:
 
 ```bash
-npm run start:standalone
+npm start
 ```
-
-## Removed unnecessary files
-
-These Docker-only files were removed because Railway does not need them for this setup:
 
 - `Dockerfile`
 - `docker-compose.yml`

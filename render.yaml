@@ -3,8 +3,8 @@ services:
     name: portfolioimad
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build && mkdir -p .next/standalone/public && cp -r public/* .next/standalone/public/ 2>/dev/null; cp -r .next/static .next/standalone/.next/static 2>/dev/null; true
-    startCommand: npm run start:standalone
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     healthCheckPath: /api/health
     autoDeployTrigger: commit
     envVars:
