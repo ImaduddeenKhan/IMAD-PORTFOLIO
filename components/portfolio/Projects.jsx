@@ -2,7 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { Github, Youtube, ExternalLink, Play } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
-import { youtubeId } from "@/lib/utils";
+import { youtubeEmbedUrl, youtubeId } from "@/lib/utils";
+
+const DEFAULT_SHARED_VIDEO_URL = "https://youtu.be/DB3D-mtWR0c";
 
 const STATUS_LABELS = {
   active: "Active",
@@ -10,31 +12,42 @@ const STATUS_LABELS = {
   archived: "Archived",
 };
 
-export default function Projects({ projects = [] }) {
+export default function Projects({ projects = [], sharedVideoUrl }) {
   if (!projects.length) return null;
   return (
     <section className="section-shell">
       <SectionHeader id="projects" title="Projects" subtitle="Things I've built." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((p, index) => (
-          <ProjectCard key={p.id} project={p} index={index} />
+          <ProjectCard key={p.id} project={p} index={index} sharedVideoUrl={sharedVideoUrl} />
         ))}
       </div>
     </section>
   );
 }
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index, sharedVideoUrl }) {
   const href = `/projects/${project.id}`;
-  const ytId = youtubeId(project.youtubeUrl);
+  const videoUrl = project.youtubeUrl || sharedVideoUrl || DEFAULT_SHARED_VIDEO_URL;
+  const embedUrl = youtubeEmbedUrl(videoUrl);
+  const ytId = youtubeId(videoUrl);
   const thumbnail = project.thumbnail || (ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : null);
   return (
     <article
       className="card motion-card overflow-hidden flex flex-col group transition-all duration-500 animate-fade-up"
       style={{ "--enter-delay": `${index * 60}ms` }}
     >
-      <Link href={href} className="motion-media block relative overflow-hidden bg-bg aspect-video">
-        {thumbnail ? (
+      <div className="motion-media block relative overflow-hidden bg-bg aspect-video">
+        {embedUrl ? (
+          <iframe
+            src={embedUrl}
+            title={`${project.title} video preview`}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="absolute inset-0 h-full w-full"
+          />
+        ) : thumbnail ? (
           <Image
             src={thumbnail}
             alt={project.title}
@@ -53,8 +66,8 @@ function ProjectCard({ project, index }) {
             <div className="text-xs uppercase tracking-[0.25em] text-white/60">{String(index + 1).padStart(2, "0")}</div>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" aria-hidden="true" />
-        {ytId && !project.thumbnail && (
+        {!embedUrl && <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" aria-hidden="true" />}
+        {!embedUrl && ytId && !project.thumbnail && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="h-10 w-10 rounded-full bg-white/85 backdrop-blur-sm flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.22)]">
               <Play className="h-4 w-4 text-fg fill-fg" />
@@ -66,7 +79,8 @@ function ProjectCard({ project, index }) {
             Featured
           </span>
         )}
-      </Link>
+        <Link href={href} className="absolute inset-0" aria-label={`Open ${project.title}`} />
+      </div>
       <div className="p-4 sm:p-5 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-2 mb-1.5">
           <div className="flex-1 min-w-0">
@@ -87,9 +101,9 @@ function ProjectCard({ project, index }) {
                 <Github className="h-3.5 w-3.5" />
               </a>
             )}
-            {project.youtubeUrl && (
+            {videoUrl && (
               <a
-                href={project.youtubeUrl}
+                href={videoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube video"
@@ -122,8 +136,8 @@ function ProjectCard({ project, index }) {
           </div>
         )}
         <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-muted">
-          {project.youtubeUrl && (
-            <a href={project.youtubeUrl} target="_blank" rel="noopener noreferrer" className="hover:text-fg transition-colors">
+          {videoUrl && (
+            <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="hover:text-fg transition-colors">
               Watch on YouTube
             </a>
           )}

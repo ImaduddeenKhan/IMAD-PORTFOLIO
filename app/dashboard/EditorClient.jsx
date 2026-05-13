@@ -46,6 +46,7 @@ const BUILDING_FIELDS = [
     { value: "idea", label: "Idea" }, { value: "building", label: "Building" }, { value: "beta", label: "Beta" }, { value: "live", label: "Live" },
   ] },
   { key: "url", label: "URL" },
+  { key: "videoUrl", label: "YouTube video URL" },
   { key: "description", label: "Description", type: "textarea", rows: 3 },
   { key: "logo", label: "Logo", type: "image" },
 ];
@@ -277,7 +278,8 @@ export default function EditorClient({ initial }) {
         )}
 
         {tab === "resume" && (
-          <Card title="Resume" description="Upload a PDF — visitors will see a download button.">
+          <Card title="Resume" description="Paste a Google Drive or public resume URL, or upload a PDF.">
+            <Field label="Resume URL" value={data.resumeUrl} onChange={(v) => update({ resumeUrl: v })} placeholder="https://drive.google.com/..." />
             <ImageField label="Resume PDF" value={data.resumeUrl} onChange={(v) => update({ resumeUrl: v })} kind="resume" accept="application/pdf" />
           </Card>
         )}

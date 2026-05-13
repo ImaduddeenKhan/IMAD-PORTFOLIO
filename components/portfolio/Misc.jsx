@@ -10,7 +10,6 @@ export default function Resume({ resumeUrl, name }) {
         href={resumeUrl}
         target="_blank"
         rel="noopener noreferrer"
-        download
         className="card motion-card p-6 inline-flex items-center gap-4"
       >
         <div className="h-14 w-14 rounded-[1.25rem] bg-primary/10 flex items-center justify-center border border-border">
@@ -18,7 +17,7 @@ export default function Resume({ resumeUrl, name }) {
         </div>
         <div className="flex-1">
           <div className="font-display text-xl tracking-[-0.03em]">{name ? `${name} — Resume.pdf` : "Resume.pdf"}</div>
-          <div className="text-xs text-muted mt-1">Open or download the latest resume</div>
+          <div className="text-xs text-muted mt-1">Open the latest resume in Google Drive</div>
         </div>
         <Download className="h-5 w-5 text-muted" />
       </a>

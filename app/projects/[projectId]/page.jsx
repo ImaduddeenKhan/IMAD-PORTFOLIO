@@ -27,7 +27,8 @@ export default async function ProjectDetailPage({ params }) {
   const project = portfolio.projects?.find((item) => item.id === projectId);
   if (!project) notFound();
 
-  const ytEmbed = youtubeEmbedUrl(project.youtubeUrl);
+  const videoUrl = project.youtubeUrl || portfolio.hero?.introVideoUrl || "https://youtu.be/DB3D-mtWR0c";
+  const ytEmbed = youtubeEmbedUrl(videoUrl);
 
   return (
     <div className="min-h-screen container-page py-8 sm:py-12 max-w-[1120px]">
@@ -59,8 +60,8 @@ export default async function ProjectDetailPage({ params }) {
                 <ExternalLink className="h-4 w-4" /> Live demo
               </a>
             )}
-            {project.youtubeUrl && (
-              <a href={project.youtubeUrl} target="_blank" rel="noopener noreferrer" className="btn-outline">
+            {videoUrl && (
+              <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="btn-outline">
                 <Youtube className="h-4 w-4 text-red-500" /> Watch
               </a>
             )}
@@ -103,8 +104,8 @@ export default async function ProjectDetailPage({ params }) {
                   <div className="eyebrow mb-2">Video walkthrough</div>
                   <p className="text-sm text-fg/70">Project demo embedded directly from YouTube.</p>
                 </div>
-                {project.youtubeUrl && (
-                  <a href={project.youtubeUrl} target="_blank" rel="noopener noreferrer" className="chip">
+                {videoUrl && (
+                  <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="chip">
                     <Youtube className="h-3.5 w-3.5 mr-1 text-red-500" /> Watch
                   </a>
                 )}
@@ -160,8 +161,8 @@ export default async function ProjectDetailPage({ params }) {
                   <ExternalLink className="h-4 w-4" /> Live demo
                 </a>
               )}
-              {project.youtubeUrl && (
-                <a href={project.youtubeUrl} target="_blank" rel="noopener noreferrer" className="btn-outline justify-start">
+              {videoUrl && (
+                <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="btn-outline justify-start">
                   <Youtube className="h-4 w-4 text-red-500" /> YouTube demo
                 </a>
               )}

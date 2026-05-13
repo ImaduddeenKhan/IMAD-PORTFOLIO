@@ -69,11 +69,11 @@ export default async function HomePage() {
     <div className="min-h-screen">
       <TopNav portfolio={portfolio} sections={sections} initialMode={initialMode} />
       <main>
-        <Hero hero={portfolio.hero} personalInfo={portfolio.personalInfo} socials={portfolio.socials} />
+        <Hero hero={portfolio.hero} personalInfo={portfolio.personalInfo} socials={portfolio.socials} resumeUrl={portfolio.resumeUrl} />
         <div className="container-page py-6 sm:py-8 lg:py-10">
           <About personalInfo={portfolio.personalInfo} />
-          <Building items={portfolio.building} />
-          <Projects projects={portfolio.projects} />
+          <Building items={portfolio.building} sharedVideoUrl={portfolio.hero?.introVideoUrl} />
+          <Projects projects={portfolio.projects} sharedVideoUrl={portfolio.hero?.introVideoUrl} />
           <Experience items={portfolio.experience} />
           <Education items={portfolio.education} />
           <Skills groups={portfolio.skills} />

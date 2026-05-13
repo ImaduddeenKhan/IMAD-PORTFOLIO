@@ -1,16 +1,18 @@
 import Image from "next/image";
 import { youtubeId } from "@/lib/utils";
-import { ArrowRight, CirclePlay } from "lucide-react";
+import { ArrowRight, CirclePlay, FileText } from "lucide-react";
 import { PlatformIcon } from "@/components/icons";
 
 const DEFAULT_INTRO_VIDEO = "https://youtu.be/DB3D-mtWR0c";
+const DEFAULT_RESUME_URL = "https://drive.google.com/file/d/13OoBP6pA9kNRFNR20jP5ZYwuTagibocB/view?usp=sharing";
 
-export default function Hero({ hero, personalInfo, socials = [] }) {
+export default function Hero({ hero, personalInfo, socials = [], resumeUrl }) {
   const introVideoId =
     youtubeId(hero?.introVideoUrl) || youtubeId(DEFAULT_INTRO_VIDEO);
   const introThumb = introVideoId
     ? `https://i.ytimg.com/vi/${introVideoId}/hqdefault.jpg`
     : null;
+  const resolvedResumeUrl = resumeUrl || DEFAULT_RESUME_URL;
   const avatar = personalInfo.avatar || "/Imad_Hero Image.png";
   const nameParts = (personalInfo?.fullName || "Imad Khan").split(" ");
   const firstName = nameParts[0] || "IMAD";
@@ -89,6 +91,16 @@ export default function Hero({ hero, personalInfo, socials = [] }) {
                     <PlatformIcon platform={s.platform} />
                   </a>
                 ))}
+                <a
+                  href={resolvedResumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Resume"
+                  className="hero-social-icon"
+                  title="Open resume"
+                >
+                  <FileText className="h-4 w-4" />
+                </a>
               </div>
             )}
           </div>
