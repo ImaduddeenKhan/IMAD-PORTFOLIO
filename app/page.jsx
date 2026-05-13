@@ -14,6 +14,7 @@ import Skills, {
 import Resume, { About } from "@/components/portfolio/Misc";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
+import AIForBusiness from "@/components/portfolio/AIForBusiness";
 import { getPublicPortfolio } from "@/lib/site-data";
 
 export const dynamic = "force-dynamic";
@@ -74,6 +75,7 @@ export default async function HomePage() {
           <About personalInfo={portfolio.personalInfo} />
           <Building items={portfolio.building} sharedVideoUrl={portfolio.hero?.introVideoUrl} />
           <Projects projects={portfolio.projects} sharedVideoUrl={portfolio.hero?.introVideoUrl} />
+          <AIForBusiness />
           <Experience items={portfolio.experience} />
           <Education items={portfolio.education} />
           <Skills groups={portfolio.skills} />
