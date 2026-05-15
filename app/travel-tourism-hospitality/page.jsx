@@ -1,11 +1,9 @@
 import DomainPage from "@/components/portfolio/DomainPage";
 import domain from "@/lib/domains/travel-tourism-hospitality";
+import { buildDomainMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
-export const metadata = {
-  title: `${domain.label} · AI Automation by Imad Khan`,
-  description: domain.subheadline,
-};
+export const metadata = buildDomainMetadata(domain);
 
 export default function Page() {
   return <DomainPage domain={domain} />;

@@ -1,0 +1,43 @@
+INTRO VIDEO SCRIPT — IMAD KHAN
+=================================
+Length: roughly 60 to 90 seconds when spoken at a normal pace.
+Style notes for you while recording:
+- Talk like you are explaining yourself to one person sitting across the table.
+- Slow down on the lines that matter. Pause for half a second before "And honestly..." and before the closing line.
+- It is okay to look away from the camera for a moment when you are thinking. That actually feels more real.
+- If you stumble on a word, do not start over — just keep going. Small stumbles make it feel human.
+- No need for fancy editing. One take, eye contact, decent light from a window, mic close to you. That is enough.
+
+----------------------------------------------------------------
+SCRIPT (read it like a person, not like a paragraph)
+----------------------------------------------------------------
+
+Hey, I am Imad.
+
+I build AI products for businesses — that is the short version.
+
+The longer version is, I really enjoy sitting with somebody, listening to where their work is getting stuck, and then going back and quietly building something that just... takes that pain away. That is the part I love. Not the buzzwords, the actual problem.
+
+So if you are running a business and there is something that is eating your team's time every single day — invoices, follow-ups, support replies, lead qualification, paperwork, anything — tell me about it. Nine times out of ten there is an AI workflow that can handle most of it, and I can build it for you.
+
+On the technical side — I have spent serious hands-on time with machine learning, deep learning, NLP, and data science. Not just courses. Actually shipping things. So far I have built and shipped more than fifteen AI products across different industries — logistics, healthcare, real estate, retail, finance, a few more. Each one taught me something I could not have learned from a tutorial.
+
+And honestly, right now I am open to opportunities. Full-time roles, contract work, founders who need an AI engineer to actually ship something — I am up for the right conversation.
+
+If any of that sounds like you, the easiest way is to message me. Email and WhatsApp are on the page. I usually reply the same day.
+
+Thanks for watching.
+
+----------------------------------------------------------------
+ALTERNATIVE SHORTER OPENER (if you want a 45-second version)
+----------------------------------------------------------------
+
+Hey, I am Imad. I build AI products for businesses.
+
+If you tell me one workflow in your business that is eating time — invoices, follow-ups, support, paperwork, anything — I can almost always build an AI system that handles most of it for you.
+
+I have hands-on experience with machine learning, deep learning, NLP, and data science, and I have shipped more than fifteen AI products across industries like logistics, healthcare, retail, and finance.
+
+Right now I am open to opportunities — full-time, contract, or building something with a founder.
+
+If that is interesting to you, message me. Email and WhatsApp are right here on the page.
