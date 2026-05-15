@@ -15,6 +15,8 @@ import ThemeModeToggle from "@/components/portfolio/ThemeModeToggle";
 import WhatsAppFab from "@/components/portfolio/WhatsAppFab";
 import DomainHeroArt from "@/components/portfolio/DomainHeroArt";
 import { getPublicPortfolio } from "@/lib/site-data";
+import { getDomainSeo, buildDomainJsonLd } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -41,9 +43,11 @@ export default async function DomainPage({ domain }) {
   const name = portfolio?.personalInfo?.fullName || "Imad Khan";
 
   const HeroIcon = Icons[domain.heroIcon] || Icons.Sparkles;
+  const seo = getDomainSeo(domain.slug) || { faqs: [] };
+  const jsonLd = buildDomainJsonLd(domain);
 
-  // Aggregate totals
-  const totals = domain.tasks.reduce(
+  // ---- Aggregate "reference" totals (the per-task math shown below) ----
+  const refTotals = domain.tasks.reduce(
     (acc, t) => {
       acc.tradHours += t.traditional.hoursPerMonth || 0;
       acc.aiHours += t.ai.hoursPerMonth || 0;
@@ -53,12 +57,23 @@ export default async function DomainPage({ domain }) {
     },
     { tradHours: 0, aiHours: 0, tradCost: 0, aiCost: 0 }
   );
-  const monthlySavings = totals.tradCost - totals.aiCost;
+
+  // ---- Apply business-size scaling for the headline / ROI numbers ----
+  const scale = typeof domain.scale === "number" ? domain.scale : 0.25;
+  const totals = {
+    tradHours: refTotals.tradHours * scale,
+    aiHours: refTotals.aiHours * scale,
+    tradCost: refTotals.tradCost * scale,
+    aiCost: refTotals.aiCost * scale,
+  };
+  const monthlySavings = Math.max(0, totals.tradCost - totals.aiCost);
   const annualSavings = monthlySavings * 12;
   const hoursSavedMonth = totals.tradHours - totals.aiHours;
   const pctSavings = totals.tradCost
     ? Math.round((monthlySavings / totals.tradCost) * 100)
     : 0;
+
+  const businessProfile = domain.businessProfile || {};
 
   const waText = encodeURIComponent(
     `Hi Imad, I came from your ${domain.label} page. I'd like to discuss AI automation for my business.`
@@ -109,9 +124,32 @@ export default async function DomainPage({ domain }) {
                       {formatLakh(annualSavings)} / year saved
                     </div>
                     <div className="text-xs font-medium uppercase tracking-[0.18em] text-muted">
-                      typical {domain.label.toLowerCase()} setup · math shown below
+                      For a {businessProfile.sizeLabel?.toLowerCase() || "medium-sized business"} · math shown below
                     </div>
                   </div>
+                </div>
+
+                {/* Business profile panel — so the reader knows exactly which "size" we costed for */}
+                <div
+                  className="mt-6 rounded-[1.5rem] border p-5"
+                  style={{
+                    borderColor: `${domain.palette.c1}55`,
+                    background: `${domain.palette.c1}0c`,
+                  }}
+                >
+                  <div className="eyebrow" style={{ color: domain.palette.c1 }}>
+                    Calculations are for this size of business
+                  </div>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    <ProfileRow label="Type" value={businessProfile.sizeLabel} />
+                    <ProfileRow label="Annual turnover" value={businessProfile.annualTurnover} />
+                    <ProfileRow label="Team size" value={businessProfile.teamSize} />
+                    <ProfileRow label="Locations" value={businessProfile.locations} />
+                  </div>
+                  <p className="mt-4 text-xs text-fg/60 leading-relaxed">
+                    Bigger setup? Multiply the numbers by your scale (e.g. 3 clinics ≈ 3× savings).
+                    Smaller? Divide. The <em>ratio</em> of savings to cost stays the same.
+                  </p>
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -125,9 +163,6 @@ export default async function DomainPage({ domain }) {
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
                   <a href="#tasks" className="btn-outline">See the 15 automations</a>
-                  <Link href="/heavyhaul-ai" className="btn-outline">
-                    Live case study <ArrowUpRight className="h-4 w-4" />
-                  </Link>
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -239,7 +274,12 @@ export default async function DomainPage({ domain }) {
                 Traditional way → AI way, with the math on the table
               </h2>
               <p className="section-sub">
-                Every line item below is a real workflow I have built or could ship inside 2–6 weeks. The numbers use realistic Indian SMB rates ({formatINR(domain.assumedRate)}/hr loaded). Adjust to your scale — the ratio holds.
+                Every line below is a real workflow I have built or could ship inside 2–6 weeks. The
+                per-task numbers describe a <strong>reference setup</strong> at the upper end (busy
+                clinic, full QSR week, etc.) using a loaded labour rate of {formatINR(domain.assumedRate)}/hr.
+                The <strong>headline savings of {formatLakh(annualSavings)}/year</strong> at the top of the page
+                are these per-task savings <em>scaled down</em> to the {businessProfile.sizeLabel?.toLowerCase() || "medium-sized business"} described above.
+                If your business is larger, multiply; if smaller, divide.
               </p>
             </div>
 
@@ -458,6 +498,34 @@ export default async function DomainPage({ domain }) {
           </div>
         </section>
 
+        {/* FAQ */}
+        {seo.faqs && seo.faqs.length > 0 && (
+          <section className="section-shell" id="faq">
+            <div className="container-page">
+              <div className="mx-auto max-w-3xl">
+                <p className="eyebrow text-center">Questions {domain.audience} actually ask</p>
+                <h2 className="mt-3 text-center font-display text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
+                  Frequently asked questions
+                </h2>
+                <div className="mt-8 space-y-4">
+                  {seo.faqs.map((f, i) => (
+                    <details
+                      key={i}
+                      className="group rounded-2xl border border-fg/10 bg-bg/40 p-5 open:bg-bg/70"
+                    >
+                      <summary className="cursor-pointer list-none font-medium text-fg marker:hidden">
+                        <span className="mr-2 text-accent">Q.</span>
+                        {f.q}
+                      </summary>
+                      <p className="mt-3 text-sm leading-relaxed text-fg/75">{f.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* FOOTER */}
         <section className="section-shell">
           <div className="container-page text-center">
@@ -487,6 +555,7 @@ export default async function DomainPage({ domain }) {
       </main>
 
       <WhatsAppFab domainLabel={domain.label} />
+      <JsonLd data={jsonLd} />
     </div>
   );
 }
@@ -521,6 +590,18 @@ function BigStat({ label, value, accent }) {
       >
         {value}
       </div>
+    </div>
+  );
+}
+
+function ProfileRow({ label, value }) {
+  if (!value) return null;
+  return (
+    <div className="rounded-xl border border-border/60 bg-surface/60 px-3 py-2.5">
+      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">
+        {label}
+      </div>
+      <div className="mt-1 text-sm leading-snug text-fg/85">{value}</div>
     </div>
   );
 }

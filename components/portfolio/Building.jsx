@@ -29,11 +29,11 @@ export default function Building({ items = [], sharedVideoUrl }) {
           return (
             <div
               key={b.id}
-              className="card motion-card p-6 sm:p-7 flex flex-col gap-5 animate-fade-up"
+              className="card motion-card overflow-hidden p-6 sm:p-7 flex flex-col gap-5 animate-fade-up"
               style={{ "--enter-delay": `${index * 80}ms` }}
             >
-              <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_20rem] xl:items-start">
-                <div>
+              <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,20rem)] xl:items-start">
+                <div className="min-w-0">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <div className="eyebrow mb-2">In progress</div>
@@ -61,18 +61,18 @@ export default function Building({ items = [], sharedVideoUrl }) {
                   </div>
                 </div>
                 {embedUrl && (
-                  <div className="overflow-hidden rounded-[1.6rem] border border-border bg-bg shadow-[0_22px_55px_rgba(0,0,0,0.08)]">
+                  <div className="w-full min-w-0 overflow-hidden rounded-[1.6rem] border border-border bg-bg shadow-[0_22px_55px_rgba(0,0,0,0.08)]">
                     <div className="px-4 pt-4">
                       <div className="eyebrow mb-2">Product video</div>
                     </div>
-                    <div className="relative aspect-video">
+                    <div className="relative w-full aspect-video overflow-hidden">
                       <iframe
                         src={embedUrl}
                         title={`${b.name} video`}
                         loading="lazy"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
-                        className="absolute inset-0 h-full w-full"
+                        className="absolute inset-0 h-full w-full block"
                       />
                     </div>
                   </div>

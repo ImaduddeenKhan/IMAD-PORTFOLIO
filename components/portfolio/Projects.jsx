@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Youtube, ExternalLink, Play } from "lucide-react";
+import { Github, Youtube, ExternalLink, Play, ArrowRight } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { youtubeEmbedUrl, youtubeId } from "@/lib/utils";
 
@@ -12,16 +12,30 @@ const STATUS_LABELS = {
   archived: "Archived",
 };
 
-export default function Projects({ projects = [], sharedVideoUrl }) {
+export default function Projects({ projects = [], sharedVideoUrl, limit = 3, showExploreAll = true }) {
   if (!projects.length) return null;
+  const visibleProjects = typeof limit === "number" ? projects.slice(0, limit) : projects;
+  const hasMore = projects.length > visibleProjects.length;
   return (
     <section className="section-shell">
       <SectionHeader id="projects" title="Projects" subtitle="Things I've built." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {projects.map((p, index) => (
+        {visibleProjects.map((p, index) => (
           <ProjectCard key={p.id} project={p} index={index} sharedVideoUrl={sharedVideoUrl} />
         ))}
       </div>
+      {showExploreAll && hasMore && (
+        <div className="mt-10 text-center">
+          <Link
+            href="/projects"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary inline-flex"
+          >
+            Explore All Projects <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      )}
     </section>
   );
 }
@@ -79,13 +93,13 @@ function ProjectCard({ project, index, sharedVideoUrl }) {
             Featured
           </span>
         )}
-        <Link href={href} className="absolute inset-0" aria-label={`Open ${project.title}`} />
+        <Link href={href} target="_blank" rel="noopener noreferrer" className="absolute inset-0" aria-label={`Open ${project.title}`} />
       </div>
       <div className="p-4 sm:p-5 flex flex-col flex-1">
         <div className="flex items-start justify-between gap-2 mb-1.5">
           <div className="flex-1 min-w-0">
             <div className="eyebrow mb-1.5">Selected work</div>
-            <Link href={href} className="font-display font-semibold text-base tracking-[-0.03em] hover:text-primary transition-colors line-clamp-2 leading-snug">
+            <Link href={href} target="_blank" rel="noopener noreferrer" className="font-display font-semibold text-base tracking-[-0.03em] hover:text-primary transition-colors line-clamp-2 leading-snug">
               {project.title}
             </Link>
           </div>

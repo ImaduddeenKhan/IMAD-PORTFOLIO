@@ -32,6 +32,8 @@ export default function AIForBusiness() {
               <Link
                 key={d.slug}
                 href={`/${d.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="card group flex flex-col gap-3 p-5 transition-transform hover:-translate-y-0.5"
                 style={{
                   borderColor: `${d.palette.c1}33`,
@@ -76,6 +78,8 @@ export default function AIForBusiness() {
         <div className="mt-10 text-center">
           <Link
             href="/heavyhaul-ai"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-outline inline-flex items-center gap-2"
           >
             Or read the full HeavyHaul AI case study

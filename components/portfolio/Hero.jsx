@@ -58,17 +58,28 @@ export default function Hero({ hero, personalInfo, socials = [], resumeUrl }) {
               className="hero-ctas animate-fade-up"
               style={{ "--enter-delay": "260ms" }}
             >
-              {hero?.ctaLabel && hero?.ctaUrl && (
-                <a href={hero.ctaUrl} className="btn-primary">
-                  {hero.ctaLabel} <ArrowRight className="h-4 w-4" />
-                </a>
-              )}
               {personalInfo?.email && (
                 <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="btn-outline"
+                  href={`mailto:${personalInfo.email}?subject=Hiring%20enquiry%20from%20your%20portfolio&body=Hi%20Imad%2C%0A%0AI%27d%20like%20to%20discuss%20a%20project%20with%20you.%0A%0A`}
+                  className="btn-primary"
+                  aria-label="Hire Imad — opens email"
                 >
-                  Let&apos;s talk
+                  Hire Me <ArrowRight className="h-4 w-4" />
+                </a>
+              )}
+              <a
+                href={resolvedResumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline"
+                aria-label="Download CV"
+              >
+                <FileText className="h-4 w-4" />
+                Download CV
+              </a>
+              {hero?.ctaLabel && hero?.ctaUrl && (
+                <a href={hero.ctaUrl} className="btn-ghost">
+                  {hero.ctaLabel}
                 </a>
               )}
             </div>
