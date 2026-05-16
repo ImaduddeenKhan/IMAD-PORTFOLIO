@@ -2,7 +2,7 @@ import { Rocket, Sparkles, Globe2, Lightbulb, Youtube } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { youtubeEmbedUrl } from "@/lib/utils";
 
-const DEFAULT_SHARED_VIDEO_URL = "https://youtu.be/DB3D-mtWR0c";
+const DEFAULT_SHARED_VIDEO_URL = "https://youtube.com/shorts/gKZUWgf2lIo?si=oV3xKkNO-FsalTH9";
 
 const STATUS_BADGES = {
   idea: { label: "Idea", icon: Lightbulb, color: "text-yellow-400" },

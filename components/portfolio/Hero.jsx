@@ -3,7 +3,7 @@ import { youtubeId } from "@/lib/utils";
 import { ArrowRight, CirclePlay, FileText } from "lucide-react";
 import { PlatformIcon } from "@/components/icons";
 
-const DEFAULT_INTRO_VIDEO = "https://youtu.be/DB3D-mtWR0c";
+const DEFAULT_INTRO_VIDEO = "https://youtube.com/shorts/gKZUWgf2lIo?si=oV3xKkNO-FsalTH9";
 const DEFAULT_RESUME_URL = "https://drive.google.com/file/d/13OoBP6pA9kNRFNR20jP5ZYwuTagibocB/view?usp=sharing";
 
 export default function Hero({ hero, personalInfo, socials = [], resumeUrl }) {

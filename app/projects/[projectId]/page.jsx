@@ -27,7 +27,7 @@ export default async function ProjectDetailPage({ params }) {
   const project = portfolio.projects?.find((item) => item.id === projectId);
   if (!project) notFound();
 
-  const videoUrl = project.youtubeUrl || portfolio.hero?.introVideoUrl || "https://youtu.be/DB3D-mtWR0c";
+  const videoUrl = project.youtubeUrl || portfolio.hero?.introVideoUrl || "https://youtube.com/shorts/gKZUWgf2lIo?si=oV3xKkNO-FsalTH9";
   const ytEmbed = youtubeEmbedUrl(videoUrl);
 
   return (

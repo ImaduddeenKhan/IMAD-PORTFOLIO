@@ -4,7 +4,7 @@ import { Github, Youtube, ExternalLink, Play, ArrowRight } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { youtubeEmbedUrl, youtubeId } from "@/lib/utils";
 
-const DEFAULT_SHARED_VIDEO_URL = "https://youtu.be/DB3D-mtWR0c";
+const DEFAULT_SHARED_VIDEO_URL = "https://youtu.be/QTc7-ak782o";
 
 const STATUS_LABELS = {
   active: "Active",

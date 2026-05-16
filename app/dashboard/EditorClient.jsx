@@ -199,7 +199,7 @@ export default function EditorClient({ initial }) {
             <Field label="Greeting" value={data.hero?.greeting} onChange={(v) => updateNested("hero", { greeting: v })} placeholder="Hey, I'm …" />
             <Field label="Headline" value={data.hero?.headline} onChange={(v) => updateNested("hero", { headline: v })} placeholder="I build …" />
             <TextField label="Description" rows={4} value={data.hero?.description} onChange={(v) => updateNested("hero", { description: v })} />
-            <Field label="Intro YouTube video URL" value={data.hero?.introVideoUrl} onChange={(v) => updateNested("hero", { introVideoUrl: v })} placeholder="https://youtube.com/watch?v=…" />
+            <Field label="Intro YouTube video URL" value={data.hero?.introVideoUrl} onChange={(v) => updateNested("hero", { introVideoUrl: v })} placeholder="https://youtube.com/shorts/gKZUWgf2lIo?si=oV3xKkNO-FsalTH9" />
             <div className="grid sm:grid-cols-2 gap-3">
               <Field label="CTA button label" value={data.hero?.ctaLabel} onChange={(v) => updateNested("hero", { ctaLabel: v })} />
               <Field label="CTA URL" value={data.hero?.ctaUrl} onChange={(v) => updateNested("hero", { ctaUrl: v })} />
