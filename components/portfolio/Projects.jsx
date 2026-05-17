@@ -4,27 +4,24 @@ import { Github, Youtube, ExternalLink, Play, ArrowRight } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { youtubeEmbedUrl, youtubeId } from "@/lib/utils";
 
-const DEFAULT_SHARED_VIDEO_URL = "https://youtu.be/DB3D-mtWR0c";
-
 const STATUS_LABELS = {
   active: "Active",
   wip: "Work in progress",
   archived: "Archived",
 };
 
-export default function Projects({ projects = [], sharedVideoUrl, limit = 3, showExploreAll = true }) {
+export default function Projects({ projects = [], limit = 3, showExploreAll = true }) {
   if (!projects.length) return null;
   const visibleProjects = typeof limit === "number" ? projects.slice(0, limit) : projects;
-  const hasMore = projects.length > visibleProjects.length;
   return (
     <section className="section-shell">
       <SectionHeader id="projects" title="Projects" subtitle="Things I've built." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visibleProjects.map((p, index) => (
-          <ProjectCard key={p.id} project={p} index={index} sharedVideoUrl={sharedVideoUrl} />
+          <ProjectCard key={p.id} project={p} index={index} />
         ))}
       </div>
-      {showExploreAll && hasMore && (
+      {showExploreAll && (
         <div className="mt-10 text-center">
           <Link
             href="/projects"
@@ -32,7 +29,7 @@ export default function Projects({ projects = [], sharedVideoUrl, limit = 3, sho
             rel="noopener noreferrer"
             className="btn-primary inline-flex"
           >
-            Explore All Projects <ArrowRight className="h-4 w-4" />
+            View All Projects <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       )}
@@ -40,9 +37,9 @@ export default function Projects({ projects = [], sharedVideoUrl, limit = 3, sho
   );
 }
 
-function ProjectCard({ project, index, sharedVideoUrl }) {
+function ProjectCard({ project, index }) {
   const href = `/projects/${project.id}`;
-  const videoUrl = project.youtubeUrl || sharedVideoUrl || DEFAULT_SHARED_VIDEO_URL;
+  const videoUrl = project.youtubeUrl || "";
   const embedUrl = youtubeEmbedUrl(videoUrl);
   const ytId = youtubeId(videoUrl);
   const thumbnail = project.thumbnail || (ytId ? `https://i.ytimg.com/vi/${ytId}/hqdefault.jpg` : null);

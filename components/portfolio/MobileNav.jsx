@@ -50,7 +50,7 @@ export default function MobileNav({ portfolio, sections, initialMode }) {
             {sections.map((s) => (
               <a
                 key={s.id}
-                href={`#${s.id}`}
+                href={s.href || `#${s.id}`}
                 onClick={() => setOpen(false)}
                   className="px-5 py-4 text-lg font-display rounded-[1.5rem] border border-border bg-surface/75 hover:bg-surface w-full text-left"
               >

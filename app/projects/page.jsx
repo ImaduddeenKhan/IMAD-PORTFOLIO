@@ -48,7 +48,6 @@ export default async function AllProjectsPage() {
         <div className="mt-10">
           <Projects
             projects={portfolio.projects || []}
-            sharedVideoUrl={portfolio.hero?.introVideoUrl}
             limit={null}
             showExploreAll={false}
           />

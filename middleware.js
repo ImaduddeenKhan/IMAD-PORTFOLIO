@@ -19,7 +19,7 @@ export async function middleware(req) {
 
   const token = await getToken({
     req,
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
     cookieName,
     salt: cookieName,
   });

@@ -62,7 +62,7 @@ export default function TopNav({ portfolio, sections, initialMode }) {
               {sections.map((s, i) => (
                 <a
                   key={s.id}
-                  href={`#${s.id}`}
+                  href={s.href || `#${s.id}`}
                   onClick={() => setOpen(false)}
                   className="menu-overlay-link group"
                 >

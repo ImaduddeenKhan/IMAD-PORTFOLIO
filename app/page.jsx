@@ -55,6 +55,7 @@ export default async function HomePage() {
     { id: "about", label: "About", show: !!portfolio.personalInfo?.tagline },
     { id: "building", label: "Building", show: portfolio.building?.length > 0 },
     { id: "projects", label: "Projects", show: portfolio.projects?.length > 0 },
+    { id: "all-projects", label: "All Projects", href: "/projects", show: portfolio.projects?.length > 0 },
     { id: "experience", label: "Experience", show: portfolio.experience?.length > 0 },
     { id: "education", label: "Education", show: portfolio.education?.length > 0 },
     { id: "skills", label: "Skills", show: portfolio.skills?.length > 0 },
@@ -73,8 +74,8 @@ export default async function HomePage() {
         <Hero hero={portfolio.hero} personalInfo={portfolio.personalInfo} socials={portfolio.socials} resumeUrl={portfolio.resumeUrl} />
         <div className="container-page py-6 sm:py-8 lg:py-10">
           <About personalInfo={portfolio.personalInfo} />
-          <Building items={portfolio.building} sharedVideoUrl={portfolio.hero?.introVideoUrl} />
-          <Projects projects={portfolio.projects} sharedVideoUrl={portfolio.hero?.introVideoUrl} />
+          <Building items={portfolio.building} />
+          <Projects projects={portfolio.projects} />
           <AIForBusiness />
           <Experience items={portfolio.experience} />
           <Education items={portfolio.education} />
