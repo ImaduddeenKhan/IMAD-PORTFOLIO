@@ -1,0 +1,20 @@
+﻿venv/Scripts/python.exe : INFO:     Will watch for 
+changes in these directories: 
+['C:\\Users\\imadi\\VS Code 
+Projects\\portfolioimad\\backend']
+At line:1 char:1
++ venv/Scripts/python.exe backend/start.py 2>&1 | 
+Out-File -FilePath ba ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (INFO: 
+        Will ...imad\\backend']:String) [], Remot  
+  eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+INFO:     Uvicorn running on http://0.0.0.0:8000 
+(Press CTRL+C to quit)
+INFO:     Started reloader process [27568] using 
+StatReload
+INFO:     Started server process [39696]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
