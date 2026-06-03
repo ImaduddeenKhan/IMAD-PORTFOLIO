@@ -9,8 +9,8 @@ import Skills, {
   Achievements,
   Certifications,
   Languages,
-  Hobbies,
 } from "@/components/portfolio/Sections";
+import Hobbies from "@/components/portfolio/Hobbies";
 import Resume, { About } from "@/components/portfolio/Misc";
 import Contact from "@/components/portfolio/Contact";
 import Footer from "@/components/portfolio/Footer";
@@ -64,7 +64,7 @@ export default async function HomePage() {
     { id: "achievements", label: "Achievements", show: portfolio.achievements?.length > 0 },
     { id: "certifications", label: "Certifications", show: portfolio.certifications?.length > 0 },
     { id: "languages", label: "Languages", show: portfolio.languages?.length > 0 },
-    { id: "hobbies", label: "Hobbies", show: portfolio.hobbies?.length > 0 },
+    { id: "hobbies", label: "Beyond the Portfolio", show: true },
     { id: "resume", label: "Resume", show: !!portfolio.resumeUrl },
     { id: "contact", label: "Contact", show: !!portfolio.contactEmail },
   ].filter((section) => section.show);
@@ -85,7 +85,7 @@ export default async function HomePage() {
           <Achievements items={portfolio.achievements} />
           <Certifications items={portfolio.certifications} />
           <Languages items={portfolio.languages} />
-          <Hobbies items={portfolio.hobbies} />
+          <Hobbies />
           <Resume resumeUrl={portfolio.resumeUrl} name={portfolio.personalInfo.fullName} />
           <Contact contactEmail={portfolio.contactEmail} contactMessage={portfolio.contactMessage} />
           <Footer portfolio={portfolio} />

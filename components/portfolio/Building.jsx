@@ -37,16 +37,16 @@ export default function Building({ items = [] }) {
           return (
             <div
               key={b.id}
-              className="card motion-card overflow-hidden p-5 sm:p-6 flex flex-col gap-4 animate-fade-up"
+              className="card motion-card overflow-hidden p-4 sm:p-5 flex flex-col gap-3.5 animate-fade-up"
               style={{ "--enter-delay": `${index * 80}ms` }}
             >
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <div className="eyebrow mb-2">In progress</div>
+                  <div className="eyebrow mb-1.5">In progress</div>
                   <h3 className="font-display font-semibold text-xl sm:text-2xl tracking-[-0.04em] leading-tight">
                     {b.name}
                   </h3>
-                  <p className="text-sm text-fg/75 mt-2 max-w-xl leading-relaxed">{b.tagline}</p>
+                  <p className="text-sm text-fg/75 mt-1.5 max-w-xl leading-relaxed">{b.tagline}</p>
                 </div>
                 <div className={`flex shrink-0 items-center gap-1.5 text-xs font-medium ${badge.color} chip`}>
                   <Icon className="h-3.5 w-3.5" />
@@ -55,9 +55,9 @@ export default function Building({ items = [] }) {
               </div>
 
               {descriptionLines.length > 0 && (
-                <div className="grid gap-2 rounded-[1.25rem] border border-border/70 bg-bg/35 p-3.5 sm:p-4">
+                <div className="grid gap-1.5 rounded-[1rem] border border-border/70 bg-bg/35 p-3 sm:p-3.5">
                   {descriptionLines.map((line) => (
-                    <div key={line} className="flex gap-2.5 text-sm text-fg/70 leading-relaxed">
+                    <div key={line} className="flex gap-2 text-sm text-fg/70 leading-relaxed">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary/65" />
                       <span>{line}</span>
                     </div>
@@ -66,11 +66,11 @@ export default function Building({ items = [] }) {
               )}
 
               {embedUrl && (
-                <div className="w-full max-w-[24rem] min-w-0 overflow-hidden rounded-[1.25rem] border border-border bg-bg shadow-[0_18px_38px_rgba(0,0,0,0.07)]">
-                  <div className="flex items-center justify-between gap-3 px-3.5 py-2.5">
+                <div className="w-full max-w-[20rem] min-w-0 overflow-hidden rounded-[1rem] border border-border bg-bg shadow-[0_12px_28px_rgba(0,0,0,0.06)]">
+                  <div className="flex items-center justify-between gap-3 px-3 py-2">
                     <div className="eyebrow">Product video</div>
-                    <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="chip px-2.5 py-1 text-[0.65rem]">
-                      <Youtube className="h-3.5 w-3.5 text-red-500" />
+                    <a href={videoUrl} target="_blank" rel="noopener noreferrer" className="chip px-2 py-0.5 text-[0.65rem]">
+                      <Youtube className="h-3 w-3 text-red-500" />
                       Watch
                     </a>
                   </div>

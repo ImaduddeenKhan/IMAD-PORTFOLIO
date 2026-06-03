@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
-import * as Icons from "lucide-react";
-import { DOMAIN_INDEX } from "@/lib/domains";
 
 export default function AIForBusiness() {
   return (
@@ -11,80 +9,48 @@ export default function AIForBusiness() {
       aria-labelledby="ai-in-your-business-heading"
     >
       <div className="container-page">
-        <div className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow justify-center">
+        <div className="mx-auto max-w-4xl text-center flex flex-col items-center gap-6 py-6 sm:py-10">
+          <p className="eyebrow justify-center inline-flex items-center gap-2">
             <Sparkles className="h-3.5 w-3.5" /> AI in your business
           </p>
-          <h2 id="ai-in-your-business-heading" className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.04em] leading-[0.95]">
-            I help 22 industries get their hours and rupees back.
-          </h2>
-          <p className="section-sub">
-            Pick the one closest to your business. Each page is a real plan — 15
-            workflows, the math behind the savings, a one-time build cost, a
-            monthly run cost, and a WhatsApp button to talk to me directly.
-          </p>
-        </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {DOMAIN_INDEX.map((d) => {
-            const Icon = Icons[d.heroIcon] || Icons.Sparkles;
-            return (
-              <Link
-                key={d.slug}
-                href={`/${d.slug}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card group flex flex-col gap-3 p-5 transition-transform hover:-translate-y-0.5"
-                style={{
-                  borderColor: `${d.palette.c1}33`,
-                  background: `linear-gradient(135deg, ${d.palette.c1}0F 0%, ${d.palette.c2}0A 100%)`,
-                }}
+          <div className="group flex flex-col items-center gap-4">
+            <Link 
+              href="/ai-in-your-business"
+              className="inline-block transition-transform duration-300 hover:scale-[1.01]"
+            >
+              <h2
+                id="ai-in-your-business-heading"
+                className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.04em] leading-[0.95] text-fg transition-colors duration-300 hover:text-primary"
               >
-                <div className="flex items-center justify-between">
-                  <span
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl"
-                    style={{
-                      background: `${d.palette.c1}1A`,
-                      color: d.palette.c1,
-                    }}
-                  >
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <ArrowUpRight className="h-4 w-4 text-fg/40 transition-colors group-hover:text-fg" />
-                </div>
-                <div>
-                  <h3 className="font-display text-base font-semibold text-fg">
-                    {d.label}
-                  </h3>
-                  <p className="mt-0.5 text-xs uppercase tracking-wider text-fg/50">
-                    {d.audience}
-                  </p>
-                </div>
-                <p className="text-sm leading-relaxed text-fg/70">
-                  {d.oneLiner}
-                </p>
-                <div className="mt-auto flex items-center gap-2 text-xs font-semibold tracking-wide text-fg/60">
-                  <span
-                    className="inline-block h-1.5 w-1.5 rounded-full"
-                    style={{ background: d.palette.accent }}
-                  />
-                  See the 15-workflow plan
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+                AI In Your Business
+              </h2>
+            </Link>
 
-        <div className="mt-10 text-center">
-          <Link
-            href="/heavyhaul-ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline inline-flex items-center gap-2"
-          >
-            Or read the full HeavyHaul AI case study
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
+            <Link
+              href="/ai-in-your-business"
+              className="max-w-2xl text-center block transition-colors duration-300"
+            >
+              <p className="text-base sm:text-lg md:text-xl text-fg/75 leading-relaxed group-hover:text-fg/90 transition-colors">
+                How AI Can Help Your Industry — by Imad Khan.{" "}
+                <span className="text-primary font-semibold underline decoration-2 underline-offset-4 group-hover:text-primary/95 transition-colors">
+                  Click here to explore how AI can transform your business and industry.
+                </span>
+              </p>
+            </Link>
+          </div>
+
+          <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 justify-center">
+            <Link
+              href="/heavyhaul-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-base sm:text-lg px-8 py-4 gap-3 shadow-lg hover:scale-[1.03] transition-all duration-300 inline-flex items-center"
+            >
+              What I Did During My 6-Month Internship
+              <ArrowUpRight className="h-5 w-5" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
