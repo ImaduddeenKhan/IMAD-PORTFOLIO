@@ -18,6 +18,9 @@ coverage/
 .vercel/
 .turbo/
 
+SEO_WORK_AND_GUIDE.txt
+supabase_setup.md
+
 # Logs
 *.log
 npm-debug.log*

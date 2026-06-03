@@ -15,7 +15,7 @@ export default function AIForBusiness() {
           <p className="eyebrow justify-center">
             <Sparkles className="h-3.5 w-3.5" /> AI in your business
           </p>
-          <h2 id="ai-in-your-business-heading" className="section-h">
+          <h2 id="ai-in-your-business-heading" className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.04em] leading-[0.95]">
             I help 22 industries get their hours and rupees back.
           </h2>
           <p className="section-sub">

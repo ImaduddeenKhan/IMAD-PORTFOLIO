@@ -56,6 +56,8 @@ export default async function HomePage() {
     { id: "building", label: "Building", show: portfolio.building?.length > 0 },
     { id: "projects", label: "Projects", show: portfolio.projects?.length > 0 },
     { id: "all-projects", label: "All Projects", href: "/projects", show: portfolio.projects?.length > 0 },
+    { id: "ai-in-your-business", label: "AI in Your Business", show: true },
+    { id: "internship-case-study", label: "My 6-Month Internship", href: "/heavyhaul-ai", show: true },
     { id: "experience", label: "Experience", show: portfolio.experience?.length > 0 },
     { id: "education", label: "Education", show: portfolio.education?.length > 0 },
     { id: "skills", label: "Skills", show: portfolio.skills?.length > 0 },
