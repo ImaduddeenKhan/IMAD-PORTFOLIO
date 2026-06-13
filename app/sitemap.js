@@ -7,7 +7,6 @@ export default function sitemap() {
   const staticRoutes = [
     "",
     "/projects",
-    "/heavyhaul-ai",
   ].map((p) => ({
     url: `${base}${p}`,
     lastModified: now,

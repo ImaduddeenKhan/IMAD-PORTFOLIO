@@ -1,417 +1,517 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  Bot,
-  BrainCircuit,
-  CheckCircle2,
-  Database,
-  FileScan,
-  KeyRound,
-  MailSearch,
-  Network,
-  RadioTower,
-  ServerCog,
-  ShieldCheck,
-  Truck,
-  Workflow,
-} from "lucide-react";
-import ThemeModeToggle from "@/components/portfolio/ThemeModeToggle";
 import { getPublicPortfolio } from "@/lib/site-data";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "AI Logistics Automation Case Study",
+  title: "6-Month Internship Case Study — Imad Khan",
   description:
-    "A public-safe case study explaining the AI logistics automation systems Imad built during his internship, including agents, document extraction, APIs, email automation, and deployment work.",
+    "An in-depth look at 15 AI-powered systems I built during my 6-month internship in the heavy-haul transportation industry — from agentic email automation to RAG knowledge platforms.",
 };
 
-const metrics = [
-  { label: "Major systems", value: "13" },
-  { label: "Document types automated", value: "5" },
-  { label: "Core endpoint", value: "/api/v1/order" },
-  { label: "Support languages", value: "3" },
-];
+/* ─── narrative data ─── */
 
-const capabilities = [
-  "AI order support agent",
-  "Multilingual estimate assistant",
-  "Internal RAG knowledge search",
-  "Voice conversation transcription",
-  "Transcript cleaning pipeline",
-  "Agentic Gmail intake workflow",
-  "Front desk operations dashboard",
-  "External TMS API integration",
-  "Vision-based document extraction",
-  "Async order lifecycle tracking",
-  "API keys, OTP, CAPTCHA, rate limits",
-  "Email notifications and audit logs",
-  "Docker deployment and runtime operations",
-];
+const chapterIntro = {
+  badge: "The Industry",
+  title: "Heavy-haul transportation is a world of permits, regulations, and relentless coordination.",
+  body: [
+    "The company operates across all 50 U.S. states in the oversize and heavy-haul transportation industry. Every time a large truck carries an oversized load between states, it needs permits that comply with each state's unique transportation regulations.",
+    "The business manages the entire permitting process and also handles dispatch operations for carriers moving loads across the country. It's a domain where a single missed detail — a wrong state, an expired permit, a misread load dimension — can cost thousands of dollars.",
+    "When I joined, much of the work was manual: reading long email threads, reviewing PDF documents by hand, copying data between systems, and relying on institutional knowledge that lived only in people's heads.",
+    "Over six months, I set out to change that.",
+  ],
+};
 
-const timeline = [
+const projects = [
   {
-    icon: Network,
-    title: "1. I mapped the logistics workflow and designed the backend architecture",
-    text: "I first studied how oversized-load orders move through the business: intake, document collection, route details, permit checks, order creation, team handoff, status updates, and notifications. From that flow, I designed a modular Flask backend with route blueprints, controllers, MongoDB models, middleware, utility layers, and clean response contracts.",
-    points: [
-      "Separated the platform into clear domains such as chat, permits, document onboarding, TMS registration, API updates, admin operations, and LiveKit authentication.",
-      "Used MongoDB collections for orders, sessions, TMS clients, state rules, trucks, trailers, carriers, and users so the system could evolve without rigid relational migrations.",
-      "Designed the system as a production-oriented modular monolith, which kept deployment simple while still keeping each feature area maintainable.",
+    num: "01",
+    title: "AI-Powered Front Desk Email Automation",
+    category: "Multi-Agent System",
+    accent: "orange",
+    narrative: "The company receives hundreds of emails daily — customers requesting permits, carriers sending documents, brokers asking for quotes. Employees had to manually read through lengthy email threads, figure out what was relevant, and piece together context from scattered conversations. It was one of the biggest time drains in the organization.",
+    approach: "I designed a multi-agent system using LangGraph with five coordinated AI agents working together in a pipeline.",
+    details: [
+      { label: "Agent 1", text: "Email monitoring and classification — continuously watches the inbox, determines if a message belongs to an existing thread, whether it's a real customer request or marketing noise." },
+      { label: "Agents 2–5", text: "Context retrieval and order intelligence — search Gmail for previous conversations, pull the last related threads, extract order references, fetch details from internal databases, and assemble complete context." },
     ],
+    challenge: "One of the biggest challenges was accurately classifying permit requests. Many emails discuss permits without actually placing orders. I analyzed communication patterns and designed custom classification logic to distinguish between the two.",
+    image: "/case-studies/heavyhaul-ai/frontdesk-full.png",
+    imageAlt: "Front Desk Dashboard showing intake pipeline stages",
+    imageCaption: "The front desk dashboard I built — showing reported intakes, order building status, and ready-for-routing queues.",
   },
   {
-    icon: Bot,
-    title: "2. I built an AI order support agent for drivers and internal teams",
-    text: "The first user-facing AI feature was a support bot that answers order-related questions. The user provides an order reference, and the agent retrieves order context, checks rules, and explains the result conversationally instead of forcing a staff member to search database records manually.",
-    points: [
-      "Added tool-calling functions for order fields, permit rules, load compliance, journey compliance, provision files, and pricing details.",
-      "Connected the agent to fast LLM inference for responsive chat behavior and grounded each answer in retrieved operational data.",
-      "Added a dark chat widget, voice input path, speech response support, active-order context display, and feedback hooks for response quality review.",
-    ],
-    image: "/case-studies/heavyhaul-ai/ai-agent.webp",
-    imageAlt: "Sanitized AI order support chat widget screenshot",
-  },
-  {
-    icon: Truck,
-    title: "3. I created a multilingual estimator assistant",
-    text: "After support automation, I built a customer-facing estimator flow. It lets a user enter route details and load dimensions, then starts an assisted session that can explain estimated costs and requirements in a simpler conversational format.",
-    points: [
-      "Captured origin, destination, route states, length, width, height, weight, and overhang information for better estimation context.",
-      "Added English, Spanish, and Romanian support so the workflow could serve a wider logistics workforce.",
-      "Implemented selectable agent voices and a clean session-start flow so non-technical users could begin quickly.",
-    ],
-    image: "/case-studies/heavyhaul-ai/estimator-agent.webp",
-    imageAlt: "Sanitized multilingual estimator assistant screenshot",
-  },
-  {
-    icon: BrainCircuit,
-    title: "4. I built a RAG knowledge system for employee support",
-    text: "The company had repeated questions about internal process, state rules, and operational decisions. I built a Retrieval-Augmented Generation system so employees could ask questions and receive answers grounded in internal knowledge instead of relying only on generic LLM memory.",
-    points: [
-      "Chunked and indexed internal conversation data and regulatory text so relevant context could be retrieved for each query.",
-      "Connected state-specific regulation files to the answer flow, including permit provisions and compliance context.",
-      "Improved consistency for new employees by preserving practical knowledge in a searchable support layer.",
-    ],
-  },
-  {
-    icon: RadioTower,
-    title: "5. I developed a Discord voice transcription bot",
-    text: "To grow the internal knowledge base, I built a bot that joins voice channels, listens to operational discussions, converts speech to text, and stores daily transcripts for later analysis and training data preparation.",
-    points: [
-      "Used Discord.js for voice-channel handling and Deepgram for speech-to-text transcription.",
-      "Implemented one transcript per day, per server, per voice channel, with automatic finalization at the configured end-of-day time.",
-      "Handled restarts safely by appending to the existing daily transcript instead of producing duplicate files.",
-    ],
-  },
-  {
-    icon: Database,
-    title: "6. I cleaned raw transcripts into AI-ready data",
-    text: "Raw transcripts are noisy. I built a cleanup pipeline that normalizes the captured conversations so they can become useful retrieval and training material instead of messy text dumps.",
-    points: [
-      "Used spaCy English and Spanish models for language-aware text processing.",
-      "Removed noise artifacts, standardized formatting, and prepared cleaner chunks for downstream search and RAG ingestion.",
-      "Designed the process for batch cleanup so large transcript collections could be processed repeatedly as more data arrived.",
-    ],
-  },
-  {
-    icon: MailSearch,
-    title: "7. I automated front desk Gmail intake with an agentic workflow",
-    text: "A major operational bottleneck was email-based order intake. I designed a LangGraph workflow where specialized agents monitor email threads, classify relevant requests, extract useful details, and prepare structured order data for the team.",
-    points: [
-      "Built the workflow as a multi-step graph: monitor, classify, extract, consolidate, and prepare order-ready output.",
-      "Created a dashboard that shows intake stages, aging alerts, assignments, source links, order-building status, and ready-for-routing queues.",
-      "Reduced repetitive reading and copying work while giving the team a clearer operational view of the inbox pipeline.",
-    ],
-    image: "/case-studies/heavyhaul-ai/frontdesk-dashboard.webp",
-    imageAlt: "Sanitized front desk intake dashboard screenshot",
-  },
-  {
-    icon: Workflow,
-    title: "8. I built external APIs for partner TMS platforms",
-    text: "Once internal flows were stable, I built public-facing API workflows so external transportation management systems could submit orders programmatically. The key endpoint accepts structured order data, document references, and multipart uploads, then returns an asynchronous acknowledgement.",
-    points: [
-      "Designed nested payload support for contacts, carrier data, truck data, trailer data, route stops, commodity dimensions, and documents.",
-      "Added field validation for driver and client emails, VINs, MC/DOT numbers, route stop dates, and dimensional data.",
-      "Implemented route-state inference, UTC route-date normalization, status polling, and callback support for downstream completion events.",
-    ],
-  },
-  {
-    icon: KeyRound,
-    title: "9. I added self-service API registration and secure key provisioning",
-    text: "To make partner onboarding practical, I built a registration page that collects workspace details, validates human users, verifies work email ownership, and then provisions API access in a controlled way.",
-    points: [
-      "Added CAPTCHA before registration to reduce automated abuse.",
-      "Added email OTP verification with expiration and attempt controls before key generation.",
-      "Stored client records with activation state, API key metadata, and admin controls for future access management.",
-    ],
-  },
-  {
-    icon: FileScan,
-    title: "10. I built multi-document extraction for operational documents",
-    text: "I automated extraction from the documents that repeatedly appear in logistics orders: rate confirmations, truck registrations, trailer registrations, IFTA certificates, and insurance documents. The goal was to reduce manual reading and prepare order-ready data faster.",
-    points: [
-      "Rendered PDFs into images and sent them to vision-language models with document-specific prompts.",
-      "Processed multiple document URLs in parallel using ThreadPoolExecutor, then merged extracted values into a normalized payload.",
-      "Added VIN decoding and enrichment for truck and trailer records where useful.",
+    num: "02",
+    title: "TMS Integration API",
+    category: "API Engineering",
+    accent: "black",
+    narrative: "External Transportation Management Systems needed a clean way to submit order data programmatically. Without an API, partners had to send emails or make phone calls — a process that didn't scale.",
+    approach: "I designed a complete integration API that allows external TMS platforms to send load information, rate confirmations, and supporting documents directly into the company's system.",
+    details: [
+      { label: "Architecture", text: "One primary endpoint that accepts structured order data with nested payloads for contacts, carrier info, truck/trailer data, route stops, commodity dimensions, and document references." },
+      { label: "Developer Experience", text: "I created AI-friendly API documentation that developers can copy directly into tools like Claude Code or GitHub Copilot to rapidly integrate with minimal friction." },
+      { label: "Security", text: "Token-based authentication generated through the company website, with CAPTCHA protection and email OTP verification before key provisioning." },
     ],
     imagePair: [
-      {
-        src: "/case-studies/heavyhaul-ai/truck-form.webp",
-        alt: "Truck registration form populated by extraction workflow",
-      },
-      {
-        src: "/case-studies/heavyhaul-ai/trailer-form.webp",
-        alt: "Trailer registration form populated by extraction workflow",
-      },
+      { src: "/case-studies/heavyhaul-ai/tms-api-docs.png", alt: "API documentation page", caption: "The API docs I designed — with code samples in cURL, Python, Node.js, PHP, C#, and Laravel." },
+      { src: "/case-studies/heavyhaul-ai/tms-api-registration.png", alt: "TMS registration portal", caption: "Self-service API registration page with OTP email verification and secure key generation." },
     ],
   },
   {
-    icon: ServerCog,
-    title: "11. I implemented the async order lifecycle and downstream handoff",
-    text: "Document extraction and downstream order creation can take time, so I moved the intake flow to an asynchronous lifecycle. Clients receive a fast acceptance response, while processing continues safely in the background.",
-    points: [
-      "Returned 202 Accepted with a generated order ID after validation and initial persistence.",
-      "Tracked lifecycle states such as received, processing, forwarded, created, and failed.",
-      "Added status polling and callback endpoints so external systems can follow the order without blocking their own workflows.",
+    num: "03",
+    title: "Intelligent Document Extraction Suite",
+    category: "Document Intelligence",
+    accent: "cream",
+    narrative: "The permitting team spent hours every day manually reviewing uploaded documents — permits, registrations, rate confirmations, insurance certificates — and typing information into internal systems. It was repetitive, error-prone, and a bottleneck for the entire workflow.",
+    approach: "I built an AI-powered extraction system that handles five different document types, each with its own extraction logic and validation pipeline.",
+    details: [
+      { label: "Permit Extraction", text: "Automatically pulls permit details from uploaded documents, dramatically reducing manual data entry time." },
+      { label: "Vehicle & Trailer Data", text: "Automated extraction pipelines for truck and trailer registration documents, including VIN decoding and enrichment." },
+      { label: "Rate Confirmation", text: "Identifies and extracts key shipment and pricing information directly from RateCon documents." },
+      { label: "COI & IFTA", text: "Extraction modules for Certificate of Insurance and International Fuel Tax Agreement documents for compliance workflows." },
+    ],
+    technical: "Rendered PDFs into images and sent them to vision-language models with document-specific prompts. Processed multiple document URLs in parallel using ThreadPoolExecutor, then merged extracted values into normalized payloads.",
+  },
+  {
+    num: "04",
+    title: "Intelligent Order Information Assistant",
+    category: "AI Agent",
+    accent: "orange",
+    narrative: "Drivers, dispatchers, and internal teams constantly needed quick answers about specific orders — route details, payment status, load specifications, restrictions. Previously, someone had to manually search through database records to find answers.",
+    approach: "I built an AI assistant that takes an order number and retrieves everything about that order, combining real-time data retrieval with regulatory knowledge.",
+    details: [
+      { label: "Capabilities", text: "Users can ask natural language questions like 'What route is assigned to this order?', 'Has payment been received?', 'Can this load travel through a specific state at night?'" },
+      { label: "Intelligence", text: "The assistant combines order data with transportation regulations, legal documents, and compliance resources to provide context-aware answers — not just data lookups." },
+    ],
+    image: "/case-studies/heavyhaul-ai/order-bot.png",
+    imageAlt: "Order information AI assistant chat interface",
+    imageCaption: "The Heavy Haul AI assistant — users enter an order token and ask questions naturally.",
+    imageSize: "small",
+  },
+  {
+    num: "05",
+    title: "Enterprise Discord Recording Platform",
+    category: "Knowledge Capture",
+    accent: "black",
+    narrative: "Discord is the primary communication channel in this organization. Dispatchers, permit specialists, and operational teams collaborate there daily in voice channels. But all that valuable knowledge — how to handle edge cases, which states have tricky rules, how experienced employees solve problems — was just disappearing after conversations ended.",
+    approach: "I built a custom Discord recording platform from scratch using Node.js that captures voice conversations, transcribes them, and stores them for future use.",
+    details: [
+      { label: "Smart Recording", text: "Records only when users are actively speaking, minimizing unnecessary storage consumption." },
+      { label: "Multilingual", text: "Supports Spanish and multiple other languages — critical for this workforce." },
+      { label: "Storage", text: "Automatically generates transcripts and stores them in organized Google Shared Drive folders." },
+      { label: "Infrastructure", text: "Runs on cPanel infrastructure using PM2 process management for reliability." },
+    ],
+    challenge: "Discord's API limits a recording bot to one channel at a time. I solved this by designing a multi-bot architecture with 10 coordinated recording bots, enabling simultaneous recording across multiple channels. Scaling is as simple as enabling or disabling bot instances.",
+    image: "/case-studies/heavyhaul-ai/discord-bot.png",
+    imageAlt: "Discord recording bot profile",
+    imageCaption: "One of the 10 recording bots I deployed — 'UncleVlad' records and transcribes conversations for training and analysis.",
+    imageSize: "small",
+  },
+  {
+    num: "06",
+    title: "Transcript Processing Pipeline",
+    category: "NLP Engineering",
+    accent: "cream",
+    narrative: "Raw Discord transcripts are messy. People interrupt each other, go off-topic, use slang, switch between languages. To make this data useful for AI systems, I needed a serious cleanup pipeline.",
+    approach: "I designed a multi-stage processing pipeline that transforms noisy conversations into structured, AI-consumable knowledge.",
+    details: [
+      { label: "Processing", text: "Uses spaCy English and Spanish models for language-aware text processing — removing noise, normalizing formatting, organizing into structured chunks." },
+      { label: "Scale", text: "I specifically selected Gemini Batch API for large-scale processing because it reduces operational costs significantly compared to standard API usage." },
+      { label: "Output", text: "The final output is transformed into a question-answering format that downstream AI systems can consume directly." },
     ],
   },
   {
-    icon: ShieldCheck,
-    title: "12. I added security, notifications, observability, and deployment work",
-    text: "The final layer was reliability. I added practical controls around authentication, rate limits, callbacks, email notifications, structured logs, audit metadata, Docker deployment, and production runtime troubleshooting.",
-    points: [
-      "Implemented API-key middleware, callback secret validation, per-client rate limiting, client activation/deactivation, and structured error responses.",
-      "Built receipt emails, lifecycle notifications, OTP emails, and HTML email templates for operational communication.",
-      "Added endpoint timing logs, JSON logs, step-by-step pipeline output, Docker containerization, environment management, and production monitoring workflows.",
+    num: "07",
+    title: "RAG Knowledge System",
+    category: "Knowledge Platform",
+    accent: "orange",
+    narrative: "All this captured and cleaned knowledge needed to be searchable. When a new employee has a question about a specific state's regulations, they shouldn't have to wait for a senior colleague — they should be able to ask the system.",
+    approach: "I built a Retrieval-Augmented Generation (RAG) platform that makes the processed Discord knowledge base searchable and accessible to the entire organization.",
+    details: [
+      { label: "Technical Stack", text: "Knowledge indexing, retrieval optimization, reranking implementation, BM25 experimentation and evaluation, and search quality testing." },
+      { label: "Goal", text: "Preserve the expertise of experienced employees and make it instantly available — turning tribal knowledge into institutional knowledge." },
     ],
+  },
+  {
+    num: "08",
+    title: "AI Employee Interview & Training System",
+    category: "Learning System",
+    accent: "black",
+    narrative: "In the permitting industry, even small operational mistakes can result in significant financial penalties. The company needed a way to learn from errors systematically — not just blame people, but actually understand why mistakes happen and prevent them from recurring.",
+    approach: "I developed an AI-powered system that conducts automated post-incident investigations and transforms findings into training material.",
+    details: [
+      { label: "Investigation", text: "When an employee makes an error, the system receives details about the mistake, conducts an AI-driven interview asking 10–12 contextual questions, and collects explanations, corrective actions, and preventive measures." },
+      { label: "Output", text: "Generates a structured summary, then transforms findings into training videos, knowledge-sharing content, and interactive quizzes." },
+      { label: "Distribution", text: "Training material is automatically distributed to Discord channels so the entire team can learn from past mistakes." },
+    ],
+  },
+  {
+    num: "09",
+    title: "AI Email Reply Drafting Assistant",
+    category: "Productivity Tool",
+    accent: "cream",
+    narrative: "Customer support teams were spending significant time crafting responses to similar questions over and over. Each reply required context from previous interactions — which meant searching through email history before even starting to write.",
+    approach: "I built an AI-powered drafting assistant that generates contextual email replies by analyzing conversation history.",
+    details: [
+      { label: "Workflow", text: "Receives incoming email → searches Gmail for previous interactions → retrieves last 10 relevant threads → cleans signatures and disclaimers → sends history to LLM → generates contextual draft." },
+      { label: "Human Oversight", text: "The system never sends emails automatically. It creates drafts that employees review before sending — AI augmentation, not replacement." },
+    ],
+  },
+  {
+    num: "10",
+    title: "Route Auto-Approval Enhancement",
+    category: "Automation",
+    accent: "orange",
+    narrative: "Every transport route needed manual approval — even routes that had been successfully used dozens of times before. I contributed improvements to reduce this unnecessary workload.",
+    approach: "Enhanced the existing route approval system to recognize historical patterns and auto-approve proven routes.",
+    details: [
+      { label: "Logic", text: "The system checks if the same origin-destination combination has been used previously. If a match exists, historical route information and maps are reused." },
+      { label: "Auto-Approval", text: "Routes that have been successfully used multiple times can be automatically approved, with human review always available for edge cases." },
+    ],
+  },
+  {
+    num: "11",
+    title: "Estimator Agent Improvements",
+    category: "AI Enhancement",
+    accent: "black",
+    narrative: "The company had an existing AI-powered Estimator Agent that helps users understand transportation costs and regulations. I contributed to making it better.",
+    approach: "Focused on improving system accuracy, usability, and overall performance of the estimator tool.",
+    details: [
+      { label: "Features", text: "Users enter load dimensions and receive cost estimates, ask about regulations and permits, understand route-specific restrictions, and learn about transportation laws." },
+    ],
+    imagePair: [
+      { src: "/case-studies/heavyhaul-ai/estimator-page.png", alt: "Estimator tool with state selection map", caption: "The estimator interface — interactive state selection, dimension inputs, and cost calculation." },
+      { src: "/case-studies/heavyhaul-ai/estimator-agent-chat.png", alt: "Estimator assistant conversation", caption: "Multilingual oversize assistant providing regulation guidance in a conversational format." },
+    ],
+  },
+  {
+    num: "12",
+    title: "Frontend Development & Customer Portals",
+    category: "Full-Stack",
+    accent: "cream",
+    narrative: "Beyond backend and AI systems, the company needed polished customer-facing interfaces. I designed and built several frontend experiences from scratch.",
+    approach: "Created marketing pages, registration portals, customer onboarding flows, and workflow-related user interfaces.",
+    details: [
+      { label: "Scope", text: "Marketing pages, registration portals with reCAPTCHA, customer onboarding pages, and workflow-related UI — all designed to feel professional and trustworthy." },
+    ],
+    image: "/case-studies/heavyhaul-ai/registration-page.png",
+    imageAlt: "Customer registration page for HeavyHaul Agent",
+    imageCaption: "The early access registration page — complete with security checks and professional form design.",
   },
 ];
 
-const stack = [
-  "Python",
-  "Flask",
-  "MongoDB",
-  "Google Gemini",
-  "Groq LLMs",
-  "LangGraph",
-  "spaCy",
-  "Deepgram",
-  "Discord.js",
-  "SMTP",
-  "Docker",
-  "Gunicorn",
+const techStack = [
+  { category: "Backend & APIs", items: ["Python", "Flask", "MongoDB", "REST APIs", "Gunicorn"] },
+  { category: "AI & NLP", items: ["Google Gemini", "Groq LLMs", "LangGraph", "spaCy", "RAG", "BM25"] },
+  { category: "Real-Time & Voice", items: ["Discord.js", "Deepgram", "LiveKit", "Node.js"] },
+  { category: "Infrastructure", items: ["Docker", "PM2", "SMTP", "Google Drive API", "cPanel"] },
 ];
 
-export default async function LogisticsAutomationPage() {
+/* ─── helper components ─── */
+
+function SectionNumber({ num }) {
+  return (
+    <span className="cs-section-num">{num}</span>
+  );
+}
+
+function ProjectImage({ src, alt, caption, size }) {
+  return (
+    <figure className={`cs-figure ${size === "small" ? "cs-figure--small" : ""}`}>
+      <div className="cs-figure-frame">
+        <Image
+          src={src}
+          alt={alt}
+          width={1200}
+          height={750}
+          quality={90}
+          className="cs-figure-img"
+        />
+      </div>
+      {caption && <figcaption className="cs-figcaption">{caption}</figcaption>}
+    </figure>
+  );
+}
+
+function ProjectImagePair({ images }) {
+  return (
+    <div className="cs-figure-pair">
+      {images.map((img) => (
+        <figure key={img.src} className="cs-figure cs-figure--paired">
+          <div className="cs-figure-frame">
+            <Image
+              src={img.src}
+              alt={img.alt}
+              width={800}
+              height={500}
+              quality={90}
+              className="cs-figure-img"
+            />
+          </div>
+          {img.caption && <figcaption className="cs-figcaption">{img.caption}</figcaption>}
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+/* ─── main page ─── */
+
+export default async function InternshipCaseStudy() {
   const portfolio = await getPublicPortfolio().catch(() => null);
-  const initialMode = portfolio?.theme?.preset === "light" || portfolio?.theme?.preset === "minimal" ? "light" : "dark";
   const name = portfolio?.personalInfo?.fullName || "Imad Khan";
 
   return (
-    <div className="min-h-screen">
-      <header className="topnav-bar">
-        <Link
-          href="/"
-          className="font-display text-xs sm:text-sm font-semibold uppercase tracking-[0.15em] text-fg/60 transition-colors hover:text-fg"
-        >
-          {name}
+    <div className="cs-page">
+      {/* ── Minimal header ── */}
+      <header className="cs-header">
+        <Link href="/" className="cs-header-home">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          <span>{name}</span>
         </Link>
-        <div className="flex items-center gap-3">
-          <ThemeModeToggle initialMode={initialMode} compact />
-          <a href="#work" className="topnav-menu-btn">
-            Work <ArrowUpRight className="h-3.5 w-3.5" />
-          </a>
-        </div>
+        <span className="cs-header-label">Case Study</span>
       </header>
 
       <main>
-        <section className="relative flex min-h-[92vh] items-end overflow-hidden pt-28">
-          <div className="container-page pb-12 sm:pb-16 lg:pb-20">
-            <div className="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(320px,0.9fr)] lg:items-end">
-              <div className="max-w-4xl">
-                <p className="eyebrow animate-fade-up">Public case study</p>
-                <h1 className="mt-5 font-display text-5xl font-semibold leading-[0.95] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
-                  AI logistics automation platform
-                </h1>
-                <p className="mt-6 max-w-3xl text-base leading-relaxed text-fg/72 sm:text-lg">
-                  Over several months, I helped build a production backend for oversized-load logistics operations. The work covered AI agents, document extraction, email intake automation, external APIs, security layers, logging, and deployment. This page only explains the useful project work and deliberately removes private personal and company-identifying details.
-                </p>
-                <div className="mt-8 flex flex-wrap gap-2.5">
-                  {capabilities.slice(0, 7).map((item) => (
-                    <span key={item} className="chip">
-                      {item}
-                    </span>
-                  ))}
+        {/* ═══════════════════════ HERO ═══════════════════════ */}
+        <section className="cs-hero">
+          <div className="cs-hero-inner">
+            <div className="cs-hero-overline">
+              <span className="cs-hero-dot" />
+              6-Month Internship · 15 Systems Built · Production Impact
+            </div>
+            <h1 className="cs-hero-title">
+              I built <span className="cs-hero-title-em">15 AI-powered systems</span> for a heavy-haul transportation company.
+            </h1>
+            <p className="cs-hero-subtitle">
+              From multi-agent email automation to enterprise knowledge platforms — this is the story of my six months transforming manual logistics operations into intelligent, scalable systems.
+            </p>
+            <div className="cs-hero-meta">
+              <div className="cs-hero-meta-item">
+                <span className="cs-hero-meta-label">Role</span>
+                <span className="cs-hero-meta-value">AI Engineering Intern</span>
+              </div>
+              <div className="cs-hero-meta-divider" />
+              <div className="cs-hero-meta-item">
+                <span className="cs-hero-meta-label">Duration</span>
+                <span className="cs-hero-meta-value">6 Months</span>
+              </div>
+              <div className="cs-hero-meta-divider" />
+              <div className="cs-hero-meta-item">
+                <span className="cs-hero-meta-label">Domains</span>
+                <span className="cs-hero-meta-value">AI · NLP · APIs · Frontend</span>
+              </div>
+            </div>
+          </div>
+          <div className="cs-hero-scroll-hint">
+            <span>Scroll to read</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          </div>
+        </section>
+
+        {/* ═══════════════════════ INDUSTRY CONTEXT ═══════════════════════ */}
+        <section className="cs-section cs-section--intro">
+          <div className="cs-container">
+            <div className="cs-intro-grid">
+              <div className="cs-intro-badge-col">
+                <span className="cs-badge">{chapterIntro.badge}</span>
+              </div>
+              <div className="cs-intro-content">
+                <h2 className="cs-intro-title">{chapterIntro.title}</h2>
+                {chapterIntro.body.map((para, i) => (
+                  <p key={i} className={`cs-body ${i === chapterIntro.body.length - 1 ? "cs-body--emphasis" : ""}`}>
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════ IMPACT BANNER ═══════════════════════ */}
+        <section className="cs-impact-banner">
+          <div className="cs-container">
+            <div className="cs-impact-grid">
+              {[
+                { value: "15", label: "Systems Built" },
+                { value: "5", label: "Document Types Automated" },
+                { value: "10", label: "Discord Bots Deployed" },
+                { value: "3", label: "Languages Supported" },
+              ].map((stat) => (
+                <div key={stat.label} className="cs-impact-stat">
+                  <span className="cs-impact-value">{stat.value}</span>
+                  <span className="cs-impact-label">{stat.label}</span>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                {metrics.map((metric, index) => (
-                  <div key={metric.label} className="card p-5 animate-fade-up" style={{ "--enter-delay": `${index * 70}ms` }}>
-                    <div className="font-display text-3xl font-semibold tracking-[-0.05em] text-fg sm:text-4xl">
-                      {metric.value}
-                    </div>
-                    <div className="mt-2 text-xs font-medium uppercase tracking-[0.16em] text-muted">
-                      {metric.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section-shell" id="overview">
-          <div className="container-page">
-            <div className="grid gap-8 lg:grid-cols-[0.65fr_1fr]">
-              <div>
-                <p className="eyebrow">Problem</p>
-                <h2 className="section-h mt-4">What the system needed to solve</h2>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {[
-                  "Operations teams had to read long email threads, PDF documents, registrations, permits, and order notes manually.",
-                  "Drivers and employees needed quick answers about orders, routes, rules, pricing, and compliance without waiting for someone to search records.",
-                  "External TMS platforms needed a clean way to submit order data and track status programmatically.",
-                  "The business needed stronger security, logs, lifecycle notifications, and deployment practices around these AI workflows.",
-                ].map((item) => (
-                  <div key={item} className="card p-6">
-                    <CheckCircle2 className="mb-4 h-5 w-5 text-primary" />
-                    <p className="text-sm leading-relaxed text-fg/72">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section-shell" id="work">
-          <div className="container-page">
-            <div className="mb-10 max-w-3xl">
-              <p className="eyebrow">Build sequence</p>
-              <h2 className="section-h mt-4">What I built, in order</h2>
-              <p className="section-sub">
-                The work grew from core workflow mapping into AI support, then document automation, then partner APIs, and finally production reliability.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {timeline.map((item, index) => (
-                <article key={item.title} className="card overflow-hidden animate-fade-up" style={{ "--enter-delay": `${index * 45}ms` }}>
-                  <div className="grid gap-0 lg:grid-cols-[minmax(0,0.9fr)_minmax(360px,1.1fr)]">
-                    <div className="p-6 sm:p-8 lg:p-10">
-                      <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full border border-border bg-surface/80 text-primary">
-                        <item.icon className="h-5 w-5" />
-                      </div>
-                      <h3 className="font-display text-2xl font-semibold leading-tight tracking-[-0.04em] text-fg sm:text-3xl">
-                        {item.title}
-                      </h3>
-                      <p className="mt-4 text-sm leading-relaxed text-fg/72 sm:text-base">{item.text}</p>
-                      <ul className="mt-6 space-y-3">
-                        {item.points.map((point) => (
-                          <li key={point} className="flex gap-3 text-sm leading-relaxed text-fg/72">
-                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <Visual item={item} />
-                  </div>
-                </article>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="section-shell" id="stack">
-          <div className="container-page">
-            <div className="grid gap-8 lg:grid-cols-[0.75fr_1fr] lg:items-start">
-              <div>
-                <p className="eyebrow">Tech stack</p>
-                <h2 className="section-h mt-4">Tools I used to ship it</h2>
-                <p className="section-sub">
-                  The stack combined backend APIs, multimodal AI, real-time transcription, NLP cleanup, security middleware, and deployment operations.
-                </p>
+        {/* ═══════════════════════ PROJECTS ═══════════════════════ */}
+        <section className="cs-section" id="work">
+          <div className="cs-container">
+            <div className="cs-chapter-header">
+              <span className="cs-badge">The Work</span>
+              <h2 className="cs-chapter-title">Every system I built, and why it mattered.</h2>
+              <p className="cs-chapter-sub">
+                Each project below addressed a real operational pain point. I've included screenshots where the work is publicly safe to show.
+              </p>
+            </div>
+          </div>
+
+          {projects.map((project, idx) => (
+            <article
+              key={project.num}
+              className={`cs-project cs-project--${project.accent}`}
+              id={`project-${project.num}`}
+            >
+              <div className="cs-container">
+                <div className="cs-project-header">
+                  <SectionNumber num={project.num} />
+                  <div>
+                    <span className="cs-project-category">{project.category}</span>
+                    <h3 className="cs-project-title">{project.title}</h3>
+                  </div>
+                </div>
+
+                <div className="cs-project-body">
+                  <div className="cs-project-narrative">
+                    <p className="cs-body cs-body--lead">{project.narrative}</p>
+
+                    {project.approach && (
+                      <div className="cs-approach">
+                        <span className="cs-approach-label">My Approach</span>
+                        <p className="cs-body">{project.approach}</p>
+                      </div>
+                    )}
+
+                    {project.details && (
+                      <div className="cs-details">
+                        {project.details.map((d) => (
+                          <div key={d.label} className="cs-detail">
+                            <span className="cs-detail-label">{d.label}</span>
+                            <p className="cs-detail-text">{d.text}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {project.technical && (
+                      <div className="cs-technical">
+                        <span className="cs-approach-label">Technical Detail</span>
+                        <p className="cs-body cs-body--mono">{project.technical}</p>
+                      </div>
+                    )}
+
+                    {project.challenge && (
+                      <div className="cs-challenge">
+                        <div className="cs-challenge-icon">⚡</div>
+                        <div>
+                          <span className="cs-challenge-label">Key Challenge</span>
+                          <p className="cs-body">{project.challenge}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {project.image && (
+                    <div className="cs-project-visual">
+                      <ProjectImage
+                        src={project.image}
+                        alt={project.imageAlt}
+                        caption={project.imageCaption}
+                        size={project.imageSize}
+                      />
+                    </div>
+                  )}
+
+                  {project.imagePair && (
+                    <div className="cs-project-visual cs-project-visual--full">
+                      <ProjectImagePair images={project.imagePair} />
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2.5">
-                {stack.map((item) => (
-                  <span key={item} className="chip py-2 text-sm">
-                    {item}
-                  </span>
-                ))}
+            </article>
+          ))}
+        </section>
+
+        {/* ═══════════════════════ TECH STACK ═══════════════════════ */}
+        <section className="cs-section cs-section--stack" id="stack">
+          <div className="cs-container">
+            <div className="cs-chapter-header">
+              <span className="cs-badge">Tech Stack</span>
+              <h2 className="cs-chapter-title">The tools behind the systems.</h2>
+            </div>
+            <div className="cs-stack-grid">
+              {techStack.map((group) => (
+                <div key={group.category} className="cs-stack-group">
+                  <h4 className="cs-stack-category">{group.category}</h4>
+                  <div className="cs-stack-items">
+                    {group.items.map((item) => (
+                      <span key={item} className="cs-stack-chip">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════ IMPACT SECTION ═══════════════════════ */}
+        <section className="cs-section cs-section--reflection" id="impact">
+          <div className="cs-container">
+            <div className="cs-chapter-header">
+              <span className="cs-badge">Impact & Reflection</span>
+              <h2 className="cs-chapter-title">What changed — and what I learned.</h2>
+            </div>
+            <div className="cs-reflection-grid">
+              <div className="cs-reflection-col">
+                <h4 className="cs-reflection-heading">Operational Impact</h4>
+                <ul className="cs-reflection-list">
+                  <li>Manual order lookup became faster through conversational AI support agents.</li>
+                  <li>Document-heavy intake became more consistent through vision-based extraction.</li>
+                  <li>Email-heavy front desk work became trackable through an agent-assisted dashboard.</li>
+                  <li>External partners gained a structured API path for order submission and tracking.</li>
+                  <li>Security improved through API keys, OTP, CAPTCHA, and rate limiting.</li>
+                  <li>Organizational knowledge was preserved and made searchable for the first time.</li>
+                </ul>
+              </div>
+              <div className="cs-reflection-col">
+                <h4 className="cs-reflection-heading">Personal Growth</h4>
+                <ul className="cs-reflection-list">
+                  <li>Learned to build production AI systems, not just prototypes — with error handling, logging, and deployment.</li>
+                  <li>Developed a deep understanding of multi-agent architectures and when they actually help vs. add complexity.</li>
+                  <li>Gained experience shipping features that real teams depend on every day.</li>
+                  <li>Improved at communicating technical solutions to non-technical stakeholders.</li>
+                  <li>Built full-stack applications end-to-end — from database design to polished frontend interfaces.</li>
+                </ul>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="section-shell" id="impact">
-          <div className="container-page">
-            <div className="grid gap-8 lg:grid-cols-[0.75fr_1fr]">
-              <div>
-                <p className="eyebrow">Impact</p>
-                <h2 className="section-h mt-4">What changed after the build</h2>
+        {/* ═══════════════════════ CLOSING ═══════════════════════ */}
+        <section className="cs-closing">
+          <div className="cs-container">
+            <div className="cs-closing-content">
+              <p className="cs-closing-quote">
+                "Throughout my internship, I worked across AI engineering, automation, NLP, document intelligence, workflow optimization, API development, backend systems, frontend development, and knowledge management."
+              </p>
+              <p className="cs-closing-body">
+                These six months taught me that the best AI systems aren't the ones that are technically impressive in isolation — they're the ones that fit naturally into how people already work, making their days easier and their decisions better.
+              </p>
+              <div className="cs-closing-cta">
+                <Link href="/" className="cs-btn-primary">
+                  View Full Portfolio
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </Link>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {[
-                  "Manual order lookup became faster through conversational support agents.",
-                  "Document-heavy intake became more consistent through vision-based extraction and normalized payloads.",
-                  "Email-heavy front desk work became trackable through an agent-assisted dashboard workflow.",
-                  "External partners gained a structured API path for order submission, status polling, and callbacks.",
-                  "Security improved through API keys, OTP, CAPTCHA, callback secrets, rate limits, and client activation controls.",
-                  "Operations gained better auditability through structured logs, lifecycle metadata, and saved pipeline step outputs.",
-                ].map((item) => (
-                  <div key={item} className="card p-6">
-                    <p className="text-sm leading-relaxed text-fg/72">{item}</p>
-                  </div>
-                ))}
-              </div>
+              <p className="cs-closing-name">— {name}</p>
             </div>
           </div>
         </section>
       </main>
-    </div>
-  );
-}
-
-function Visual({ item }) {
-  if (item.imagePair) {
-    return (
-      <div className="grid gap-4 border-t border-border bg-bg/45 p-4 sm:grid-cols-2 lg:border-l lg:border-t-0 lg:p-6">
-        {item.imagePair.map((image) => (
-          <div key={image.src} className="relative min-h-[420px] overflow-hidden rounded-[1.35rem] border border-border bg-surface/70">
-            <Image src={image.src} alt={image.alt} fill sizes="(max-width: 1024px) 50vw, 360px" className="object-contain" />
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (item.image) {
-    return (
-      <div className="border-t border-border bg-bg/45 p-4 lg:border-l lg:border-t-0 lg:p-6">
-        <div className="relative aspect-[16/10] min-h-[300px] overflow-hidden rounded-[1.35rem] border border-border bg-surface/70">
-          <Image src={item.image} alt={item.imageAlt} fill sizes="(max-width: 1024px) 100vw, 620px" className="object-contain" />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="border-t border-border bg-bg/45 p-6 lg:border-l lg:border-t-0 lg:p-10">
-      <div className="grid h-full min-h-[260px] place-items-center rounded-[1.35rem] border border-border bg-surface/55 p-8 text-center">
-        <div>
-          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <CheckCircle2 className="h-5 w-5" />
-          </div>
-          <p className="mx-auto max-w-sm text-sm leading-relaxed text-fg/68">
-            Backend and automation work: no public screenshot shown here because the original evidence includes private operational details.
-          </p>
-        </div>
-      </div>
     </div>
   );
 }

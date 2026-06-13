@@ -67,15 +67,6 @@ export default async function AIInYourBusinessPage() {
                   Explore Industries
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
-                <Link
-                  href="/heavyhaul-ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline px-8 py-4 text-base"
-                >
-                  Read AI Case Study
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
               </div>
             </div>
           </div>
@@ -175,42 +166,7 @@ export default async function AIInYourBusinessPage() {
           </div>
         </section>
 
-        {/* ─── Case study CTA ─── */}
-        <section className="section-shell">
-          <div className="container-page">
-            <div className="card p-8 sm:p-12 text-center">
-              <p className="eyebrow justify-center mb-4">Case study</p>
-              <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-[-0.04em]">
-                See what 6 months of AI automation looks like.
-              </h2>
-              <p className="mt-4 mx-auto max-w-2xl text-sm sm:text-base text-fg/65 leading-relaxed">
-                I built 13 major AI systems for a logistics company — agents, document extraction,
-                email automation, external APIs, and deployment infrastructure. Read the full
-                public case study.
-              </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-4">
-                <Link
-                  href="/heavyhaul-ai"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-primary px-8 py-4"
-                >
-                  Read Full Case Study
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-                <a
-                  href="https://wa.me/919125197678"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline px-8 py-4"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  Talk on WhatsApp
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Case study CTA section removed — case study accessible only via direct URL */}
 
         {/* ─── Footer ─── */}
         <footer className="section-shell">

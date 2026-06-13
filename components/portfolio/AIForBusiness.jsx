@@ -39,18 +39,7 @@ export default function AIForBusiness() {
               </p>
             </Link>
           </div>
-
-          <div className="mt-6 flex flex-col sm:flex-row items-center gap-4 justify-center">
-            <Link
-              href="/heavyhaul-ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary text-base sm:text-lg px-8 py-4 gap-3 shadow-lg hover:scale-[1.03] transition-all duration-300 inline-flex items-center"
-            >
-              What I Did During My 6-Month Internship
-              <ArrowUpRight className="h-5 w-5" />
-            </Link>
-          </div>
+          {/* Case study link intentionally removed — accessible only via direct URL */}
         </div>
       </div>
     </section>
