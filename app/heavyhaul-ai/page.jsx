@@ -366,54 +366,89 @@ export default async function InternshipCaseStudy() {
               id={`project-${project.num}`}
             >
               <div className="cs-container">
+                {/* ── Project header with accent line ── */}
                 <div className="cs-project-header">
-                  <SectionNumber num={project.num} />
-                  <div>
-                    <span className="cs-project-category">{project.category}</span>
-                    <h3 className="cs-project-title">{project.title}</h3>
+                  <div className="cs-project-header-inner">
+                    <div className="cs-project-num-block">
+                      <span className="cs-project-num-line" />
+                      <SectionNumber num={project.num} />
+                      <span className="cs-project-num-line" />
+                    </div>
+                    <div className="cs-project-meta">
+                      <span className="cs-project-category">{project.category}</span>
+                      <h3 className="cs-project-title">{project.title}</h3>
+                    </div>
                   </div>
                 </div>
 
                 <div className="cs-project-body">
+                  {/* ── Narrative column ── */}
                   <div className="cs-project-narrative">
                     <p className="cs-body cs-body--lead">{project.narrative}</p>
 
+                    {/* Approach — editorial pullquote style */}
                     {project.approach && (
-                      <div className="cs-approach">
-                        <span className="cs-approach-label">My Approach</span>
-                        <p className="cs-body">{project.approach}</p>
+                      <div className="cs-approach-v2">
+                        <div className="cs-approach-v2-accent" />
+                        <div className="cs-approach-v2-content">
+                          <span className="cs-label-tag">My Approach</span>
+                          <p className="cs-approach-v2-text">{project.approach}</p>
+                        </div>
                       </div>
                     )}
 
+                    {/* Details — connected timeline */}
                     {project.details && (
-                      <div className="cs-details">
-                        {project.details.map((d) => (
-                          <div key={d.label} className="cs-detail">
-                            <span className="cs-detail-label">{d.label}</span>
-                            <p className="cs-detail-text">{d.text}</p>
+                      <div className="cs-timeline">
+                        <div className="cs-timeline-line" />
+                        {project.details.map((d, i) => (
+                          <div key={d.label} className="cs-timeline-item">
+                            <div className="cs-timeline-marker">
+                              <span className="cs-timeline-dot" />
+                            </div>
+                            <div className="cs-timeline-content">
+                              <span className="cs-timeline-label">{d.label}</span>
+                              <p className="cs-timeline-text">{d.text}</p>
+                            </div>
                           </div>
                         ))}
                       </div>
                     )}
 
+                    {/* Technical — terminal-inspired block */}
                     {project.technical && (
-                      <div className="cs-technical">
-                        <span className="cs-approach-label">Technical Detail</span>
-                        <p className="cs-body cs-body--mono">{project.technical}</p>
+                      <div className="cs-terminal">
+                        <div className="cs-terminal-bar">
+                          <span className="cs-terminal-dot cs-terminal-dot--red" />
+                          <span className="cs-terminal-dot cs-terminal-dot--yellow" />
+                          <span className="cs-terminal-dot cs-terminal-dot--green" />
+                          <span className="cs-terminal-title">Technical Detail</span>
+                        </div>
+                        <div className="cs-terminal-body">
+                          <span className="cs-terminal-prompt">$</span>
+                          <p className="cs-terminal-text">{project.technical}</p>
+                        </div>
                       </div>
                     )}
 
+                    {/* Challenge — dramatic editorial callout */}
                     {project.challenge && (
-                      <div className="cs-challenge">
-                        <div className="cs-challenge-icon">⚡</div>
-                        <div>
-                          <span className="cs-challenge-label">Key Challenge</span>
-                          <p className="cs-body">{project.challenge}</p>
+                      <div className="cs-callout">
+                        <div className="cs-callout-glow" />
+                        <div className="cs-callout-inner">
+                          <div className="cs-callout-icon-wrap">
+                            <span className="cs-callout-icon">⚡</span>
+                          </div>
+                          <div className="cs-callout-body">
+                            <span className="cs-label-tag cs-label-tag--warm">Key Challenge</span>
+                            <p className="cs-callout-text">{project.challenge}</p>
+                          </div>
                         </div>
                       </div>
                     )}
                   </div>
 
+                  {/* ── Visual column ── */}
                   {project.image && (
                     <div className="cs-project-visual">
                       <ProjectImage

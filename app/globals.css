@@ -1698,47 +1698,86 @@ body::before {
 .cs-project--black { background: var(--cs-bg-cream); }
 .cs-project--cream { background: var(--cs-bg-warm); }
 
+/* ═══════════════════════ PROJECT HEADER v2 ═══════════════════════ */
 .cs-project-header {
+  margin-bottom: 3rem;
+}
+
+.cs-project-header-inner {
   display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.cs-project-num-block {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.cs-project-num-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cs-border), transparent);
 }
 
 .cs-section-num {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 48px;
-  height: 48px;
+  min-width: 52px;
+  height: 52px;
   border-radius: 50%;
   font-family: 'Playfair Display', 'Georgia', serif;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--cs-accent);
-  background: rgba(224, 122, 58, 0.08);
-  border: 1.5px solid rgba(224, 122, 58, 0.2);
+  background: linear-gradient(135deg, rgba(224, 122, 58, 0.1), rgba(224, 122, 58, 0.04));
+  border: 1.5px solid rgba(224, 122, 58, 0.25);
   flex-shrink: 0;
-  margin-top: 0.2rem;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(224, 122, 58, 0.1);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-project:hover .cs-section-num {
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(224, 122, 58, 0.18);
+  border-color: rgba(224, 122, 58, 0.4);
+}
+
+.cs-project-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .cs-project-category {
-  display: block;
-  font-size: 0.65rem;
+  display: inline-block;
+  font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--cs-accent);
-  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(224, 122, 58, 0.06);
+  border: 1px solid rgba(224, 122, 58, 0.12);
 }
 
 .cs-project-title {
   font-family: 'Playfair Display', 'Georgia', serif;
-  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
   font-weight: 700;
-  line-height: 1.25;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   color: var(--cs-fg);
+  max-width: 600px;
 }
 
 .cs-project-body {
@@ -1753,91 +1792,269 @@ body::before {
   max-width: 720px;
 }
 
-/* ── Approach ── */
-.cs-approach {
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid var(--cs-border);
-  border-radius: 1rem;
-  border-left: 3px solid var(--cs-accent);
-}
-
-.cs-approach-label {
-  display: block;
-  font-size: 0.65rem;
+/* ═══════════════════════ SHARED LABEL TAG ═══════════════════════ */
+.cs-label-tag {
+  display: inline-block;
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--cs-accent);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+.cs-label-tag--warm {
+  color: var(--cs-accent-warm);
 }
 
-/* ── Details ── */
-.cs-details {
-  display: grid;
-  gap: 1rem;
-  margin-top: 1.5rem;
+/* ═══════════════════════ APPROACH v2 — Pullquote ═══════════════════════ */
+.cs-approach-v2 {
+  display: flex;
+  gap: 0;
+  margin-top: 2rem;
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(216, 208, 196, 0.5);
+  box-shadow: 0 2px 12px rgba(26, 26, 24, 0.04);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-
-.cs-detail {
-  padding: 1rem 1.25rem;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(216, 208, 196, 0.6);
-  border-radius: 0.85rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.cs-detail:hover {
+.cs-approach-v2:hover {
+  box-shadow: 0 8px 32px rgba(26, 26, 24, 0.08);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(26, 26, 24, 0.06);
 }
 
-.cs-detail-label {
+.cs-approach-v2-accent {
+  width: 4px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, var(--cs-accent), var(--cs-accent-warm));
+  border-radius: 4px 0 0 4px;
+}
+
+.cs-approach-v2-content {
+  padding: 1.5rem 1.75rem;
+}
+
+.cs-approach-v2-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--cs-fg);
+  font-weight: 500;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ═══════════════════════ TIMELINE — Connected details ═══════════════════════ */
+.cs-timeline {
+  position: relative;
+  margin-top: 2rem;
+  padding-left: 2rem;
+}
+
+.cs-timeline-line {
+  position: absolute;
+  left: 7px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--cs-accent), rgba(224, 122, 58, 0.15));
+  border-radius: 2px;
+}
+
+.cs-timeline-item {
+  display: flex;
+  gap: 1.25rem;
+  position: relative;
+  padding-bottom: 1.75rem;
+}
+.cs-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.cs-timeline-marker {
+  position: absolute;
+  left: -2rem;
+  top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.cs-timeline-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--cs-bg);
+  border: 2.5px solid var(--cs-accent);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cs-timeline-dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cs-accent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.cs-timeline-item:hover .cs-timeline-dot {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(224, 122, 58, 0.12);
+}
+.cs-timeline-item:hover .cs-timeline-dot::after {
+  opacity: 1;
+}
+
+.cs-timeline-content {
+  flex: 1;
+  min-width: 0;
+  padding: 0.25rem 0;
+}
+
+.cs-timeline-label {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--cs-fg);
   margin-bottom: 0.4rem;
 }
 
-.cs-detail-text {
-  font-size: 0.9rem;
-  line-height: 1.7;
+.cs-timeline-text {
+  font-size: 0.92rem;
+  line-height: 1.75;
   color: var(--cs-fg-secondary);
+  margin: 0;
 }
 
-/* ── Technical ── */
-.cs-technical {
-  margin-top: 1.5rem;
+/* ═══════════════════════ TERMINAL — Technical block ═══════════════════════ */
+.cs-terminal {
+  margin-top: 2rem;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  border: 1px solid rgba(40, 40, 36, 0.15);
+  box-shadow: 0 4px 20px rgba(26, 26, 24, 0.08);
 }
 
-/* ── Challenge ── */
-.cs-challenge {
+.cs-terminal-bar {
   display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  background: linear-gradient(135deg, rgba(224, 122, 58, 0.06), rgba(224, 122, 58, 0.02));
-  border: 1px solid rgba(224, 122, 58, 0.15);
-  border-radius: 1rem;
+  align-items: center;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  background: #2c2c2a;
 }
 
-.cs-challenge-icon {
-  font-size: 1.2rem;
-  margin-top: 0.15rem;
-  flex-shrink: 0;
+.cs-terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
+.cs-terminal-dot--red { background: #ff5f56; }
+.cs-terminal-dot--yellow { background: #ffbd2e; }
+.cs-terminal-dot--green { background: #27c93f; }
 
-.cs-challenge-label {
-  display: block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+.cs-terminal-title {
+  margin-left: auto;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--cs-accent-warm);
-  margin-bottom: 0.35rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.cs-terminal-body {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  background: #1e1e1c;
+  align-items: flex-start;
+}
+
+.cs-terminal-prompt {
+  font-family: 'SF Mono', 'Menlo', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  color: var(--cs-accent);
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.cs-terminal-text {
+  font-family: 'SF Mono', 'Menlo', 'Fira Code', monospace;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+}
+
+/* ═══════════════════════ CALLOUT — Key Challenge ═══════════════════════ */
+.cs-callout {
+  position: relative;
+  margin-top: 2rem;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(224, 122, 58, 0.04), rgba(212, 98, 42, 0.08));
+  border: 1px solid rgba(224, 122, 58, 0.18);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cs-callout:hover {
+  border-color: rgba(224, 122, 58, 0.3);
+  box-shadow: 0 8px 30px rgba(224, 122, 58, 0.1);
+  transform: translateY(-2px);
+}
+
+.cs-callout-glow {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 122, 58, 0.15), transparent 65%);
+  pointer-events: none;
+}
+
+.cs-callout-inner {
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cs-callout-icon-wrap {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(224, 122, 58, 0.15), rgba(224, 122, 58, 0.05));
+  border: 1px solid rgba(224, 122, 58, 0.2);
+}
+
+.cs-callout-icon {
+  font-size: 1.15rem;
+}
+
+.cs-callout-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.cs-callout-text {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--cs-fg-secondary);
+  margin: 0;
 }
 
 /* ═══════════════════════ FIGURES ═══════════════════════ */
@@ -2145,11 +2362,14 @@ body::before {
     animation: none !important;
   }
 
-  .cs-detail,
+  .cs-approach-v2,
+  .cs-timeline-dot,
+  .cs-callout,
   .cs-figure-frame,
   .cs-stack-group,
   .cs-stack-chip,
-  .cs-btn-primary {
+  .cs-btn-primary,
+  .cs-section-num {
     transition: none !important;
   }
 }
@@ -2277,8 +2497,14 @@ body::before {
     padding: 2.5rem 0;
   }
   .cs-project-header {
-    gap: 0.85rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .cs-project-header-inner {
+    gap: 1rem;
+  }
+  .cs-project-num-block {
+    max-width: 280px;
+    gap: 1rem;
   }
   .cs-section-num {
     min-width: 38px;
@@ -2286,9 +2512,8 @@ body::before {
     font-size: 0.85rem;
   }
   .cs-project-category {
-    font-size: 0.58rem;
-    letter-spacing: 0.16em;
-    margin-bottom: 0.3rem;
+    font-size: 0.55rem;
+    padding: 0.2rem 0.6rem;
   }
   .cs-project-title {
     font-size: 1.2rem;
@@ -2297,42 +2522,91 @@ body::before {
     gap: 1.5rem;
   }
 
-  /* Approach */
-  .cs-approach {
-    padding: 1rem 1rem;
-    margin-top: 1rem;
+  /* Approach v2 */
+  .cs-approach-v2 {
+    margin-top: 1.25rem;
   }
-  .cs-approach-label {
-    font-size: 0.6rem;
+  .cs-approach-v2-content {
+    padding: 1.15rem 1.25rem;
+  }
+  .cs-approach-v2-text {
+    font-size: 0.92rem;
+  }
+  .cs-label-tag {
+    font-size: 0.55rem;
   }
 
-  /* Details */
-  .cs-details {
-    margin-top: 1rem;
-    gap: 0.75rem;
+  /* Timeline */
+  .cs-timeline {
+    margin-top: 1.25rem;
+    padding-left: 1.75rem;
   }
-  .cs-detail {
-    padding: 0.85rem 1rem;
+  .cs-timeline-item {
+    padding-bottom: 1.25rem;
   }
-  .cs-detail-label {
+  .cs-timeline-dot {
+    width: 13px;
+    height: 13px;
+  }
+  .cs-timeline-line {
+    left: 5.5px;
+  }
+  .cs-timeline-marker {
+    left: -1.75rem;
+  }
+  .cs-timeline-label {
     font-size: 0.62rem;
   }
-  .cs-detail-text {
+  .cs-timeline-text {
     font-size: 0.82rem;
     line-height: 1.65;
   }
 
-  /* Challenge */
-  .cs-challenge {
-    padding: 1rem 1rem;
-    margin-top: 1rem;
-    gap: 0.75rem;
+  /* Terminal */
+  .cs-terminal {
+    margin-top: 1.25rem;
+    border-radius: 0.7rem;
   }
-  .cs-challenge-icon {
+  .cs-terminal-bar {
+    padding: 0.6rem 0.85rem;
+    gap: 5px;
+  }
+  .cs-terminal-dot {
+    width: 8px;
+    height: 8px;
+  }
+  .cs-terminal-title {
+    font-size: 0.55rem;
+  }
+  .cs-terminal-body {
+    padding: 1rem 1.15rem;
+    gap: 0.6rem;
+  }
+  .cs-terminal-prompt {
+    font-size: 0.78rem;
+  }
+  .cs-terminal-text {
+    font-size: 0.78rem;
+  }
+
+  /* Callout */
+  .cs-callout {
+    margin-top: 1.25rem;
+    border-radius: 1rem;
+  }
+  .cs-callout-inner {
+    padding: 1.15rem 1.25rem;
+    gap: 1rem;
+  }
+  .cs-callout-icon-wrap {
+    width: 36px;
+    height: 36px;
+  }
+  .cs-callout-icon {
     font-size: 1rem;
   }
-  .cs-challenge-label {
-    font-size: 0.6rem;
+  .cs-callout-text {
+    font-size: 0.85rem;
   }
 
   /* Figures */
