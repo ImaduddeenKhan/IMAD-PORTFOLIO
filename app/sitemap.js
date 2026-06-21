@@ -7,11 +7,12 @@ export default function sitemap() {
   const staticRoutes = [
     "",
     "/projects",
+    "/arangoxheavyhaul",
   ].map((p) => ({
     url: `${base}${p}`,
     lastModified: now,
     changeFrequency: p === "" ? "weekly" : "monthly",
-    priority: p === "" ? 1 : 0.7,
+    priority: p === "" ? 1 : p === "/arangoxheavyhaul" ? 0.85 : 0.7,
   }));
 
   const domainRoutes = DOMAIN_INDEX.map((d) => ({
