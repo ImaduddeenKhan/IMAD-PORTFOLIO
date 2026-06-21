@@ -135,7 +135,7 @@
 .heroContent h1 {
   max-width: 900px;
   margin: 0;
-  font-size: 4.9rem;
+  font-size: clamp(2.1rem, 7.5vw, 4.9rem);
   line-height: 0.98;
   font-weight: 800;
 }
@@ -296,7 +296,7 @@
 .operatorContent h2 {
   margin: 0;
   color: var(--ink);
-  font-size: 3rem;
+  font-size: clamp(1.7rem, 5vw, 3rem);
   line-height: 1.08;
   font-weight: 800;
 }
@@ -850,7 +850,8 @@
   }
 
   .hero {
-    min-height: 92vh;
+    min-height: auto;
+    padding: 6rem 0 3rem;
   }
 
   .heroContent {
@@ -858,19 +859,9 @@
     padding: 3rem 0 2rem;
   }
 
-  .heroContent h1 {
-    font-size: 2.65rem;
-    line-height: 1.04;
-  }
-
   .heroLead {
     font-size: 1rem;
     line-height: 1.68;
-  }
-
-  .heroActions {
-    flex-direction: column;
-    align-items: stretch;
   }
 
   .metricDock {
@@ -895,19 +886,7 @@
   .closingSection,
   .ideasSection,
   .sourcesSection {
-    padding: 3.75rem 0;
-  }
-
-  .sectionHeader h2,
-  .closingGrid h2,
-  .operatorContent h2 {
-    font-size: 2.1rem;
-  }
-
-  .prose p,
-  .proseCompact p,
-  .sectionHeader p:not(.kickerDark) {
-    font-size: 0.98rem;
+    padding: 3.5rem 0;
   }
 
   .layerGrid,
@@ -915,61 +894,70 @@
   .ideasGrid {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 600px) {
   .graphModel {
-    min-height: 680px;
+    min-height: auto;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: #fbfdff;
   }
-
+  .graphLines {
+    display: none;
+  }
   .graphCenter {
-    min-width: 210px;
-    top: 50%;
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+    justify-content: center;
+    padding: 1rem;
   }
-
   .graphNode {
-    min-width: 138px;
-    min-height: 3rem;
-    font-size: 0.88rem;
+    position: static;
+    width: 100%;
+    min-height: auto;
+    padding: 0.75rem 1rem;
+    justify-content: flex-start;
   }
+}
 
-  .nodeOrder {
-    left: 5%;
-    top: 8%;
+@media (max-width: 560px) {
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
   }
-
-  .nodeRoute {
-    right: 5%;
-    top: 17%;
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+    text-align: center;
   }
-
-  .nodePermit {
-    left: 5%;
-    top: 31%;
+  .useCaseFigure,
+  .useCaseImage {
+    min-height: 200px;
   }
+}
 
-  .nodeCarrier {
-    right: 5%;
-    top: 39%;
+@media (max-width: 480px) {
+  .metricDock {
+    grid-template-columns: 1fr;
   }
-
-  .nodeReg {
-    left: 5%;
-    bottom: 24%;
+  .metricItem {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-dark);
   }
-
-  .nodeDocs {
-    right: 5%;
-    bottom: 16%;
+  .metricItem:last-child {
+    border-bottom: 0;
   }
-
-  .nodeEmail {
-    left: 5%;
-    top: 55%;
+  .operatorChecks {
+    flex-direction: column;
+    align-items: stretch;
   }
-
-  .nodeVoice {
-    right: 5%;
-    left: auto;
-    bottom: 5%;
+  .operatorChecks span {
+    width: 100%;
   }
 }
 

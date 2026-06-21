@@ -165,7 +165,7 @@
 .heroInner h1 {
   max-width: 820px;
   margin: 0;
-  font-size: 3.8rem;
+  font-size: clamp(2rem, 8vw, 3.8rem);
   line-height: 1.06;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -304,7 +304,7 @@
 
 .sectionInner h2 {
   margin: 0;
-  font-size: 2.6rem;
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
   line-height: 1.12;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -525,7 +525,7 @@
 
 .ctaInner h2 {
   margin: 0;
-  font-size: 2.4rem;
+  font-size: clamp(1.5rem, 5.5vw, 2.4rem);
   font-weight: 800;
   line-height: 1.12;
   color: #fff;
@@ -634,8 +634,6 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 1000px) {
-  .heroInner h1 { font-size: 2.8rem; }
-  .sectionInner h2 { font-size: 2rem; }
   .contextGrid { grid-template-columns: 1fr; gap: 2rem; }
   .contextAside { position: static; }
   .cardGrid { grid-template-columns: 1fr; }
@@ -647,12 +645,51 @@
 }
 
 @media (max-width: 640px) {
-  .heroInner h1 { font-size: 2.2rem; }
-  .hero { min-height: 80vh; }
-  .sectionInner h2 { font-size: 1.7rem; }
+  .hero { min-height: auto; padding: 6rem 0 3rem; }
   .section { padding: 3.5rem 0; }
   .nav { width: calc(100% - 1.5rem); }
-  .heroInner { width: calc(100% - 1.5rem); }
+  .heroInner { width: calc(100% - 1.5rem); padding-top: 3.5rem; }
   .sectionInner { width: calc(100% - 1.5rem); }
-  .statBar { width: calc(100% - 1.5rem); }
+  .statBar { width: calc(100% - 1.5rem); margin-top: 2rem; }
+  .heroSub { font-size: 1.05rem; }
+  .card { padding: 1.5rem; }
+  .step { padding: 1.5rem; }
 }
+
+@media (max-width: 560px) {
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    text-align: center;
+  }
+  .ctaInner {
+    gap: 2rem;
+  }
+  .ctaCard {
+    padding: 1.5rem;
+  }
+  .ctaActions a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .navBadge {
+    font-size: 0.72rem;
+    padding: 0 0.6rem;
+    min-height: 2.2rem;
+  }
+  .backLink {
+    font-size: 0.8rem;
+  }
+}
+
