@@ -330,7 +330,7 @@ export default function IntrizenPage() {
                 rel="noreferrer"
               >
                 <Mail aria-hidden="true" size={16} />
-                imaduddeen.work@gmail.com
+                aiwithimad@gmail.com
               </a>
               <a
                 href="https://www.linkedin.com/in/imadkhan-ai-ml"
