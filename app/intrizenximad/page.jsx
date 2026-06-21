@@ -325,7 +325,7 @@ export default function IntrizenPage() {
             </p>
             <div className={styles.ctaActions}>
               <a
-                href="mailto:imaduddeen.work@gmail.com"
+                href="mailto:aiwithimad@gmail.com"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -333,7 +333,7 @@ export default function IntrizenPage() {
                 imaduddeen.work@gmail.com
               </a>
               <a
-                href="https://www.linkedin.com/in/imadkhan03/"
+                href="https://www.linkedin.com/in/imadkhan-ai-ml"
                 target="_blank"
                 rel="noreferrer"
               >
