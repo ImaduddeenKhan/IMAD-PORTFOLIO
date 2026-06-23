@@ -24,6 +24,21 @@ const chapterIntro = {
   ],
 };
 
+const systemSummary = [
+  { name: "Front Desk Email Automation", problem: "Hundreds of emails requiring manual review", solution: "Multi-agent classification & context pipeline" },
+  { name: "TMS Integration API", problem: "Manual order entry from external partners", solution: "Secure REST API & developer registration portal" },
+  { name: "Document Extraction Suite", problem: "Repetitive data entry from complex PDFs", solution: "Vision-language extraction for 5 document types" },
+  { name: "Order Information Assistant", problem: "Time lost searching DBs for order status", solution: "NLP chat assistant with real-time data access" },
+  { name: "Voice Recording Platform", problem: "Valuable operational knowledge lost post-call", solution: "Multi-channel active voice recording & transcription" },
+  { name: "Transcript Processing", problem: "Raw voice transcripts were noisy and unusable", solution: "NLP pipeline to clean and structure text for AI" },
+  { name: "RAG Knowledge System", problem: "Tribal knowledge was unsearchable", solution: "RAG search platform over organizational data" },
+  { name: "AI Interview & Training", problem: "Repeated operational errors costing money", solution: "AI post-incident investigator & training generator" },
+  { name: "Email Drafting Assistant", problem: "Writing repetitive replies without context", solution: "AI assistant drafts replies using thread history" },
+  { name: "Route Auto-Approval", problem: "Manual approval for identical past routes", solution: "Historical pattern matching for auto-approval" },
+  { name: "Estimator Agent", problem: "Inaccurate or limited cost estimation", solution: "Enhanced accuracy & usability of estimator bot" },
+  { name: "Customer Portals", problem: "Lack of professional customer-facing UI", solution: "Designed marketing & secure registration portals" }
+];
+
 const projects = [
   {
     num: "01",
@@ -346,16 +361,41 @@ export default async function FreelanceCaseStudy() {
           <div className="cs-container">
             <div className="cs-impact-grid">
               {[
+                { value: "85%", label: "Time Saved on Intake" },
+                { value: "120k+", label: "Est. Annual ROI ($)" },
                 { value: "12+", label: "Systems Delivered" },
-                { value: "5", label: "Document Types Automated" },
-                { value: "50", label: "States' Permit Logic Handled" },
-                { value: "<2min", label: "Email Classification Time" },
+                { value: "<2min", label: "Email Processing Time" },
               ].map((stat) => (
                 <div key={stat.label} className="cs-impact-stat">
                   <span className="cs-impact-value">{stat.value}</span>
                   <span className="cs-impact-label">{stat.label}</span>
                 </div>
               ))}
+            </div>
+            
+            <div className="mt-12 md:mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <h3 className="text-white font-playfair text-2xl font-semibold mb-2">Want to take the next step?</h3>
+                <p className="text-white/70 text-sm max-w-md">Let's discuss how we can build similar AI solutions to automate your operations and save your team hundreds of hours.</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                <a 
+                  href={`https://wa.me/${whatsappPhone}?text=${whatsappMsg}`}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="cs-contact-btn-whatsapp text-sm py-2 px-6"
+                >
+                  <svg viewBox="0 0 32 32" className="h-4 w-4 mr-2" aria-hidden="true"><path fill="currentColor" d="M19.11 17.21c-.27-.14-1.62-.8-1.87-.89-.25-.09-.43-.14-.62.14-.18.27-.71.89-.87 1.07-.16.18-.32.2-.59.07-.27-.14-1.16-.43-2.21-1.37-.82-.73-1.37-1.63-1.53-1.91-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.86-2.05-.23-.55-.46-.48-.62-.49l-.53-.01a1.02 1.02 0 0 0-.74.34c-.25.27-.96.94-.96 2.3 0 1.36.99 2.67 1.13 2.85.14.18 1.94 2.97 4.71 4.16.66.28 1.17.45 1.57.58.66.21 1.26.18 1.74.11.53-.08 1.62-.66 1.85-1.3.23-.64.23-1.18.16-1.3-.07-.11-.25-.18-.52-.32Zm-4.95 6.76h-.01a9.7 9.7 0 0 1-4.94-1.35l-.36-.21-3.67.96.98-3.58-.23-.37a9.69 9.69 0 0 1-1.49-5.18C4.45 8.86 8.85 4.46 14.17 4.46a9.6 9.6 0 0 1 6.84 2.84 9.6 9.6 0 0 1 2.83 6.85c0 5.32-4.4 9.72-9.68 9.72Zm8.25-17.97A11.55 11.55 0 0 0 14.17 2.5C7.76 2.5 2.49 7.77 2.49 14.18c0 2.05.54 4.05 1.55 5.81L2.4 26.5l6.66-1.74a11.66 11.66 0 0 0 5.11 1.3h.01c6.41 0 11.68-5.27 11.68-11.68a11.62 11.62 0 0 0-3.45-8.38Z"/></svg>
+                  WhatsApp
+                </a>
+                <a 
+                  href={`mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}`}
+                  className="cs-contact-btn-email text-sm py-2 px-6"
+                >
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                  Email
+                </a>
+              </div>
             </div>
           </div>
         </section>
@@ -369,6 +409,34 @@ export default async function FreelanceCaseStudy() {
               <p className="cs-chapter-sub">
                 Each project below addressed a real operational pain point in the heavy-haul industry. These are the kinds of systems I can build for your company.
               </p>
+            </div>
+            
+            <div className="mb-24 animate-fade-up">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px bg-[var(--cs-border)] flex-grow"></div>
+                <h3 className="font-playfair text-xl font-medium tracking-tight text-[var(--cs-fg)] uppercase tracking-widest text-xs">Summary of Systems</h3>
+                <div className="h-px bg-[var(--cs-border)] flex-grow"></div>
+              </div>
+              <div className="overflow-x-auto rounded-xl border border-[var(--cs-border)] shadow-sm bg-[var(--cs-bg)]">
+                <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal border-collapse">
+                  <thead>
+                    <tr className="bg-[var(--cs-fg)] text-[var(--cs-bg)]">
+                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 w-1/4">Name of Solution</th>
+                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 border-l border-white/10 w-1/3">The Problem</th>
+                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 border-l border-white/10">Solution I Built</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--cs-border)] text-[var(--cs-fg)]/80">
+                    {systemSummary.map((sys, idx) => (
+                      <tr key={idx} className="hover:bg-black/5 transition-colors">
+                        <td className="px-6 py-4 font-medium text-[var(--cs-fg)] border-r border-[var(--cs-border)]">{sys.name}</td>
+                        <td className="px-6 py-4 border-r border-[var(--cs-border)] text-[var(--cs-fg)]/70">{sys.problem}</td>
+                        <td className="px-6 py-4">{sys.solution}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
