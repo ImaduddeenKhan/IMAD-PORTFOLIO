@@ -23,6 +23,21 @@ const chapterIntro = {
   ],
 };
 
+const systemSummary = [
+  { name: "Front Desk Email Automation", problem: "Hundreds of emails requiring manual review", solution: "Multi-agent classification & context pipeline" },
+  { name: "TMS Integration API", problem: "Manual order entry from external partners", solution: "Secure REST API & developer registration portal" },
+  { name: "Document Extraction Suite", problem: "Repetitive data entry from complex PDFs", solution: "Vision-language extraction for 5 document types" },
+  { name: "Order Information Assistant", problem: "Time lost searching DBs for order status", solution: "NLP chat assistant with real-time data access" },
+  { name: "Discord Recording Platform", problem: "Valuable operational knowledge lost post-call", solution: "Multi-channel active voice recording & transcription" },
+  { name: "Transcript Processing", problem: "Raw voice transcripts were noisy and unusable", solution: "NLP pipeline to clean and structure text for AI" },
+  { name: "RAG Knowledge System", problem: "Tribal knowledge was unsearchable", solution: "RAG search platform over organizational data" },
+  { name: "AI Interview & Training", problem: "Repeated operational errors costing money", solution: "AI post-incident investigator & training generator" },
+  { name: "Email Drafting Assistant", problem: "Writing repetitive replies without context", solution: "AI assistant drafts replies using thread history" },
+  { name: "Route Auto-Approval", problem: "Manual approval for identical past routes", solution: "Historical pattern matching for auto-approval" },
+  { name: "Estimator Agent", problem: "Inaccurate or limited cost estimation", solution: "Enhanced accuracy & usability of estimator bot" },
+  { name: "Customer Portals", problem: "Lack of professional customer-facing UI", solution: "Designed marketing & secure registration portals" }
+];
+
 const projects = [
   {
     num: "01",
@@ -356,6 +371,34 @@ export default async function InternshipCaseStudy() {
               <p className="cs-chapter-sub">
                 Each project below addressed a real operational pain point. I've included screenshots where the work is publicly safe to show.
               </p>
+            </div>
+
+            <div className="mb-24 animate-fade-up">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="h-px bg-[var(--cs-border)] flex-grow"></div>
+                <h3 className="font-playfair text-xl font-medium tracking-tight text-[var(--cs-fg)] uppercase tracking-widest text-xs">Summary of Systems</h3>
+                <div className="h-px bg-[var(--cs-border)] flex-grow"></div>
+              </div>
+              <div className="overflow-x-auto rounded-xl border border-[var(--cs-border)] shadow-sm bg-[var(--cs-bg)]">
+                <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal border-collapse">
+                  <thead>
+                    <tr className="bg-[var(--cs-fg)] text-[var(--cs-bg)]">
+                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 w-1/4">Name of Solution</th>
+                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 border-l border-white/10 w-1/3">The Problem</th>
+                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 border-l border-white/10">Solution I Built</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[var(--cs-border)] text-[var(--cs-fg)]/80">
+                    {systemSummary.map((sys, idx) => (
+                      <tr key={idx} className="hover:bg-black/5 transition-colors">
+                        <td className="px-6 py-4 font-medium text-[var(--cs-fg)] border-r border-[var(--cs-border)]">{sys.name}</td>
+                        <td className="px-6 py-4 border-r border-[var(--cs-border)] text-[var(--cs-fg)]/70">{sys.problem}</td>
+                        <td className="px-6 py-4">{sys.solution}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
