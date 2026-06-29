@@ -2702,3 +2702,832 @@ body::before {
     padding: 3rem 0;
   }
 }
+
+/* ==========================================================================
+   CONTACT SECTION — Aesthetic CTA
+   ========================================================================== */
+
+.cs-contact-section {
+  position: relative;
+  padding: 6rem 0;
+  background: var(--cs-fg);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.cs-contact-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center 0%, rgba(224, 122, 58, 0.15), transparent 60%);
+  pointer-events: none;
+}
+
+.cs-contact-btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-contact-btn-whatsapp:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.cs-contact-btn-email {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cs-contact-btn-email:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   PROJECT SHOWCASE — Premium Hover-Based Progressive Disclosure
+   ========================================================================== */
+
+/* ── Showcase Grid ── */
+.fw-showcase-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .fw-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+@media (min-width: 1100px) {
+  .fw-showcase-grid {
+    gap: 2rem;
+  }
+}
+
+/* ── Individual Tile ── */
+.fw-tile {
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--cs-fg);
+  aspect-ratio: 16 / 11;
+  isolation: isolate;
+  transition:
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fw-tile:hover {
+  transform: translateY(-6px) scale(1.012);
+  box-shadow:
+    0 32px 72px rgba(26, 26, 24, 0.22),
+    0 0 0 1px rgba(224, 122, 58, 0.15);
+  z-index: 2;
+}
+
+/* ── Tile Image ── */
+.fw-tile-img-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.fw-tile-img {
+  object-fit: cover;
+  transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1), filter 700ms ease;
+  filter: brightness(0.55) saturate(1.1);
+}
+
+.fw-tile:hover .fw-tile-img {
+  transform: scale(1.08);
+  filter: brightness(0.35) saturate(1.2);
+}
+
+/* ── Tile Gradient Overlay ── */
+.fw-tile-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg,
+      transparent 0%,
+      rgba(20, 18, 16, 0.15) 30%,
+      rgba(20, 18, 16, 0.65) 60%,
+      rgba(20, 18, 16, 0.92) 100%
+    );
+  pointer-events: none;
+  transition: opacity 400ms ease;
+}
+
+.fw-tile:hover .fw-tile-gradient {
+  opacity: 0.6;
+}
+
+/* ── Tile Content (always visible) ── */
+.fw-tile-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 1.5rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease;
+}
+
+.fw-tile:hover .fw-tile-content {
+  transform: translateY(-6px);
+}
+
+/* Tile Number */
+.fw-tile-num {
+  position: absolute;
+  top: 1rem;
+  left: 1.25rem;
+  z-index: 3;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.05em;
+  transition: color 400ms ease;
+}
+
+.fw-tile:hover .fw-tile-num {
+  color: var(--cs-accent);
+}
+
+/* Category Badge */
+.fw-tile-category {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cs-accent);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(224, 122, 58, 0.15);
+  border: 1px solid rgba(224, 122, 58, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Problem Statement */
+.fw-tile-problem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.fw-tile-problem-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #ef6b4a;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+.fw-tile-problem-text {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.96);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* Solution Line */
+.fw-tile-solution {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.fw-tile-solution-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #4ade80;
+  margin-top: 2px;
+  opacity: 0.85;
+}
+
+.fw-tile-solution-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.45;
+}
+
+/* Hover hint */
+.fw-tile-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 0.15rem;
+  transition: color 400ms ease, transform 400ms ease;
+}
+
+.fw-tile:hover .fw-tile-hint {
+  color: var(--cs-accent);
+  transform: translateX(4px);
+}
+
+.fw-tile-hint svg {
+  width: 12px;
+  height: 12px;
+  transition: transform 400ms ease;
+}
+
+.fw-tile:hover .fw-tile-hint svg {
+  transform: translateX(3px);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   DETAIL OVERLAY PANEL — Appears on Hover
+   ══════════════════════════════════════════════════════════════════ */
+
+.fw-detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fw-detail-overlay.fw-detail-overlay--active {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+/* Backdrop */
+.fw-detail-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 18, 16, 0.72);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+}
+
+/* Panel */
+.fw-detail-panel {
+  position: relative;
+  z-index: 1;
+  width: 94%;
+  max-width: 860px;
+  max-height: 88vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(250, 247, 242, 0.97) 0%,
+      rgba(245, 240, 232, 0.98) 100%
+    );
+  border: 1px solid rgba(216, 208, 196, 0.6);
+  box-shadow:
+    0 40px 100px rgba(26, 26, 24, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+    0 0 80px rgba(224, 122, 58, 0.08);
+  transform: translateY(24px) scale(0.96);
+  transition:
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 350ms ease;
+  opacity: 0;
+
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(224, 122, 58, 0.3) transparent;
+}
+
+.fw-detail-panel::-webkit-scrollbar {
+  width: 6px;
+}
+.fw-detail-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+.fw-detail-panel::-webkit-scrollbar-thumb {
+  background: rgba(224, 122, 58, 0.25);
+  border-radius: 3px;
+}
+.fw-detail-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(224, 122, 58, 0.4);
+}
+
+.fw-detail-overlay--active .fw-detail-panel {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* ── Close Button ── */
+.fw-detail-close {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem 0;
+}
+
+.fw-detail-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--cs-border);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--cs-fg-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(26, 26, 24, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.fw-detail-close-btn:hover {
+  background: var(--cs-fg);
+  color: white;
+  border-color: var(--cs-fg);
+  transform: rotate(90deg);
+}
+
+/* ── Panel Header ── */
+.fw-detail-header {
+  padding: 1rem 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.fw-detail-header-top {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.fw-detail-num {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--cs-accent);
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(224, 122, 58, 0.08);
+  border: 1.5px solid rgba(224, 122, 58, 0.2);
+  flex-shrink: 0;
+}
+
+.fw-detail-category {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cs-accent);
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(224, 122, 58, 0.06);
+  border: 1px solid rgba(224, 122, 58, 0.15);
+}
+
+.fw-detail-title {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--cs-fg);
+  margin-top: 0.25rem;
+}
+
+/* ── Panel Body ── */
+.fw-detail-body {
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Narrative */
+.fw-detail-narrative {
+  font-size: 0.98rem;
+  line-height: 1.85;
+  color: var(--cs-fg-secondary);
+  position: relative;
+  padding-left: 1rem;
+  border-left: 3px solid rgba(224, 122, 58, 0.2);
+}
+
+/* Approach Block */
+.fw-detail-approach {
+  display: flex;
+  gap: 0;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(216, 208, 196, 0.5);
+  box-shadow: 0 2px 8px rgba(26, 26, 24, 0.03);
+}
+
+.fw-detail-approach-accent {
+  width: 4px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, var(--cs-accent), var(--cs-accent-warm));
+}
+
+.fw-detail-approach-content {
+  padding: 1.15rem 1.35rem;
+}
+
+.fw-detail-approach-label {
+  display: inline-block;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cs-accent);
+  margin-bottom: 0.4rem;
+}
+
+.fw-detail-approach-text {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--cs-fg);
+  font-weight: 500;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Details Timeline */
+.fw-detail-timeline {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.fw-detail-timeline-line {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--cs-accent), rgba(224, 122, 58, 0.12));
+  border-radius: 2px;
+}
+
+.fw-detail-timeline-item {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  padding-bottom: 1.25rem;
+}
+
+.fw-detail-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.fw-detail-timeline-marker {
+  position: absolute;
+  left: -1.75rem;
+  top: 5px;
+  z-index: 1;
+}
+
+.fw-detail-timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--cs-bg-cream);
+  border: 2.5px solid var(--cs-accent);
+}
+
+.fw-detail-timeline-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cs-fg);
+  margin-bottom: 0.25rem;
+}
+
+.fw-detail-timeline-text {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--cs-fg-secondary);
+  margin: 0;
+}
+
+/* Technical Block */
+.fw-detail-technical {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(40, 40, 36, 0.12);
+}
+
+.fw-detail-technical-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0.6rem 0.85rem;
+  background: #2c2c2a;
+}
+
+.fw-detail-technical-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.fw-detail-technical-dot--r { background: #ff5f56; }
+.fw-detail-technical-dot--y { background: #ffbd2e; }
+.fw-detail-technical-dot--g { background: #27c93f; }
+
+.fw-detail-technical-title {
+  margin-left: auto;
+  font-size: 0.55rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.fw-detail-technical-body {
+  padding: 1rem 1.15rem;
+  background: #1e1e1c;
+  font-family: 'SF Mono', 'Menlo', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* Challenge Callout */
+.fw-detail-challenge {
+  border-radius: 0.85rem;
+  padding: 1.15rem 1.35rem;
+  background: linear-gradient(135deg, rgba(224, 122, 58, 0.04), rgba(212, 98, 42, 0.07));
+  border: 1px solid rgba(224, 122, 58, 0.15);
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+.fw-detail-challenge-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.fw-detail-challenge-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.fw-detail-challenge-label {
+  display: inline-block;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cs-accent-warm);
+  margin-bottom: 0.35rem;
+}
+
+.fw-detail-challenge-text {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--cs-fg-secondary);
+  margin: 0;
+}
+
+/* ── Panel Images ── */
+.fw-detail-image-wrap {
+  border-radius: 0.85rem;
+  overflow: hidden;
+  border: 1px solid var(--cs-border);
+  background: var(--cs-surface);
+  box-shadow: 0 4px 16px rgba(26, 26, 24, 0.06);
+}
+
+.fw-detail-image-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fw-detail-image-caption {
+  padding: 0.6rem 0.85rem;
+  font-size: 0.72rem;
+  color: var(--cs-fg-muted);
+  font-style: italic;
+  line-height: 1.5;
+  border-top: 1px solid rgba(216, 208, 196, 0.4);
+  background: rgba(250, 247, 242, 0.6);
+}
+
+.fw-detail-image-pair {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .fw-detail-image-pair {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SHOWCASE TILE ENTRANCE ANIMATION
+   ══════════════════════════════════════════════════════════════════ */
+
+@keyframes fwTileEnter {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fw-tile {
+  animation: fwTileEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.fw-tile:nth-child(1) { animation-delay: 0.05s; }
+.fw-tile:nth-child(2) { animation-delay: 0.12s; }
+.fw-tile:nth-child(3) { animation-delay: 0.19s; }
+.fw-tile:nth-child(4) { animation-delay: 0.26s; }
+.fw-tile:nth-child(5) { animation-delay: 0.33s; }
+.fw-tile:nth-child(6) { animation-delay: 0.40s; }
+.fw-tile:nth-child(7) { animation-delay: 0.47s; }
+.fw-tile:nth-child(8) { animation-delay: 0.54s; }
+.fw-tile:nth-child(9) { animation-delay: 0.61s; }
+.fw-tile:nth-child(10) { animation-delay: 0.68s; }
+.fw-tile:nth-child(11) { animation-delay: 0.75s; }
+.fw-tile:nth-child(12) { animation-delay: 0.82s; }
+
+/* ══════════════════════════════════════════════════════════════════
+   SHOWCASE RESPONSIVE — Mobile / Tablet
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Scrollbar for panel on small viewports */
+@media (max-width: 640px) {
+  .fw-tile {
+    aspect-ratio: 16 / 12;
+  }
+
+  .fw-tile-content {
+    padding: 1.15rem 1.15rem 1rem;
+    gap: 0.45rem;
+  }
+
+  .fw-tile-num {
+    font-size: 0.72rem;
+    top: 0.75rem;
+    left: 1rem;
+  }
+
+  .fw-tile-category {
+    font-size: 0.52rem;
+    padding: 0.22rem 0.6rem;
+  }
+
+  .fw-tile-problem-text {
+    font-size: 1.15rem;
+  }
+
+  .fw-tile-solution-text {
+    font-size: 0.85rem;
+  }
+
+  .fw-tile-hint {
+    font-size: 0.56rem;
+  }
+
+  /* Detail panel */
+  .fw-detail-panel {
+    width: 96%;
+    max-height: 92vh;
+    border-radius: 1.15rem;
+  }
+
+  .fw-detail-header {
+    padding: 0.75rem 1.25rem 0;
+  }
+
+  .fw-detail-body {
+    padding: 1.15rem 1.25rem 1.5rem;
+    gap: 1.15rem;
+  }
+
+  .fw-detail-title {
+    font-size: 1.35rem;
+  }
+
+  .fw-detail-narrative {
+    font-size: 0.9rem;
+    padding-left: 0.85rem;
+  }
+
+  .fw-detail-num {
+    width: 36px;
+    height: 36px;
+    font-size: 0.78rem;
+  }
+
+  .fw-detail-close {
+    padding: 0.75rem 1rem 0;
+  }
+}
+
+/* Touch device hint text */
+@media (hover: none) {
+  .fw-tile-hint::after {
+    content: "Tap to explore";
+  }
+  .fw-tile-hint span {
+    display: none;
+  }
+}
+
+@media (hover: hover) {
+  .fw-tile-hint span {
+    display: inline;
+  }
+}
+
+/* ── Body scroll lock when overlay is open ── */
+body.fw-overlay-open {
+  overflow: hidden;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .fw-tile {
+    animation: none !important;
+  }
+
+  .fw-tile,
+  .fw-tile-img,
+  .fw-tile-content,
+  .fw-tile-hint,
+  .fw-tile-hint svg,
+  .fw-tile-num,
+  .fw-detail-overlay,
+  .fw-detail-panel,
+  .fw-detail-close-btn {
+    transition: none !important;
+  }
+}

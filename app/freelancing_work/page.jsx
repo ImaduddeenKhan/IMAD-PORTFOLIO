@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getPublicPortfolio } from "@/lib/site-data";
 import WhatsAppFab from "@/components/portfolio/WhatsAppFab";
+import ProjectShowcase from "@/components/portfolio/ProjectShowcase";
 
 export const dynamic = "force-dynamic";
 
@@ -211,59 +212,53 @@ const projects = [
 ];
 
 const techStack = [
-  { category: "Backend & APIs", items: ["Python", "Flask", "MongoDB", "REST APIs", "Gunicorn"] },
-  { category: "AI & NLP", items: ["Google Gemini", "Groq LLMs", "LangGraph", "spaCy", "RAG", "BM25"] },
-  { category: "Real-Time & Voice", items: ["WebSockets", "Deepgram", "LiveKit", "Node.js"] },
-  { category: "Infrastructure", items: ["Docker", "PM2", "SMTP", "Google Drive API", "Cloud Deployments"] },
+  { 
+    category: "AI & Foundation Models", 
+    description: "The cognitive engines I use to power intelligent systems.",
+    items: [
+      { name: "OpenAI", icon: null },
+      { name: "Anthropic Claude", icon: null },
+      { name: "Google Gemini", icon: null },
+      { name: "Groq", icon: null },
+      { name: "Hugging Face", icon: null },
+    ] 
+  },
+  { 
+    category: "AI Engineering & Agents", 
+    description: "Frameworks for building multi-agent and RAG pipelines.",
+    items: [
+      { name: "LangChain", icon: null },
+      { name: "LangGraph", icon: null },
+      { name: "LlamaIndex", icon: null },
+      { name: "Vector DBs (Pinecone, Chroma)", icon: null },
+      { name: "NLP & spaCy", icon: null },
+    ] 
+  },
+  { 
+    category: "Backend & Data", 
+    description: "Robust architecture for high-throughput operations.",
+    items: [
+      { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+      { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
+      { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+      { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
+      { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
+    ] 
+  },
+  { 
+    category: "Frontend & Infrastructure", 
+    description: "Client portals and production deployments.",
+    items: [
+      { name: "React / Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+      { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+      { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
+      { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" },
+    ] 
+  },
 ];
 
-/* ─── helper components ─── */
-
-function SectionNumber({ num }) {
-  return (
-    <span className="cs-section-num">{num}</span>
-  );
-}
-
-function ProjectImage({ src, alt, caption, size }) {
-  return (
-    <figure className={`cs-figure ${size === "small" ? "cs-figure--small" : ""}`}>
-      <div className="cs-figure-frame">
-        <Image
-          src={src}
-          alt={alt}
-          width={1200}
-          height={750}
-          quality={90}
-          className="cs-figure-img"
-        />
-      </div>
-      {caption && <figcaption className="cs-figcaption">{caption}</figcaption>}
-    </figure>
-  );
-}
-
-function ProjectImagePair({ images }) {
-  return (
-    <div className="cs-figure-pair">
-      {images.map((img) => (
-        <figure key={img.src} className="cs-figure cs-figure--paired">
-          <div className="cs-figure-frame">
-            <Image
-              src={img.src}
-              alt={img.alt}
-              width={800}
-              height={500}
-              quality={90}
-              className="cs-figure-img"
-            />
-          </div>
-          {img.caption && <figcaption className="cs-figcaption">{img.caption}</figcaption>}
-        </figure>
-      ))}
-    </div>
-  );
-}
+/* ─── helper components (moved to ProjectShowcase) ─── */
 
 /* ─── main page ─── */
 
@@ -292,47 +287,36 @@ export default async function FreelanceCaseStudy() {
 
       <main>
         {/* ═══════════════════════ HERO ═══════════════════════ */}
-        <section className="cs-hero">
-          <div className="cs-hero-inner">
-            <div className="cs-hero-overline">
-              <span className="cs-hero-dot" />
-              Freelance AI Engineer · Heavy-Haul Permits · 12+ Production Systems
-            </div>
-            <h1 className="cs-hero-title">
-              I build <span className="cs-hero-title-em">AI systems</span> that eliminate manual work for heavy-haul permit companies.
-            </h1>
-            <p className="cs-hero-subtitle">
-              From multi-agent email automation to enterprise knowledge platforms — I've transformed manual logistics operations into intelligent, scalable systems. I know the permits industry, and I know how to automate it.
-            </p>
-            <div className="cs-hero-meta">
-              <div className="cs-hero-meta-item">
-                <span className="cs-hero-meta-label">Role</span>
-                <span className="cs-hero-meta-value">Freelance AI Engineer</span>
-              </div>
-              <div className="cs-hero-meta-divider" />
-              <div className="cs-hero-meta-item">
-                <span className="cs-hero-meta-label">Domain</span>
-                <span className="cs-hero-meta-value">Heavy-Haul Permits</span>
-              </div>
-              <div className="cs-hero-meta-divider" />
-              <div className="cs-hero-meta-item">
-                <span className="cs-hero-meta-label">Systems Delivered</span>
-                <span className="cs-hero-meta-value">12+ Production Apps</span>
-              </div>
+        <section className="cs-hero" style={{ minHeight: '85vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 1.5rem' }}>
+          <div className="cs-hero-inner" style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
+            
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#E07A3A]/30 bg-[#E07A3A]/10 text-[#E07A3A] text-[0.75rem] font-bold tracking-widest uppercase mb-10 animate-fade-up">
+              <span className="w-2 h-2 rounded-full bg-[#E07A3A] animate-pulse" />
+              Heavy-Haul AI Specialist
             </div>
             
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-12 animate-fade-up" style={{ animationDelay: '0.45s' }}>
-              <a href="#work" className="cs-btn-primary" style={{ background: 'var(--cs-fg)' }}>
+            <h1 className="font-playfair text-5xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight text-[var(--cs-fg)] leading-[1.05] mb-8 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+              Automate the <br className="hidden md:block"/>
+              <span className="text-[#E07A3A] italic font-medium">impossible.</span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-[var(--cs-fg-secondary)] max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up font-medium" style={{ animationDelay: '0.2s' }}>
+              I build custom AI systems that eliminate manual data entry, streamline routing, and scale your permit operations.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 animate-fade-up" style={{ animationDelay: '0.3s' }}>
+              <a href="#work" className="cs-btn-primary" style={{ background: 'var(--cs-fg)', color: 'var(--cs-bg-cream)', padding: '1.1rem 2.5rem', fontSize: '1.1rem', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontWeight: '600' }}>
                 See the systems I built
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
-              <a href="#contact" className="px-6 py-3 rounded-full border border-gray-300 hover:border-gray-500 transition-colors text-sm font-semibold text-gray-800">
-                Let's talk →
+              <a href="#contact" className="group flex items-center gap-2 px-8 py-4 rounded-full border border-[var(--cs-border)] hover:border-[var(--cs-fg)] transition-all text-[1.1rem] font-semibold text-[var(--cs-fg)] bg-white/50 backdrop-blur-sm">
+                Let's talk 
+                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
             </div>
+            
           </div>
-          <div className="cs-hero-scroll-hint">
-            <span>Scroll to read</span>
+          <div className="cs-hero-scroll-hint" style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)' }}>
+            <span>Scroll to explore</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
           </div>
         </section>
@@ -400,156 +384,19 @@ export default async function FreelanceCaseStudy() {
           </div>
         </section>
 
-        {/* ═══════════════════════ PROJECTS ═══════════════════════ */}
+        {/* ═══════════════════════ PROJECTS — Hover Showcase ═══════════════════════ */}
         <section className="cs-section" id="work">
           <div className="cs-container">
             <div className="cs-chapter-header">
               <span className="cs-badge">The Work</span>
               <h2 className="cs-chapter-title">Systems I've Built.</h2>
               <p className="cs-chapter-sub">
-                Each project below addressed a real operational pain point in the heavy-haul industry. These are the kinds of systems I can build for your company.
+                Explore any project to see the full story — the problem, my approach, and the technical details behind each system.
               </p>
             </div>
             
-            <div className="mb-24 animate-fade-up">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="h-px bg-[var(--cs-border)] flex-grow"></div>
-                <h3 className="font-playfair text-xl font-medium tracking-tight text-[var(--cs-fg)] uppercase tracking-widest text-xs">Summary of Systems</h3>
-                <div className="h-px bg-[var(--cs-border)] flex-grow"></div>
-              </div>
-              <div className="overflow-x-auto rounded-xl border border-[var(--cs-border)] shadow-sm bg-[var(--cs-bg)]">
-                <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal border-collapse">
-                  <thead>
-                    <tr className="bg-[var(--cs-fg)] text-[var(--cs-bg)]">
-                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 w-1/4">Name of Solution</th>
-                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 border-l border-white/10 w-1/3">The Problem</th>
-                      <th className="px-6 py-4 font-semibold tracking-wide border-b border-white/10 border-l border-white/10">Solution I Built</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[var(--cs-border)] text-[var(--cs-fg)]/80">
-                    {systemSummary.map((sys, idx) => (
-                      <tr key={idx} className="hover:bg-black/5 transition-colors">
-                        <td className="px-6 py-4 font-medium text-[var(--cs-fg)] border-r border-[var(--cs-border)]">{sys.name}</td>
-                        <td className="px-6 py-4 border-r border-[var(--cs-border)] text-[var(--cs-fg)]/70">{sys.problem}</td>
-                        <td className="px-6 py-4">{sys.solution}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <ProjectShowcase projects={projects} />
           </div>
-
-          {projects.map((project, idx) => (
-            <article
-              key={project.num}
-              className={`cs-project cs-project--${project.accent}`}
-              id={`project-${project.num}`}
-            >
-              <div className="cs-container">
-                {/* ── Project header with accent line ── */}
-                <div className="cs-project-header">
-                  <div className="cs-project-header-inner">
-                    <div className="cs-project-num-block">
-                      <span className="cs-project-num-line" />
-                      <SectionNumber num={project.num} />
-                      <span className="cs-project-num-line" />
-                    </div>
-                    <div className="cs-project-meta">
-                      <span className="cs-project-category">{project.category}</span>
-                      <h3 className="cs-project-title">{project.title}</h3>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="cs-project-body">
-                  {/* ── Narrative column ── */}
-                  <div className="cs-project-narrative">
-                    <p className="cs-body cs-body--lead">{project.narrative}</p>
-
-                    {/* Approach — editorial pullquote style */}
-                    {project.approach && (
-                      <div className="cs-approach-v2">
-                        <div className="cs-approach-v2-accent" />
-                        <div className="cs-approach-v2-content">
-                          <span className="cs-label-tag">My Approach</span>
-                          <p className="cs-approach-v2-text">{project.approach}</p>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Details — connected timeline */}
-                    {project.details && (
-                      <div className="cs-timeline">
-                        <div className="cs-timeline-line" />
-                        {project.details.map((d, i) => (
-                          <div key={d.label} className="cs-timeline-item">
-                            <div className="cs-timeline-marker">
-                              <span className="cs-timeline-dot" />
-                            </div>
-                            <div className="cs-timeline-content">
-                              <span className="cs-timeline-label">{d.label}</span>
-                              <p className="cs-timeline-text">{d.text}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {/* Technical — terminal-inspired block */}
-                    {project.technical && (
-                      <div className="cs-terminal">
-                        <div className="cs-terminal-bar">
-                          <span className="cs-terminal-dot cs-terminal-dot--red" />
-                          <span className="cs-terminal-dot cs-terminal-dot--yellow" />
-                          <span className="cs-terminal-dot cs-terminal-dot--green" />
-                          <span className="cs-terminal-title">Technical Detail</span>
-                        </div>
-                        <div className="cs-terminal-body">
-                          <span className="cs-terminal-prompt">$</span>
-                          <p className="cs-terminal-text">{project.technical}</p>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Challenge — dramatic editorial callout */}
-                    {project.challenge && (
-                      <div className="cs-callout">
-                        <div className="cs-callout-glow" />
-                        <div className="cs-callout-inner">
-                          <div className="cs-callout-icon-wrap">
-                            <span className="cs-callout-icon">⚡</span>
-                          </div>
-                          <div className="cs-callout-body">
-                           <span className="cs-label-tag cs-label-tag--warm">Key Challenge</span>
-                            <p className="cs-callout-text">{project.challenge}</p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* ── Visual column ── */}
-                  {project.image && (
-                    <div className="cs-project-visual">
-                      <ProjectImage
-                        src={project.image}
-                        alt={project.imageAlt}
-                        caption={project.imageCaption}
-                        size={project.imageSize}
-                      />
-                    </div>
-                  )}
-
-                  {project.imagePair && (
-                    <div className="cs-project-visual cs-project-visual--full">
-                      <ProjectImagePair images={project.imagePair} />
-                    </div>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))}
         </section>
 
         {/* ═══════════════════════ TECH STACK ═══════════════════════ */}
@@ -557,15 +404,33 @@ export default async function FreelanceCaseStudy() {
           <div className="cs-container">
             <div className="cs-chapter-header">
               <span className="cs-badge">Tech Stack</span>
-              <h2 className="cs-chapter-title">The tools I use to build these systems.</h2>
+              <h2 className="cs-chapter-title">My AI Engineering Toolkit.</h2>
+              <p className="cs-chapter-sub">
+                A comprehensive arsenal of languages, frameworks, and foundation models I use to build enterprise-grade intelligent systems.
+              </p>
             </div>
-            <div className="cs-stack-grid">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
               {techStack.map((group) => (
-                <div key={group.category} className="cs-stack-group">
-                  <h4 className="cs-stack-category">{group.category}</h4>
-                  <div className="cs-stack-items">
+                <div key={group.category} className="flex flex-col p-6 rounded-2xl bg-white border border-[var(--cs-border)] shadow-sm hover:shadow-md transition-shadow">
+                  <h4 className="text-[var(--cs-fg)] font-bold text-lg mb-2">{group.category}</h4>
+                  <p className="text-[var(--cs-fg-secondary)] text-sm mb-6 leading-relaxed flex-grow">
+                    {group.description}
+                  </p>
+                  <div className="flex flex-col gap-3 mt-auto">
                     {group.items.map((item) => (
-                      <span key={item} className="cs-stack-chip">{item}</span>
+                      <div key={item.name} className="flex items-center gap-3 p-3 rounded-lg bg-[var(--cs-bg)] border border-[var(--cs-border)] group hover:border-[#E07A3A]/30 transition-colors">
+                        {item.icon ? (
+                          <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={item.icon} alt={`${item.name} logo`} className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" />
+                          </div>
+                        ) : (
+                          <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-[var(--cs-fg-secondary)] group-hover:text-[#E07A3A] transition-colors">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m13 2-2 9h9l-11 11 2-9H2l11-11z"/></svg>
+                          </div>
+                        )}
+                        <span className="text-[var(--cs-fg)] text-sm font-medium">{item.name}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
