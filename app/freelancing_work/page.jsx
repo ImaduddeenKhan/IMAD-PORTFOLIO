@@ -1,44 +1,21 @@
-import Image from "next/image";
-import Link from "next/link";
 import { getPublicPortfolio } from "@/lib/site-data";
-import WhatsAppFab from "@/components/portfolio/WhatsAppFab";
-import ProjectShowcase from "@/components/portfolio/ProjectShowcase";
+import FreelancingPage from "@/components/portfolio/freelancing/FreelancingPage";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Heavy-Haul AI Solutions — Imad Khan",
+  title: "AI Automation for Your Business — Imad Khan | Freelance AI Engineer",
   description:
-    "An in-depth look at 12+ AI-powered systems I built for the heavy-haul transportation industry — from agentic email automation to RAG knowledge platforms.",
+    "I build custom AI systems that automate manual operations — multi-agent email pipelines, document extraction, RAG knowledge platforms, and production-grade software. 12+ systems delivered.",
+  openGraph: {
+    title: "AI Automation for Your Business — Imad Khan",
+    description:
+      "Freelance AI Engineer building production-grade automation systems. 12+ AI systems delivered for the heavy-haul transportation industry.",
+    type: "website",
+  },
 };
 
-/* ─── narrative data ─── */
-
-const chapterIntro = {
-  badge: "The Industry",
-  title: "Heavy-haul transportation is a world of permits, regulations, and relentless coordination.",
-  body: [
-    "The company I worked with operates across all 50 U.S. states in the oversize and heavy-haul transportation industry. Every time a large truck carries an oversized load between states, it needs permits that comply with each state's unique transportation regulations.",
-    "The business manages the entire permitting process and also handles dispatch operations for carriers moving loads across the country. It's a domain where a single missed detail — a wrong state, an expired permit, a misread load dimension — can cost thousands of dollars.",
-    "When I started transforming their operation, much of the work was manual: reading long email threads, reviewing PDF documents by hand, copying data between systems, and relying on institutional knowledge that lived only in people's heads.",
-    "I was brought in to change that.",
-  ],
-};
-
-const systemSummary = [
-  { name: "Front Desk Email Automation", problem: "Hundreds of emails requiring manual review", solution: "Multi-agent classification & context pipeline" },
-  { name: "TMS Integration API", problem: "Manual order entry from external partners", solution: "Secure REST API & developer registration portal" },
-  { name: "Document Extraction Suite", problem: "Repetitive data entry from complex PDFs", solution: "Vision-language extraction for 5 document types" },
-  { name: "Order Information Assistant", problem: "Time lost searching DBs for order status", solution: "NLP chat assistant with real-time data access" },
-  { name: "Voice Recording Platform", problem: "Valuable operational knowledge lost post-call", solution: "Multi-channel active voice recording & transcription" },
-  { name: "Transcript Processing", problem: "Raw voice transcripts were noisy and unusable", solution: "NLP pipeline to clean and structure text for AI" },
-  { name: "RAG Knowledge System", problem: "Tribal knowledge was unsearchable", solution: "RAG search platform over organizational data" },
-  { name: "AI Interview & Training", problem: "Repeated operational errors costing money", solution: "AI post-incident investigator & training generator" },
-  { name: "Email Drafting Assistant", problem: "Writing repetitive replies without context", solution: "AI assistant drafts replies using thread history" },
-  { name: "Route Auto-Approval", problem: "Manual approval for identical past routes", solution: "Historical pattern matching for auto-approval" },
-  { name: "Estimator Agent", problem: "Inaccurate or limited cost estimation", solution: "Enhanced accuracy & usability of estimator bot" },
-  { name: "Customer Portals", problem: "Lack of professional customer-facing UI", solution: "Designed marketing & secure registration portals" }
-];
+/* ─── narrative data (preserved from original) ─── */
 
 const projects = [
   {
@@ -212,8 +189,8 @@ const projects = [
 ];
 
 const techStack = [
-  { 
-    category: "AI & Foundation Models", 
+  {
+    category: "AI & Foundation Models",
     description: "The cognitive engines I use to power intelligent systems.",
     items: [
       { name: "OpenAI", icon: null },
@@ -221,10 +198,10 @@ const techStack = [
       { name: "Google Gemini", icon: null },
       { name: "Groq", icon: null },
       { name: "Hugging Face", icon: null },
-    ] 
+    ],
   },
-  { 
-    category: "AI Engineering & Agents", 
+  {
+    category: "AI Engineering & Agents",
     description: "Frameworks for building multi-agent and RAG pipelines.",
     items: [
       { name: "LangChain", icon: null },
@@ -232,10 +209,10 @@ const techStack = [
       { name: "LlamaIndex", icon: null },
       { name: "Vector DBs (Pinecone, Chroma)", icon: null },
       { name: "NLP & spaCy", icon: null },
-    ] 
+    ],
   },
-  { 
-    category: "Backend & Data", 
+  {
+    category: "Backend & Data",
     description: "Robust architecture for high-throughput operations.",
     items: [
       { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
@@ -243,10 +220,10 @@ const techStack = [
       { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
       { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" },
       { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" },
-    ] 
+    ],
   },
-  { 
-    category: "Frontend & Infrastructure", 
+  {
+    category: "Frontend & Infrastructure",
     description: "Client portals and production deployments.",
     items: [
       { name: "React / Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
@@ -254,11 +231,9 @@ const techStack = [
       { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
       { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" },
       { name: "Google Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/googlecloud/googlecloud-original.svg" },
-    ] 
+    ],
   },
 ];
-
-/* ─── helper components (moved to ProjectShowcase) ─── */
 
 /* ─── main page ─── */
 
@@ -267,263 +242,25 @@ export default async function FreelanceCaseStudy() {
   const name = portfolio?.personalInfo?.fullName || "Imad Khan";
   const whatsappPhone = "919125197678";
   const emailAddress = "aiwithimad@gmail.com";
-  
-  const whatsappMsg = encodeURIComponent("Hi Imad, I came from your freelancing portfolio. I'd like to discuss AI automation for my heavy-haul company.");
+
+  const whatsappMsg = encodeURIComponent(
+    "Hi Imad, I came from your freelancing portfolio. I'd like to discuss AI automation for my business."
+  );
   const emailSubject = encodeURIComponent("AI Automation Inquiry from Your Portfolio");
-  const emailBody = encodeURIComponent("Hi Imad,\n\nI came from your website and I'm interested in your AI services for my heavy-haul permit company.\n\nHere's what I need help with:\n\n");
+  const emailBody = encodeURIComponent(
+    "Hi Imad,\n\nI came from your website and I'm interested in your AI services.\n\nHere's what I need help with:\n\n"
+  );
 
   return (
-    <div className="cs-page">
-      <WhatsAppFab domainLabel="freelancing work" />
-      
-      {/* ── Minimal header ── */}
-      <header className="cs-header">
-        <Link href="/" className="cs-header-home">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-          <span>{name}</span>
-        </Link>
-        <span className="cs-header-label">Freelance Portfolio</span>
-      </header>
-
-      <main>
-        {/* ═══════════════════════ HERO ═══════════════════════ */}
-        <section className="cs-hero" style={{ minHeight: '85vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '0 1.5rem' }}>
-          <div className="cs-hero-inner" style={{ maxWidth: '900px', margin: '0 auto', width: '100%' }}>
-            
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#E07A3A]/30 bg-[#E07A3A]/10 text-[#E07A3A] text-[0.75rem] font-bold tracking-widest uppercase mb-10 animate-fade-up">
-              <span className="w-2 h-2 rounded-full bg-[#E07A3A] animate-pulse" />
-              Heavy-Haul AI Specialist
-            </div>
-            
-            <h1 className="font-playfair text-5xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tight text-[var(--cs-fg)] leading-[1.05] mb-8 animate-fade-up" style={{ animationDelay: '0.1s' }}>
-              Automate the <br className="hidden md:block"/>
-              <span className="text-[#E07A3A] italic font-medium">impossible.</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-[var(--cs-fg-secondary)] max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-up font-medium" style={{ animationDelay: '0.2s' }}>
-              I build custom AI systems that eliminate manual data entry, streamline routing, and scale your permit operations.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-5 animate-fade-up" style={{ animationDelay: '0.3s' }}>
-              <a href="#work" className="cs-btn-primary" style={{ background: 'var(--cs-fg)', color: 'var(--cs-bg-cream)', padding: '1.1rem 2.5rem', fontSize: '1.1rem', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontWeight: '600' }}>
-                See the systems I built
-              </a>
-              <a href="#contact" className="group flex items-center gap-2 px-8 py-4 rounded-full border border-[var(--cs-border)] hover:border-[var(--cs-fg)] transition-all text-[1.1rem] font-semibold text-[var(--cs-fg)] bg-white/50 backdrop-blur-sm">
-                Let's talk 
-                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-            </div>
-            
-          </div>
-          <div className="cs-hero-scroll-hint" style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)' }}>
-            <span>Scroll to explore</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ INDUSTRY CONTEXT ═══════════════════════ */}
-        <section className="cs-section cs-section--intro">
-          <div className="cs-container">
-            <div className="cs-intro-grid">
-              <div className="cs-intro-badge-col">
-                <span className="cs-badge">{chapterIntro.badge}</span>
-              </div>
-              <div className="cs-intro-content">
-                <h2 className="cs-intro-title">{chapterIntro.title}</h2>
-                {chapterIntro.body.map((para, i) => (
-                  <p key={i} className={`cs-body ${i === chapterIntro.body.length - 1 ? "cs-body--emphasis" : ""}`}>
-                    {para}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ IMPACT BANNER ═══════════════════════ */}
-        <section className="cs-impact-banner">
-          <div className="cs-container">
-            <div className="cs-impact-grid">
-              {[
-                { value: "85%", label: "Time Saved on Intake" },
-                { value: "120k+", label: "Est. Annual ROI ($)" },
-                { value: "12+", label: "Systems Delivered" },
-                { value: "<2min", label: "Email Processing Time" },
-              ].map((stat) => (
-                <div key={stat.label} className="cs-impact-stat">
-                  <span className="cs-impact-value">{stat.value}</span>
-                  <span className="cs-impact-label">{stat.label}</span>
-                </div>
-              ))}
-            </div>
-            
-            <div className="mt-12 md:mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="text-center md:text-left">
-                <h3 className="text-white font-playfair text-2xl font-semibold mb-2">Want to take the next step?</h3>
-                <p className="text-white/70 text-sm max-w-md">Let's discuss how we can build similar AI solutions to automate your operations and save your team hundreds of hours.</p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
-                <a 
-                  href={`https://wa.me/${whatsappPhone}?text=${whatsappMsg}`}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="cs-contact-btn-whatsapp text-sm py-2 px-6"
-                >
-                  <svg viewBox="0 0 32 32" className="h-4 w-4 mr-2" aria-hidden="true"><path fill="currentColor" d="M19.11 17.21c-.27-.14-1.62-.8-1.87-.89-.25-.09-.43-.14-.62.14-.18.27-.71.89-.87 1.07-.16.18-.32.2-.59.07-.27-.14-1.16-.43-2.21-1.37-.82-.73-1.37-1.63-1.53-1.91-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.86-2.05-.23-.55-.46-.48-.62-.49l-.53-.01a1.02 1.02 0 0 0-.74.34c-.25.27-.96.94-.96 2.3 0 1.36.99 2.67 1.13 2.85.14.18 1.94 2.97 4.71 4.16.66.28 1.17.45 1.57.58.66.21 1.26.18 1.74.11.53-.08 1.62-.66 1.85-1.3.23-.64.23-1.18.16-1.3-.07-.11-.25-.18-.52-.32Zm-4.95 6.76h-.01a9.7 9.7 0 0 1-4.94-1.35l-.36-.21-3.67.96.98-3.58-.23-.37a9.69 9.69 0 0 1-1.49-5.18C4.45 8.86 8.85 4.46 14.17 4.46a9.6 9.6 0 0 1 6.84 2.84 9.6 9.6 0 0 1 2.83 6.85c0 5.32-4.4 9.72-9.68 9.72Zm8.25-17.97A11.55 11.55 0 0 0 14.17 2.5C7.76 2.5 2.49 7.77 2.49 14.18c0 2.05.54 4.05 1.55 5.81L2.4 26.5l6.66-1.74a11.66 11.66 0 0 0 5.11 1.3h.01c6.41 0 11.68-5.27 11.68-11.68a11.62 11.62 0 0 0-3.45-8.38Z"/></svg>
-                  WhatsApp
-                </a>
-                <a 
-                  href={`mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}`}
-                  className="cs-contact-btn-email text-sm py-2 px-6"
-                >
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                  Email
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ PROJECTS — Hover Showcase ═══════════════════════ */}
-        <section className="cs-section" id="work">
-          <div className="cs-container">
-            <div className="cs-chapter-header">
-              <span className="cs-badge">The Work</span>
-              <h2 className="cs-chapter-title">Systems I've Built.</h2>
-              <p className="cs-chapter-sub">
-                Explore any project to see the full story — the problem, my approach, and the technical details behind each system.
-              </p>
-            </div>
-            
-            <ProjectShowcase projects={projects} />
-          </div>
-        </section>
-
-        {/* ═══════════════════════ TECH STACK ═══════════════════════ */}
-        <section className="cs-section cs-section--stack" id="stack">
-          <div className="cs-container">
-            <div className="cs-chapter-header">
-              <span className="cs-badge">Tech Stack</span>
-              <h2 className="cs-chapter-title">My AI Engineering Toolkit.</h2>
-              <p className="cs-chapter-sub">
-                A comprehensive arsenal of languages, frameworks, and foundation models I use to build enterprise-grade intelligent systems.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-              {techStack.map((group) => (
-                <div key={group.category} className="flex flex-col p-6 rounded-2xl bg-white border border-[var(--cs-border)] shadow-sm hover:shadow-md transition-shadow">
-                  <h4 className="text-[var(--cs-fg)] font-bold text-lg mb-2">{group.category}</h4>
-                  <p className="text-[var(--cs-fg-secondary)] text-sm mb-6 leading-relaxed flex-grow">
-                    {group.description}
-                  </p>
-                  <div className="flex flex-col gap-3 mt-auto">
-                    {group.items.map((item) => (
-                      <div key={item.name} className="flex items-center gap-3 p-3 rounded-lg bg-[var(--cs-bg)] border border-[var(--cs-border)] group hover:border-[#E07A3A]/30 transition-colors">
-                        {item.icon ? (
-                          <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={item.icon} alt={`${item.name} logo`} className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300" />
-                          </div>
-                        ) : (
-                          <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-[var(--cs-fg-secondary)] group-hover:text-[#E07A3A] transition-colors">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m13 2-2 9h9l-11 11 2-9H2l11-11z"/></svg>
-                          </div>
-                        )}
-                        <span className="text-[var(--cs-fg)] text-sm font-medium">{item.name}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ IMPACT SECTION ═══════════════════════ */}
-        <section className="cs-section cs-section--reflection" id="impact">
-          <div className="cs-container">
-            <div className="cs-chapter-header">
-              <span className="cs-badge">The Results</span>
-              <h2 className="cs-chapter-title">What changes when these systems go live.</h2>
-            </div>
-            <div className="cs-reflection-grid">
-              <div className="cs-reflection-col">
-                <h4 className="cs-reflection-heading">Operational Improvements</h4>
-                <ul className="cs-reflection-list">
-                  <li>Manual order lookup becomes faster through conversational AI support agents.</li>
-                  <li>Document-heavy intake becomes more consistent through vision-based extraction.</li>
-                  <li>Email-heavy front desk work becomes trackable through an agent-assisted dashboard.</li>
-                  <li>External partners gain a structured API path for order submission and tracking.</li>
-                  <li>Security is elevated through proper API keys, OTP, CAPTCHA, and rate limiting.</li>
-                  <li>Organizational knowledge is preserved and made searchable for the entire team.</li>
-                </ul>
-              </div>
-              <div className="cs-reflection-col">
-                <h4 className="cs-reflection-heading">My Commitment</h4>
-                <ul className="cs-reflection-list">
-                  <li>I build production AI systems, not just prototypes — with proper error handling, logging, and deployment.</li>
-                  <li>I design multi-agent architectures only when they actually help, avoiding unnecessary complexity.</li>
-                  <li>I focus on shipping features that real operations teams can depend on every single day.</li>
-                  <li>I communicate technical solutions clearly to non-technical stakeholders.</li>
-                  <li>I build full-stack applications end-to-end — from database design to polished frontend interfaces.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ CONTACT CTA ═══════════════════════ */}
-        <section className="cs-contact-section" id="contact">
-          <div className="cs-container relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="font-playfair text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Ready to automate your permit operations?</h2>
-              <p className="text-lg text-white/80 mb-10 leading-relaxed">
-                I've built 12+ AI systems for a heavy-haul company just like yours. Let's discuss what I can build for you.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <a 
-                  href={`https://wa.me/${whatsappPhone}?text=${whatsappMsg}`}
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="cs-contact-btn-whatsapp w-full sm:w-auto"
-                >
-                  <svg viewBox="0 0 32 32" className="h-6 w-6 mr-2" aria-hidden="true"><path fill="currentColor" d="M19.11 17.21c-.27-.14-1.62-.8-1.87-.89-.25-.09-.43-.14-.62.14-.18.27-.71.89-.87 1.07-.16.18-.32.2-.59.07-.27-.14-1.16-.43-2.21-1.37-.82-.73-1.37-1.63-1.53-1.91-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.86-2.05-.23-.55-.46-.48-.62-.49l-.53-.01a1.02 1.02 0 0 0-.74.34c-.25.27-.96.94-.96 2.3 0 1.36.99 2.67 1.13 2.85.14.18 1.94 2.97 4.71 4.16.66.28 1.17.45 1.57.58.66.21 1.26.18 1.74.11.53-.08 1.62-.66 1.85-1.3.23-.64.23-1.18.16-1.3-.07-.11-.25-.18-.52-.32Zm-4.95 6.76h-.01a9.7 9.7 0 0 1-4.94-1.35l-.36-.21-3.67.96.98-3.58-.23-.37a9.69 9.69 0 0 1-1.49-5.18C4.45 8.86 8.85 4.46 14.17 4.46a9.6 9.6 0 0 1 6.84 2.84 9.6 9.6 0 0 1 2.83 6.85c0 5.32-4.4 9.72-9.68 9.72Zm8.25-17.97A11.55 11.55 0 0 0 14.17 2.5C7.76 2.5 2.49 7.77 2.49 14.18c0 2.05.54 4.05 1.55 5.81L2.4 26.5l6.66-1.74a11.66 11.66 0 0 0 5.11 1.3h.01c6.41 0 11.68-5.27 11.68-11.68a11.62 11.62 0 0 0-3.45-8.38Z"/></svg>
-                  Message me on WhatsApp
-                </a>
-                
-                <span className="cs-contact-divider text-white/40 font-medium">OR</span>
-                
-                <a 
-                  href={`mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}`}
-                  className="cs-contact-btn-email w-full sm:w-auto"
-                >
-                  <svg className="w-5 h-5 mr-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                  Send me an Email
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═══════════════════════ CLOSING ═══════════════════════ */}
-        <section className="cs-closing">
-          <div className="cs-container">
-            <div className="cs-closing-content">
-              <p className="cs-closing-quote">
-                "The best AI systems aren't impressive demos — they're the ones that fit naturally into how your team already works."
-              </p>
-              <div className="cs-closing-cta mt-8">
-                <Link href="/" className="cs-btn-primary">
-                  View My Full Portfolio
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </Link>
-              </div>
-              <p className="cs-closing-name mt-8 text-lg">— {name}, Freelance AI Engineer</p>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+    <FreelancingPage
+      name={name}
+      projects={projects}
+      techStack={techStack}
+      whatsappPhone={whatsappPhone}
+      emailAddress={emailAddress}
+      whatsappMsg={whatsappMsg}
+      emailSubject={emailSubject}
+      emailBody={emailBody}
+    />
   );
 }
