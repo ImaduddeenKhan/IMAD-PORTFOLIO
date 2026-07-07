@@ -68,6 +68,7 @@ function MarqueeBanner() {
           </div>
         ))}
       </div>
+
     </div>
   );
 }
@@ -144,16 +145,28 @@ function Header({ name }) {
 /* ═══════════════════════════════════════════════════════════════════
    HERO
    ═══════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   "AI in YOUR BUSINESS" ANIMATED BANNER
+   ═══════════════════════════════════════════════════════════════════ */
+function YourBusinessMattersBanner() {
+  return (
+    <div className="fl-ybm-banner">
+      <h2 className="fl-ybm-animated-text">AI IN YOUR BUSINESS</h2>
+    </div>
+  );
+}
+
 function Hero() {
   return (
     <section className="fl-hero">
+      <div className="fl-cyber-pattern" />
       <div className="fl-container">
         <div className="fl-hero-grid">
                               <div className="fl-hero-text">
-            <p className="fl-hero-intro">Hi, my name is Imad.</p>
+            <p className="fl-hero-intro" style={{ color: 'var(--fl-accent)', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '0.9rem' }}>Hi, my name is Imad.</p>
             <h1 className="fl-hero-title">
-              I BUILD AI<br />
-              THAT WORKS.
+              I BUILD <span style={{ color: 'var(--fl-accent)' }}>AI</span><br />
+              THAT <span style={{ color: 'var(--fl-gold)' }}>WORKS.</span>
             </h1>
             <p className="fl-hero-subtitle">
               I&apos;m a Freelance AI Engineer who builds custom automation systems,
@@ -171,8 +184,8 @@ function Hero() {
           <div className="fl-hero-visual">
             <div className="fl-hero-img-main">
               <Image
-                src="/case-studies/freelancing/fl-email-dashboard.png"
-                alt="AI-powered email automation dashboard built by Imad Khan"
+                src="/Imad_Hero Image.png"
+                alt="AI Engineer Imad Khan Hero Image"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
@@ -191,7 +204,7 @@ function Hero() {
               {/* Badge 2: Name Tag (Top Right) */}
               <div className="fl-hero-badge-custom fl-badge-name">
                 Imad
-                <svg className="fl-badge-pointer" viewBox="0 0 24 24" fill="#BFE2FF" stroke="#1A1A18" strokeWidth="2.5" strokeLinejoin="round">
+                <svg className="fl-badge-pointer" viewBox="0 0 24 24" fill="#43A96F" stroke="#1A1A18" strokeWidth="2.5" strokeLinejoin="round">
                   <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
                 </svg>
               </div>
@@ -214,7 +227,7 @@ function Hero() {
                   </div>
                   Available for Freelance
                 </div>
-                <svg className="fl-badge-cursor" viewBox="0 0 24 24" fill="#06D6A0" stroke="#1A1A18" strokeWidth="2.5" strokeLinejoin="round">
+                <svg className="fl-badge-cursor" viewBox="0 0 24 24" fill="#43A96F" stroke="#1A1A18" strokeWidth="2.5" strokeLinejoin="round">
                   <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" />
                 </svg>
               </div>
@@ -253,51 +266,186 @@ function Stats() {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   SERVICES
+   SERVICES (REDESIGNED)
    ═══════════════════════════════════════════════════════════════════ */
-function Services() {
-  const services = [
+function Services({ onOpenService }) {
+  const coreServices = [
     {
-      icon: "1",
-      title: "AI Automation & Multi-Agent Systems",
-      desc: "I design and build intelligent automation pipelines — from email classification agents to document extraction systems — using LangGraph, LangChain, and foundation models from OpenAI, Claude, and Gemini.",
-      iconEmoji: "🧠",
+      id: 'automation',
+      tag: 'SYS-01 · AUTOMATION',
+      title: 'AI Workflow Automation',
+      desc: 'Automations that run your front desk, follow-ups, and repetitive admin — without another hire.',
     },
     {
-      icon: "2",
-      title: "Full-Stack Application Development",
-      desc: "Production-grade web applications and APIs built with Python, FastAPI, Next.js, and PostgreSQL. From customer portals to developer registration flows — designed to scale.",
-      iconEmoji: "⚙️",
+      id: 'knowledge',
+      tag: 'SYS-02 · KNOWLEDGE',
+      title: 'RAG Knowledge Systems',
+      desc: 'Every past chat, transcript, and support ticket, turned into a layer that answers instantly from your own data.',
     },
     {
-      icon: "3",
-      title: "Knowledge Systems & Document Intelligence",
-      desc: "RAG platforms that make your team's knowledge searchable, vision-language extraction for complex PDFs, and voice-to-knowledge pipelines that preserve operational expertise.",
-      iconEmoji: "📄",
+      id: 'voice',
+      tag: 'SYS-03 · VOICE',
+      title: 'AI Voice Calling Agents',
+      desc: 'A phone line that never misses a call — takes bookings, runs feedback calls, and logs every conversation.',
+    },
+    {
+      id: 'chat',
+      tag: 'SYS-04 · CHAT',
+      title: 'AI Website Chatbots',
+      desc: 'A chatbot wired into your real listings, docs, or database — not a script it forgot to read.',
+    },
+    {
+      id: 'custom',
+      tag: 'SYS-05 · CUSTOM',
+      title: 'Custom Solutions',
+      desc: 'Bring the problem you can\'t name yet. We scope it, build it, and ship something that runs on its own.',
     },
   ];
 
+  const [reTab, setReTab] = useState('re-1');
+  const [ccTab, setCcTab] = useState('cc-1');
+
   return (
-    <section className="fl-services" id="services">
-      <div className="fl-container">
-        <h2 className="fl-section-title fl-reveal">What I can do for you</h2>
-        <div className="fl-services-grid fl-reveal-stagger">
-          {services.map((s) => (
-            <div key={s.title} className="fl-service-card fl-reveal">
-              <div className={`fl-service-icon fl-service-icon--${s.icon}`}>
-                <span style={{ fontSize: "1.6rem" }}>{s.iconEmoji}</span>
-              </div>
-              <h3>{s.title}</h3>
-              <p>{s.desc}</p>
-              <a href="#contact" className="fl-service-link">
-                Get a quote
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </a>
+    <section className="fl-services-catalog" id="services">
+      <div className="fl-catalog-inner">
+        <div className="fl-services-eyebrow fl-reveal">Service Catalog · aiwithimad</div>
+        <h2 className="fl-services-headline fl-reveal">
+          Five systems, built once.<br />Running <em>every day</em> after.
+        </h2>
+        <p className="fl-services-lede fl-reveal">
+          Every engagement starts from the same five building blocks — combined and customized to the job, then handed over as a system that keeps working without you in the loop.
+        </p>
+
+        <div className="fl-grid5 fl-reveal-stagger">
+          {coreServices.map((s) => (
+            <div 
+              key={s.id} 
+              className="fl-sys-card fl-reveal"
+              onClick={() => onOpenService({ type: 'core', ...s })}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => { if (e.key === 'Enter') onOpenService({ type: 'core', ...s }); }}
+            >
+              <span className="fl-bracket tl"></span><span className="fl-bracket br"></span>
+              <div className="fl-sys-tag">{s.tag}</div>
+              <h4 className="fl-sys-title">{s.title}</h4>
+              <p className="fl-sys-desc">{s.desc}</p>
             </div>
           ))}
         </div>
+
+        <div className="fl-sig-eyebrow fl-services-eyebrow fl-reveal">Signature Builds</div>
+        <h3 className="fl-sig-headline fl-reveal">Two systems we&apos;ve packaged end to end</h3>
+
+        <div className="fl-panels fl-reveal-stagger">
+          
+          {/* PANEL A: REAL ESTATE */}
+          <div 
+            className="fl-panel fl-reveal"
+            onClick={(e) => {
+              if (e.target.closest('.fl-tab-btn')) return; // ignore clicks on tabs themselves
+              onOpenService({ type: 'bundle', id: 'real-estate' });
+            }}
+          >
+            <div className="fl-panel-code">BUILD-A · REAL ESTATE AI SUITE</div>
+            <h4 className="fl-panel-title">Real Estate AI Suite</h4>
+            <p className="fl-panel-sub">For agents and brokerages who lose deals to slow follow-up, not bad listings.</p>
+
+            <div className="fl-tabs">
+              <button 
+                className={`fl-tab-btn ${reTab === 're-1' ? 'active' : ''}`}
+                onClick={(e) => { e.stopPropagation(); setReTab('re-1'); }}
+              >
+                Lead Capture Pro
+              </button>
+              <button 
+                className={`fl-tab-btn ${reTab === 're-2' ? 'active' : ''}`}
+                onClick={(e) => { e.stopPropagation(); setReTab('re-2'); }}
+              >
+                Full Deal Assistant
+              </button>
+            </div>
+
+            <div className={`fl-tab-panel ${reTab === 're-1' ? 'active' : ''}`}>
+              <div className="fl-tab-for">For individual agents & small brokerages (1–5 agents)</div>
+              <ul className="fl-feat">
+                <li>24/7 AI voice receptionist that catches missed calls and qualifies the caller — name, budget, area, timeline</li>
+                <li>Every lead dropped straight into your CRM or spreadsheet</li>
+                <li>Voice + text website chatbot answering real listing questions from your own data</li>
+                <li>Instant lead alerts by SMS, email, or WhatsApp</li>
+                <li>Automatic follow-up if a lead goes quiet for 24–48 hours</li>
+              </ul>
+            </div>
+
+            <div className={`fl-tab-panel ${reTab === 're-2' ? 'active' : ''}`}>
+              <div className="fl-tab-for">For growing brokerages & high-volume agents</div>
+              <ul className="fl-feat">
+                <li>Everything in Lead Capture Pro, plus:</li>
+                <li>AI meeting companion — listens to showings and calls, writes the summary and objections straight into your CRM</li>
+                <li>Automated follow-up call scheduling after every meeting</li>
+                <li>Lead scoring that separates serious buyers from browsers</li>
+                <li>Multi-language support for diverse client bases</li>
+                <li>Objection handling trained on your own top agent's calls</li>
+                <li>A dashboard tracking calls, conversions, and channel performance</li>
+              </ul>
+            </div>
+
+            <div className="fl-addon-label">Add-ons, sold standalone</div>
+            <div className="fl-chips">
+              <span className="fl-chip">CRM integration (kvCore, Follow Up Boss, HubSpot)</span>
+              <span className="fl-chip">WhatsApp lead nurture</span>
+              <span className="fl-chip">Automated drip campaigns</span>
+              <span className="fl-chip">Virtual tour booking assistant</span>
+              <span className="fl-chip">Post-closing review & referral bot</span>
+              <span className="fl-chip">RAG listing-match engine</span>
+            </div>
+          </div>
+
+          {/* PANEL B: CONTENT STUDIO */}
+          <div 
+            className="fl-panel fl-reveal"
+            onClick={(e) => {
+              if (e.target.closest('.fl-tab-btn')) return; // ignore clicks on tabs themselves
+              onOpenService({ type: 'bundle', id: 'content-studio' });
+            }}
+          >
+            <div className="fl-panel-code">BUILD-B · AUTOMATED CONTENT STUDIO</div>
+            <h4 className="fl-panel-title">Automated Content Studio</h4>
+            <p className="fl-panel-sub">Two ways in, depending on whether you&apos;re already on camera.</p>
+
+            <div className="fl-tabs">
+              <button 
+                className={`fl-tab-btn ${ccTab === 'cc-1' ? 'active' : ''}`}
+                onClick={(e) => { e.stopPropagation(); setCcTab('cc-1'); }}
+              >
+                Clone Track
+              </button>
+              <button 
+                className={`fl-tab-btn ${ccTab === 'cc-2' ? 'active' : ''}`}
+                onClick={(e) => { e.stopPropagation(); setCcTab('cc-2'); }}
+              >
+                Niche Builder Track
+              </button>
+            </div>
+
+            <div className={`fl-tab-panel ${ccTab === 'cc-1' ? 'active' : ''}`}>
+              <div className="fl-tab-for">For creators who already post and have an audience</div>
+              <p className="fl-track-desc">We study your existing videos — your scripts, delivery, pacing, the way you actually talk — and build a system that keeps producing new content in <strong>your exact voice</strong>, at a pace your posting schedule alone couldn&apos;t hit.</p>
+            </div>
+
+            <div className={`fl-tab-panel ${ccTab === 'cc-2' ? 'active' : ''}`}>
+              <div className="fl-tab-for">For founders too busy to start from zero</div>
+              <p className="fl-track-desc">Pick a niche. We study the creators already winning in it, then build a fully automated production system around it — scripting, ElevenLabs voice, thumbnails, editing, all tuned to look 100% human. If you'd rather stay off-camera entirely, that's built in too.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div className="fl-cta-strip fl-reveal">
+          <div className="fl-cta-text">Have a problem that doesn't fit a tile? <span>Tell us anyway.</span></div>
+          <a href="#contact" className="fl-cta-btn">Get a Free AI Audit</a>
+        </div>
+
       </div>
     </section>
   );
@@ -814,6 +962,231 @@ function DetailPanel({ project, onClose }) {
           )}
         </div>
       </div>
+
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SERVICE POPUP MODAL
+   ═══════════════════════════════════════════════════════════════════ */
+function ServicePopup({ service, onClose, whatsappPhone, emailAddress }) {
+  const popupRef = useRef(null);
+
+  useEffect(() => {
+    const handleKey = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onClose]);
+
+  useEffect(() => {
+    document.body.classList.add("fl-overlay-open");
+    return () => document.body.classList.remove("fl-overlay-open");
+  }, []);
+
+  if (!service) return null;
+
+  // Use Case Content Definitions
+  const serviceContent = {
+    'automation': {
+      label: 'Applications & Use Cases',
+      list: [
+        'Automated email sorting, classification & routing',
+        'Follow-up reminders when clients go quiet',
+        'Invoice processing & matching',
+        'Appointment scheduling & booking confirmations',
+        'Lead qualification from web forms & emails',
+        'CRM data entry & updates (no more copy-pasting)',
+        'Social media posting schedules',
+        'Report generation & distribution',
+        'Employee onboarding task automation'
+      ]
+    },
+    'knowledge': {
+      label: 'Applications & Use Cases',
+      list: [
+        'Internal company wiki that actually answers questions',
+        'Customer support knowledge base — instant answers from your own docs',
+        'Policy & procedure lookup for employees',
+        'Product catalog search with natural language',
+        'Past project/case search for reference',
+        'FAQ automation from existing documents',
+        'Training material retrieval & quiz generation',
+        'Contract clause search & comparison'
+      ]
+    },
+    'voice': {
+      label: 'Applications & Use Cases',
+      list: [
+        '24/7 receptionist — never miss a call again',
+        'Appointment booking & confirmation calls',
+        'Lead qualification calls (budget, timeline, requirements)',
+        'Customer feedback & satisfaction surveys',
+        'Payment reminder calls',
+        'Order status update calls',
+        'After-hours emergency routing',
+        'Multi-language support (English, Spanish, Urdu, Hindi)'
+      ]
+    },
+    'chat': {
+      label: 'Applications & Use Cases',
+      list: [
+        'Answer visitor questions from your real data (not generic scripts)',
+        'Product/service recommendations based on visitor needs',
+        'Lead capture with qualification questions',
+        'Appointment/demo booking directly in chat',
+        'Order tracking & status updates',
+        'FAQ handling with smart escalation to human',
+        'Multi-language support',
+        'Handoff to WhatsApp or email when needed'
+      ]
+    },
+    'custom': {
+      label: 'What We Can Build',
+      list: [
+        'Bring any problem — we\'ll scope and build it',
+        'Data extraction from messy documents (PDFs, images, scans)',
+        'API integrations between your existing tools',
+        'Dashboard & reporting systems',
+        'Workflow optimization & process automation',
+        'AI-powered data analysis & insights',
+        'Custom internal tools for your team',
+        'Anything that&apos;s eating your team&apos;s time — we can probably automate it'
+      ]
+    }
+  };
+
+  const getWhatsAppMsg = () => {
+    let msg = "Hi Imad, I'm interested in your AI services.";
+    if (service.type === 'core') {
+      msg = `Hi Imad, I'm interested in ${service.title} for my business.`;
+    } else if (service.id === 'real-estate') {
+      msg = `Hi Imad, I'm interested in the Real Estate AI Suite.`;
+    } else if (service.id === 'content-studio') {
+      msg = `Hi Imad, I'm interested in the Automated Content Studio.`;
+    }
+    return encodeURIComponent(msg);
+  };
+
+  const getEmailSubject = () => {
+    let sub = "AI Automation Inquiry";
+    if (service.type === 'core') {
+      sub = `Inquiry: ${service.title}`;
+    } else if (service.id === 'real-estate') {
+      sub = `Inquiry: Real Estate AI Suite`;
+    } else if (service.id === 'content-studio') {
+      sub = `Inquiry: Automated Content Studio`;
+    }
+    return encodeURIComponent(sub);
+  };
+
+  return (
+    <div className="fl-service-popup-overlay" onClick={onClose}>
+      <div className="fl-service-popup" ref={popupRef} onClick={(e) => e.stopPropagation()}>
+        <button className="fl-service-popup-close" onClick={onClose} aria-label="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+
+        {service.type === 'core' && (
+          <>
+            <div className="fl-service-popup-header">
+              <div className="fl-service-popup-tag">{service.tag}</div>
+              <h3 className="fl-service-popup-title">{service.title}</h3>
+            </div>
+            <div className="fl-service-popup-body">
+              <div className="fl-service-popup-label">{serviceContent[service.id].label}</div>
+              <ul className="fl-service-popup-list">
+                {serviceContent[service.id].list.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+
+        {service.type === 'bundle' && service.id === 'real-estate' && (
+          <>
+            <div className="fl-service-popup-header">
+              <div className="fl-service-popup-tag">BUILD-A · REAL ESTATE AI SUITE</div>
+              <h3 className="fl-service-popup-title">Real Estate AI Suite</h3>
+            </div>
+            <div className="fl-service-popup-body">
+              <div className="fl-service-popup-label">Lead Capture Pro (1-5 Agents)</div>
+              <ul className="fl-service-popup-list">
+                <li>24/7 AI voice receptionist that catches missed calls and qualifies the caller — name, budget, area, timeline</li>
+                <li>Every lead dropped straight into your CRM or spreadsheet</li>
+                <li>Voice + text website chatbot answering real listing questions from your own data</li>
+                <li>Instant lead alerts by SMS, email, or WhatsApp</li>
+                <li>Automatic follow-up if a lead goes quiet for 24–48 hours</li>
+              </ul>
+              
+              <div className="fl-service-popup-label" style={{ marginTop: '2rem' }}>Full Deal Assistant (Growing Brokerages)</div>
+              <ul className="fl-service-popup-list">
+                <li>Everything in Lead Capture Pro, plus:</li>
+                <li>AI meeting companion — listens to showings and calls, writes the summary and objections straight into your CRM</li>
+                <li>Automated follow-up call scheduling after every meeting</li>
+                <li>Lead scoring that separates serious buyers from browsers</li>
+                <li>Multi-language support for diverse client bases</li>
+                <li>Objection handling trained on your own top agent's calls</li>
+                <li>A dashboard tracking calls, conversions, and channel performance</li>
+              </ul>
+
+              <div className="fl-service-popup-label" style={{ marginTop: '2rem' }}>Available Add-ons</div>
+              <div className="fl-chips">
+                <span className="fl-chip">CRM integration</span>
+                <span className="fl-chip">WhatsApp lead nurture</span>
+                <span className="fl-chip">Automated drip campaigns</span>
+                <span className="fl-chip">Virtual tour booking assistant</span>
+                <span className="fl-chip">Post-closing review & referral bot</span>
+                <span className="fl-chip">RAG listing-match engine</span>
+              </div>
+            </div>
+          </>
+        )}
+
+        {service.type === 'bundle' && service.id === 'content-studio' && (
+          <>
+            <div className="fl-service-popup-header">
+              <div className="fl-service-popup-tag">BUILD-B · AUTOMATED CONTENT STUDIO</div>
+              <h3 className="fl-service-popup-title">Automated Content Studio</h3>
+            </div>
+            <div className="fl-service-popup-body">
+              <div className="fl-service-popup-label">Clone Track</div>
+              <p className="fl-track-desc" style={{ color: 'var(--fl-fg)', marginBottom: '2rem' }}>
+                For creators who already post and have an audience. We study your existing videos — your scripts, delivery, pacing, the way you actually talk — and build a system that keeps producing new content in <strong>your exact voice</strong>, at a pace your posting schedule alone couldn&apos;t hit.
+              </p>
+              
+              <div className="fl-service-popup-label">Niche Builder Track</div>
+              <p className="fl-track-desc" style={{ color: 'var(--fl-fg)' }}>
+                For founders too busy to start from zero. Pick a niche. We study the creators already winning in it, then build a fully automated production system around it — scripting, ElevenLabs voice, thumbnails, editing, all tuned to look 100% human. If you'd rather stay off-camera entirely, that's built in too.
+              </p>
+            </div>
+          </>
+        )}
+
+        <div className="fl-service-popup-cta">
+          <a 
+            href={`https://wa.me/${whatsappPhone}?text=${getWhatsAppMsg()}`}
+            target="_blank" rel="noopener noreferrer"
+            className="fl-popup-btn fl-popup-btn--whatsapp"
+          >
+            <svg viewBox="0 0 32 32" width="20" height="20" aria-hidden="true">
+              <path fill="currentColor" d="M19.11 17.21c-.27-.14-1.62-.8-1.87-.89-.25-.09-.43-.14-.62.14-.18.27-.71.89-.87 1.07-.16.18-.32.2-.59.07-.27-.14-1.16-.43-2.21-1.37-.82-.73-1.37-1.63-1.53-1.91-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.46.09-.18.05-.34-.02-.48-.07-.14-.62-1.5-.86-2.05-.23-.55-.46-.48-.62-.49l-.53-.01a1.02 1.02 0 0 0-.74.34c-.25.27-.96.94-.96 2.3 0 1.36.99 2.67 1.13 2.85.14.18 1.94 2.97 4.71 4.16.66.28 1.17.45 1.57.58.66.21 1.26.18 1.74.11.53-.08 1.62-.66 1.85-1.3.23-.64.23-1.18.16-1.3-.07-.11-.25-.18-.52-.32Zm-4.95 6.76h-.01a9.7 9.7 0 0 1-4.94-1.35l-.36-.21-3.67.96.98-3.58-.23-.37a9.69 9.69 0 0 1-1.49-5.18C4.45 8.86 8.85 4.46 14.17 4.46a9.6 9.6 0 0 1 6.84 2.84 9.6 9.6 0 0 1 2.83 6.85c0 5.32-4.4 9.72-9.68 9.72Zm8.25-17.97A11.55 11.55 0 0 0 14.17 2.5C7.76 2.5 2.49 7.77 2.49 14.18c0 2.05.54 4.05 1.55 5.81L2.4 26.5l6.66-1.74a11.66 11.66 0 0 0 5.11 1.3h.01c6.41 0 11.68-5.27 11.68-11.68a11.62 11.62 0 0 0-3.45-8.38Z" />
+            </svg>
+            Get a Quote on WhatsApp
+          </a>
+          <a 
+            href={`mailto:${emailAddress}?subject=${getEmailSubject()}`}
+            className="fl-popup-btn fl-popup-btn--email"
+          >
+            Send an Email
+          </a>
+        </div>
+      </div>
+
+
     </div>
   );
 }
@@ -821,6 +1194,7 @@ function DetailPanel({ project, onClose }) {
 /* ═══════════════════════════════════════════════════════════════════
    MAIN PAGE COMPONENT
    ═══════════════════════════════════════════════════════════════════ */
+
 export default function FreelancingPage({
   name,
   projects,
@@ -833,6 +1207,7 @@ export default function FreelancingPage({
 }) {
   const pageRef = useScrollReveal();
   const [activeProject, setActiveProject] = useState(null);
+  const [activeService, setActiveService] = useState(null);
 
   const handleOpenProject = useCallback((project) => {
     setActiveProject(project);
@@ -848,11 +1223,12 @@ export default function FreelancingPage({
 
       <MarqueeBanner />
       <Header name={name} />
+      <YourBusinessMattersBanner />
 
       <main>
         <Hero />
         <Stats />
-        <Services />
+        <Services onOpenService={setActiveService} />
         <FeaturedProjects projects={projects} onOpenProject={handleOpenProject} />
         <OtherProjects projects={projects} onOpenProject={handleOpenProject} />
         <TechStack techStack={techStack} />
@@ -869,6 +1245,15 @@ export default function FreelancingPage({
 
       {activeProject && (
         <DetailPanel project={activeProject} onClose={handleCloseProject} />
+      )}
+
+      {activeService && (
+        <ServicePopup 
+          service={activeService} 
+          onClose={() => setActiveService(null)} 
+          whatsappPhone={whatsappPhone}
+          emailAddress={emailAddress}
+        />
       )}
     </div>
   );
