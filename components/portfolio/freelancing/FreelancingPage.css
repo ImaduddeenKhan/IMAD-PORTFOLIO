@@ -363,7 +363,7 @@
 }
 .fl-hero-cta:hover svg { transform: translateX(3px); }
 
-/* Hero visual side */
+
 .fl-hero-visual {
   position: relative;
   display: flex;
@@ -411,130 +411,84 @@
   object-position: bottom center;
 }
 
-.fl-hero-badge-custom {
+/* NEO-BRUTALIST BADGES */
+.fl-neo-badge {
   position: absolute;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  animation: fl-pop-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, fl-float 4s ease-in-out infinite;
-}
-
-/* Badge 1: AI (Speech Bubble shape) */
-.fl-badge-ai {
-  top: -10px;
-  left: -20px;
-  width: 70px;
-  height: 70px;
-  background: var(--fl-accent-mint);
-  border: var(--fl-border-thick);
-  border-radius: 16px;
-  border-bottom-right-radius: 0;
-  box-shadow: var(--fl-shadow-solid-sm);
-  color: var(--fl-fg);
-  animation-delay: 0.2s, 0.2s;
-  top: 15%;
-  left: 0%;
-  background: var(--fl-accent);
-  color: #ffffff;
-  padding: 0.9rem;
-  border-radius: var(--fl-radius);
-  border: 1px solid rgba(255,255,255,0.2);
-  box-shadow: 0 4px 15px rgba(67, 169, 111, 0.4);
-}
-.fl-badge-ai svg { width: 36px; height: 36px; }
-
-/* Badge 2: Name tag (Pill shape) */
-.fl-badge-name {
-  top: -30px;
-  right: 15%;
-  background: var(--fl-accent);
-  padding: 0.5rem 1.25rem;
-  border: var(--fl-border-thick);
-  border-radius: var(--fl-radius-pill);
-  box-shadow: var(--fl-shadow-solid-sm);
-  font-family: var(--fl-font-display);
-  font-weight: 800;
-  font-size: 1.1rem;
-  color: var(--fl-fg);
-  animation-delay: 0.4s, 0.4s;
-  transform: rotate(5deg);
-}
-.fl-badge-pointer {
-  position: absolute;
-  bottom: -20px;
-  left: -15px;
-  width: 24px;
-  height: 24px;
-  transform: rotate(-30deg);
-}
-
-/* Badge 3: Eye (Circle shape) */
-.fl-badge-eye {
-  top: 40%;
-  right: -30px;
-  width: 65px;
-  height: 65px;
-  background: var(--fl-accent-yellow);
-  border: var(--fl-border-thick);
-  border-radius: 50%;
-  box-shadow: var(--fl-shadow-solid-sm);
-  color: var(--fl-fg);
-  animation-delay: 0.6s, 0.6s;
-  transform: rotate(15deg);
-}
-.fl-badge-eye svg { width: 34px; height: 34px; }
-
-/* Badge 4: Available for Freelance (Pill shape with custom check) */
-.fl-badge-freelance {
-  bottom: -15px;
-  right: 5%;
-  animation-delay: 0.8s, 0.8s;
-  transform: rotate(2deg);
-}
-.fl-badge-freelance-inner {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--fl-accent-mint);
-  padding: 0.5rem 1.25rem 0.5rem 0.5rem;
-  border: var(--fl-border-thick);
-  border-radius: var(--fl-radius-pill);
-  box-shadow: var(--fl-shadow-solid-sm);
-  font-weight: 800;
-  font-size: 0.85rem;
-  color: var(--fl-fg);
+  font-family: var(--fl-font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  z-index: 3;
+  border: 3px solid #111111;
+  box-shadow: 4px 4px 0px #111111;
+  color: #111111;
+  animation: fl-float 6s ease-in-out infinite;
+  transition: transform 0.2s ease;
 }
-.fl-badge-check {
-  width: 22px;
-  height: 22px;
-  background: white;
-  border: 2px solid var(--fl-fg);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+.fl-neo-badge:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #111111;
 }
-.fl-badge-check svg { width: 14px; height: 14px; color: var(--fl-fg); }
+
+.fl-badge-ai {
+  top: 15%;
+  left: -5%;
+  background: var(--fl-accent);
+  padding: 0.8rem;
+  border-radius: 12px;
+  animation-delay: 0s;
+}
+.fl-badge-ai svg { width: 32px; height: 32px; color: #111; }
+
 .fl-badge-cursor {
-  position: absolute;
-  top: -15px;
-  left: -20px;
-  width: 24px;
-  height: 24px;
+  top: 5%;
+  right: 5%;
+  background: var(--fl-fg);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  animation-delay: 1s;
+}
+.fl-badge-cursor svg {
+  width: 16px;
+  height: 16px;
+  color: #5555ff; /* Blue cursor like reference */
   transform: rotate(-15deg);
+  position: absolute;
+  bottom: -15px;
+  left: -10px;
 }
 
-@keyframes fl-pop-in {
-  0% { opacity: 0; transform: scale(0.5); }
-  100% { opacity: 1; transform: scale(1); }
+.fl-badge-eye {
+  top: 45%;
+  right: -5%;
+  background: var(--fl-gold);
+  padding: 0.8rem;
+  border-radius: 50%;
+  animation-delay: 2s;
+}
+.fl-badge-eye svg { width: 28px; height: 28px; color: #111; }
+
+.fl-badge-status {
+  bottom: 0%;
+  right: -5%;
+  background: var(--fl-accent);
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  animation-delay: 1.5s;
 }
 
-@keyframes fl-float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.02); }
+.fl-neo-check {
+  width: 16px;
+  height: 16px;
+  background: var(--fl-fg);
+  border-radius: 50%;
+  padding: 2px;
+  border: 2px solid #111;
 }
+
 
 /* ==========================================================================
    STATS / IMPACT BANNER
