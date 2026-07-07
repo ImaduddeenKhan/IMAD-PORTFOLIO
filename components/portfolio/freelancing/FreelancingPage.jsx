@@ -348,102 +348,93 @@ function Services({ onOpenService }) {
         <div className="fl-panels fl-reveal-stagger">
           
           {/* PANEL A: REAL ESTATE */}
-          <div 
-            className="fl-panel fl-reveal"
-            onClick={(e) => {
-              if (e.target.closest('.fl-tab-btn')) return; // ignore clicks on tabs themselves
-              onOpenService({ type: 'bundle', id: 'real-estate' });
-            }}
-          >
-            <div className="fl-panel-code">BUILD-A · REAL ESTATE AI SUITE</div>
+          <div className="fl-panel fl-reveal">
+            <div className="fl-panel-header">
+              <div className="fl-panel-code">BUILD-A</div>
+              <div className="fl-panel-badge">🔥 Most Demanded</div>
+            </div>
             <h4 className="fl-panel-title">Real Estate AI Suite</h4>
             <p className="fl-panel-sub">For agents and brokerages who lose deals to slow follow-up, not bad listings.</p>
 
-            <div className="fl-tabs">
-              <button 
-                className={`fl-tab-btn ${reTab === 're-1' ? 'active' : ''}`}
-                onClick={(e) => { e.stopPropagation(); setReTab('re-1'); }}
-              >
-                Lead Capture Pro
-              </button>
-              <button 
-                className={`fl-tab-btn ${reTab === 're-2' ? 'active' : ''}`}
-                onClick={(e) => { e.stopPropagation(); setReTab('re-2'); }}
-              >
-                Full Deal Assistant
-              </button>
-            </div>
+            <div className="fl-packages">
+              {/* Package 1 */}
+              <div className="fl-package-card">
+                <div className="fl-package-top">
+                  <h5 className="fl-package-title">Lead Capture Pro</h5>
+                  <span className="fl-package-for">For 1–5 agents</span>
+                </div>
+                <p className="fl-package-desc">24/7 AI voice receptionist & website chatbot that catches every missed lead and qualifies them instantly.</p>
+                <button 
+                  className="fl-package-cta"
+                  onClick={(e) => { e.stopPropagation(); onOpenService({ type: 'bundle', id: 'real-estate', package: 'pro' }); }}
+                >
+                  View Details & Pricing <span className="fl-arrow">→</span>
+                </button>
+              </div>
 
-            <div className={`fl-tab-panel ${reTab === 're-1' ? 'active' : ''}`}>
-              <div className="fl-tab-for">For individual agents & small brokerages (1–5 agents)</div>
-              <ul className="fl-feat">
-                <li>24/7 AI voice receptionist that catches missed calls and qualifies the caller — name, budget, area, timeline</li>
-                <li>Every lead dropped straight into your CRM or spreadsheet</li>
-                <li>Voice + text website chatbot answering real listing questions from your own data</li>
-                <li>Instant lead alerts by SMS, email, or WhatsApp</li>
-                <li>Automatic follow-up if a lead goes quiet for 24–48 hours</li>
-              </ul>
-            </div>
-
-            <div className={`fl-tab-panel ${reTab === 're-2' ? 'active' : ''}`}>
-              <div className="fl-tab-for">For growing brokerages & high-volume agents</div>
-              <ul className="fl-feat">
-                <li>Everything in Lead Capture Pro, plus:</li>
-                <li>AI meeting companion — listens to showings and calls, writes the summary and objections straight into your CRM</li>
-                <li>Automated follow-up call scheduling after every meeting</li>
-                <li>Lead scoring that separates serious buyers from browsers</li>
-                <li>Multi-language support for diverse client bases</li>
-                <li>Objection handling trained on your own top agent's calls</li>
-                <li>A dashboard tracking calls, conversions, and channel performance</li>
-              </ul>
+              {/* Package 2 */}
+              <div className="fl-package-card">
+                <div className="fl-package-top">
+                  <h5 className="fl-package-title">Full Deal Assistant</h5>
+                  <span className="fl-package-for">For growing teams</span>
+                </div>
+                <p className="fl-package-desc">Everything in Pro, plus AI meeting companions, automated follow-ups, and smart lead scoring in your CRM.</p>
+                <button 
+                  className="fl-package-cta"
+                  onClick={(e) => { e.stopPropagation(); onOpenService({ type: 'bundle', id: 'real-estate', package: 'full' }); }}
+                >
+                  View Details & Pricing <span className="fl-arrow">→</span>
+                </button>
+              </div>
             </div>
 
             <div className="fl-addon-label">Add-ons, sold standalone</div>
             <div className="fl-chips">
-              <span className="fl-chip">CRM integration (kvCore, Follow Up Boss, HubSpot)</span>
+              <span className="fl-chip">CRM integration</span>
               <span className="fl-chip">WhatsApp lead nurture</span>
-              <span className="fl-chip">Automated drip campaigns</span>
-              <span className="fl-chip">Virtual tour booking assistant</span>
-              <span className="fl-chip">Post-closing review & referral bot</span>
-              <span className="fl-chip">RAG listing-match engine</span>
+              <span className="fl-chip">Virtual tour booking</span>
             </div>
           </div>
 
           {/* PANEL B: CONTENT STUDIO */}
-          <div 
-            className="fl-panel fl-reveal"
-            onClick={(e) => {
-              if (e.target.closest('.fl-tab-btn')) return; // ignore clicks on tabs themselves
-              onOpenService({ type: 'bundle', id: 'content-studio' });
-            }}
-          >
-            <div className="fl-panel-code">BUILD-B · AUTOMATED CONTENT STUDIO</div>
+          <div className="fl-panel fl-reveal">
+            <div className="fl-panel-header">
+              <div className="fl-panel-code">BUILD-B</div>
+              <div className="fl-panel-badge">🚀 High Growth</div>
+            </div>
             <h4 className="fl-panel-title">Automated Content Studio</h4>
-            <p className="fl-panel-sub">Two ways in, depending on whether you&apos;re already on camera.</p>
+            <p className="fl-panel-sub">Two ways in, depending on whether you&apos;re already on camera or starting fresh.</p>
 
-            <div className="fl-tabs">
-              <button 
-                className={`fl-tab-btn ${ccTab === 'cc-1' ? 'active' : ''}`}
-                onClick={(e) => { e.stopPropagation(); setCcTab('cc-1'); }}
-              >
-                Clone Track
-              </button>
-              <button 
-                className={`fl-tab-btn ${ccTab === 'cc-2' ? 'active' : ''}`}
-                onClick={(e) => { e.stopPropagation(); setCcTab('cc-2'); }}
-              >
-                Niche Builder Track
-              </button>
-            </div>
+            <div className="fl-packages">
+              {/* Package 1 */}
+              <div className="fl-package-card">
+                <div className="fl-package-top">
+                  <h5 className="fl-package-title">Clone Track</h5>
+                  <span className="fl-package-for">For active creators</span>
+                </div>
+                <p className="fl-package-desc">We clone your exact voice, pacing, and scripting style to produce new content faster than you can record.</p>
+                <button 
+                  className="fl-package-cta"
+                  onClick={(e) => { e.stopPropagation(); onOpenService({ type: 'bundle', id: 'content-studio', package: 'clone' }); }}
+                >
+                  View Details & Pricing <span className="fl-arrow">→</span>
+                </button>
+              </div>
 
-            <div className={`fl-tab-panel ${ccTab === 'cc-1' ? 'active' : ''}`}>
-              <div className="fl-tab-for">For creators who already post and have an audience</div>
-              <p className="fl-track-desc">We study your existing videos — your scripts, delivery, pacing, the way you actually talk — and build a system that keeps producing new content in <strong>your exact voice</strong>, at a pace your posting schedule alone couldn&apos;t hit.</p>
-            </div>
-
-            <div className={`fl-tab-panel ${ccTab === 'cc-2' ? 'active' : ''}`}>
-              <div className="fl-tab-for">For founders too busy to start from zero</div>
-              <p className="fl-track-desc">Pick a niche. We study the creators already winning in it, then build a fully automated production system around it — scripting, ElevenLabs voice, thumbnails, editing, all tuned to look 100% human. If you'd rather stay off-camera entirely, that's built in too.</p>
+              {/* Package 2 */}
+              <div className="fl-package-card">
+                <div className="fl-package-top">
+                  <h5 className="fl-package-title">Niche Builder Track</h5>
+                  <span className="fl-package-for">For busy founders</span>
+                </div>
+                <p className="fl-package-desc">A fully automated faceless production system — scripting, voice generation, editing, and thumbnails.</p>
+                <button 
+                  className="fl-package-cta"
+                  onClick={(e) => { e.stopPropagation(); onOpenService({ type: 'bundle', id: 'content-studio', package: 'niche' }); }}
+                >
+                  View Details & Pricing <span className="fl-arrow">→</span>
+                </button>
+              </div>
             </div>
           </div>
 
@@ -1117,7 +1108,7 @@ function ServicePopup({ service, onClose, whatsappPhone, emailAddress }) {
         {service.type === 'bundle' && service.id === 'real-estate' && (
           <>
             <div className="fl-service-popup-header">
-              <div className="fl-service-popup-tag">BUILD-A · REAL ESTATE AI SUITE</div>
+              <div className="fl-service-popup-tag">BUILD-A</div>
               <h3 className="fl-service-popup-title">Real Estate AI Suite</h3>
             </div>
             <div className="fl-service-popup-body">
@@ -1157,7 +1148,7 @@ function ServicePopup({ service, onClose, whatsappPhone, emailAddress }) {
         {service.type === 'bundle' && service.id === 'content-studio' && (
           <>
             <div className="fl-service-popup-header">
-              <div className="fl-service-popup-tag">BUILD-B · AUTOMATED CONTENT STUDIO</div>
+              <div className="fl-service-popup-tag">BUILD-B</div>
               <h3 className="fl-service-popup-title">Automated Content Studio</h3>
             </div>
             <div className="fl-service-popup-body">
