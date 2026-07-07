@@ -93,13 +93,17 @@ function Header({ name }) {
     <>
       <header className="fl-header">
                         <Link href="/" className="fl-logo">
-          <div className="fl-logo-pill">
-            <div className="fl-logo-pill-inner">
-              <span className="fl-logo-pill-shape1"></span>
-              <span className="fl-logo-pill-shape2"></span>
-            </div>
+          <div className="fl-logo-k">
+            {/* SVG letter K — vertical spine + two diagonal arms */}
+            <svg viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg" className="fl-logo-k-svg">
+              {/* Vertical spine */}
+              <rect x="0" y="0" width="8" height="36" rx="2" fill="var(--fl-accent)" />
+              {/* Upper arm — goes from middle to top-right */}
+              <polygon points="8,18 8,12 24,0 24,8" fill="var(--fl-gold)" />
+              {/* Lower arm — goes from middle to bottom-right */}
+              <polygon points="8,18 8,24 24,36 24,28" fill="var(--fl-gold)" />
+            </svg>
           </div>
-          <span>{name}</span>
         </Link>
 
         <nav className="fl-nav">
@@ -196,43 +200,43 @@ function Hero() {
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   priority
-                  style={{ objectFit: "contain", objectPosition: "bottom center", filter: "grayscale(100%) contrast(1.1) brightness(1.05)" }}
+                  style={{ objectFit: "contain", objectPosition: "bottom center", filter: "grayscale(100%) contrast(1.1) brightness(1.05)", transform: "scale(1.4)", transformOrigin: "bottom center" }}
                 />
               </div>
-            </div>
 
-            {/* Neo-Brutalist Badges */}
-            {/* Badge 1: AI / Data Icon (Top Left) */}
-            <div className="fl-neo-badge fl-badge-ai">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                <line x1="3" y1="9" x2="21" y2="9" />
-                <line x1="9" y1="21" x2="9" y2="9" />
-              </svg>
-            </div>
-            
-            {/* Badge 2: Cursor / Tag (Top Right) */}
-            <div className="fl-neo-badge fl-badge-cursor">
-              <span>Imad</span>
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M7 2l12 11.2-5.8.5 3.3 7.3-2.2.9-3.2-7.4-4.4 4.7z"/>
-              </svg>
-            </div>
-            
-            {/* Badge 3: Eye / View Icon (Right Edge) */}
-            <div className="fl-neo-badge fl-badge-eye">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
-            </div>
-            
-            {/* Badge 4: Available for Freelance (Bottom Right) */}
-            <div className="fl-neo-badge fl-badge-status">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="fl-neo-check">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span>Available for Freelance</span>
+              {/* Neo-Brutalist Badges — inside img-main so they stay close */}
+              {/* Badge 1: AI / Data Icon (Left edge of shield) */}
+              <div className="fl-neo-badge fl-badge-ai">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                  <line x1="3" y1="9" x2="21" y2="9" />
+                  <line x1="9" y1="21" x2="9" y2="9" />
+                </svg>
+              </div>
+              
+              {/* Badge 2: "Imad" name tag (Top right, near head) */}
+              <div className="fl-neo-badge fl-badge-cursor">
+                <span>Imad</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="fl-badge-cursor-arrow">
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+              
+              {/* Badge 3: Eye / View Icon (Right edge) */}
+              <div className="fl-neo-badge fl-badge-eye">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              </div>
+              
+              {/* Badge 4: Available for Freelance (Bottom edge of shield) */}
+              <div className="fl-neo-badge fl-badge-status">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="fl-neo-check">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Available for Freelance</span>
+              </div>
             </div>
           </div>
 
