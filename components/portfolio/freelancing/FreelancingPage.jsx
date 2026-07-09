@@ -167,7 +167,7 @@ function Hero() {
       <div className="fl-container">
         <div className="fl-hero-grid">
                               <div className="fl-hero-text">
-            <p className="fl-hero-intro" style={{ color: 'var(--fl-accent)', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '0.9rem' }}>Hi, my name is Imad.</p>
+            <p className="fl-hero-intro" style={{ color: 'var(--fl-accent)', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', fontSize: '1.15rem' }}>Hi, my name is Imad.</p>
             <h1 className="fl-hero-title">
               I BUILD <span style={{ color: 'var(--fl-accent)' }}>AI</span><br />
               THAT <span style={{ color: 'var(--fl-gold)' }}>WORKS.</span>
