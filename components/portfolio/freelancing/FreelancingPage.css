@@ -1822,3 +1822,138 @@ body.fl-overlay-open {
       40px 40px; 
   }
 }
+
+/* ==========================================================================
+   DETAIL OVERLAY PANEL FOR FREELANCING PAGE (DARK THEME)
+   ========================================================================== */
+
+/* Panel Container */
+.fl-page .fw-detail-panel {
+  background: linear-gradient(135deg, #2D2D2D 0%, #1E1E1E 100%);
+  border: 1.5px solid rgba(243, 241, 234, 0.15);
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 0 80px rgba(67, 169, 111, 0.08);
+}
+
+/* Close Button */
+.fl-page .fw-detail-close-btn {
+  background: #2A2A2A;
+  color: var(--fl-fg);
+  border: 1px solid var(--fl-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.fl-page .fw-detail-close-btn:hover {
+  background: var(--fl-accent);
+  color: #111111;
+  border-color: var(--fl-accent);
+  transform: rotate(90deg);
+}
+
+/* Header & Text colors */
+.fl-page .fw-detail-title {
+  color: var(--fl-fg);
+}
+
+.fl-page .fw-detail-num {
+  font-family: var(--fl-font-display);
+  color: var(--fl-accent);
+  background: rgba(67, 169, 111, 0.1);
+  border: 1.5px solid rgba(67, 169, 111, 0.3);
+}
+
+.fl-page .fw-detail-category {
+  color: var(--fl-gold);
+  background: rgba(234, 193, 29, 0.1);
+  border: 1px solid rgba(234, 193, 29, 0.3);
+}
+
+/* Body Narrative */
+.fl-page .fw-detail-narrative {
+  color: var(--fl-fg-secondary);
+  border-left-color: rgba(67, 169, 111, 0.4);
+}
+
+/* Approach Block */
+.fl-page .fw-detail-approach {
+  background: rgba(26, 26, 26, 0.4);
+  border: 1px solid rgba(243, 241, 234, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.fl-page .fw-detail-approach-accent {
+  background: linear-gradient(180deg, var(--fl-accent), var(--fl-gold));
+}
+
+.fl-page .fw-detail-approach-label {
+  color: var(--fl-accent);
+}
+
+.fl-page .fw-detail-approach-text {
+  color: var(--fl-fg);
+}
+
+/* Timeline */
+.fl-page .fw-detail-timeline-line {
+  background: linear-gradient(180deg, var(--fl-accent), rgba(67, 169, 111, 0.12));
+}
+
+.fl-page .fw-detail-timeline-dot {
+  background: #1E1E1E;
+  border-color: var(--fl-accent);
+}
+
+.fl-page .fw-detail-timeline-label {
+  color: var(--fl-fg);
+}
+
+.fl-page .fw-detail-timeline-text {
+  color: var(--fl-fg-secondary);
+}
+
+/* Technical block */
+.fl-page .fw-detail-technical {
+  border: 1px solid rgba(243, 241, 234, 0.1);
+}
+
+.fl-page .fw-detail-technical-bar {
+  background: #1E1E1E;
+}
+
+.fl-page .fw-detail-technical-body {
+  background: #111111;
+  color: rgba(243, 241, 234, 0.85);
+}
+
+.fl-page .fw-detail-technical-title {
+  color: rgba(243, 241, 234, 0.4);
+}
+
+/* Challenge Callout */
+.fl-page .fw-detail-challenge {
+  background: linear-gradient(135deg, rgba(234, 193, 29, 0.04), rgba(234, 193, 29, 0.08));
+  border: 1px solid rgba(234, 193, 29, 0.2);
+}
+
+.fl-page .fw-detail-challenge-label {
+  color: var(--fl-gold);
+}
+
+.fl-page .fw-detail-challenge-text {
+  color: var(--fl-fg-secondary);
+}
+
+/* Panel Images */
+.fl-page .fw-detail-image-wrap {
+  border: 1px solid rgba(243, 241, 234, 0.1);
+  background: #111111;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.fl-page .fw-detail-image-caption {
+  color: var(--fl-fg-muted);
+  border-top: 1px solid rgba(243, 241, 234, 0.1);
+  background: rgba(26, 26, 26, 0.4);
+}
