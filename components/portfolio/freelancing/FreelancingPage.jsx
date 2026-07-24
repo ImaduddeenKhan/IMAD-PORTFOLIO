@@ -728,7 +728,7 @@ function Contact({ whatsappPhone, emailAddress, whatsappMsg, emailSubject, email
 
             <div className="fl-contact-socials">
               <a
-                href="https://linkedin.com/in/imadkhan"
+                href="https://www.linkedin.com/in/imadkhan-ai-ml"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="fl-contact-social"
